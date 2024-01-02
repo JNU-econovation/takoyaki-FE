@@ -33,7 +33,7 @@ export default new Router({
     component:WrittenParty,
   },
   {
-    path:'/mypage/participated-pod',
+    path:'/mypage/participated-party',
     component:ParticipatedPod,
   }
 ],

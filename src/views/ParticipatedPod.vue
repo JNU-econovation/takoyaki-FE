@@ -7,11 +7,12 @@
             <v-sheet rounded="lg" class="mypage-card">
               <v-card class="elevation-12" max-width="500px">
                 <v-list rounded="lg">
-                  <v-list-item v-for="n in mypage" :key="n" :to="`/mypage/${n}`" class="litstItem"><!--라우터연결-->
-
-                    <v-list-item-content>
-                      <v-list-item-title>{{ n }}</v-list-item-title>
-                    </v-list-item-content></v-list-item>
+                  <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="litstItem"><!--라우터연결-->
+                  
+                      <v-list-item-content >
+                        <v-list-item-title>{{ mypage[k] }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
                 </v-list>
               </v-card>
             </v-sheet>
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       mypage: ['나의정보', '내가 연팟', '내가 참여한 팟'],
+      routerMypage: ['my-information', 'written-party', 'participated-party']
     }
   }
 }
