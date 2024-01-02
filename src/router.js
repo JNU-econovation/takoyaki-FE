@@ -14,7 +14,7 @@ export default new Router({
   routes :[
   {
     path:'/',
-    component:MainHome,
+    component: MainHome,
   },
   {
     path:'/writeform',
@@ -25,15 +25,15 @@ export default new Router({
     component:MyPage,
   },
   {
-    path:'/mypage/나의정보',
+    path:'/mypage/my-information',
     component:MypageInformation,
   },
   {
-    path:'/mypage/내가 연팟',
+    path:'/mypage/written-party',
     component:WrittenParty,
   },
   {
-    path:'/mypage/내가 참여한 팟',
+    path:'/mypage/participated-pod',
     component:ParticipatedPod,
   }
 ],

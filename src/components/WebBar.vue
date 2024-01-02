@@ -6,7 +6,7 @@
       </v-avatar>-->
       
         <router-link to="/">
-          <v-btn class="me-2" >home</v-btn>
+          <v-btn class="me-2">home</v-btn>
         </router-link>  
         <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
         <router-link to="/writeform">

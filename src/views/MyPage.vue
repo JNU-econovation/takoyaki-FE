@@ -79,7 +79,7 @@
 export default {
   data(){
     return{
-      mypage:['나의정보','내가 연팟','내가 참여한 팟'],
+      mypage:['나의 정보','내가 연팟','내가 참여한 팟'],
     }
   }
 }
