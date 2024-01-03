@@ -13,7 +13,32 @@
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
       <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
 
-      <!--<v-container fluid>
+      <v-sheet class="selectBtn">
+        <v-contain >
+          <v-row>
+            <v-col>
+              <v-select
+              label="카테고리"
+              :items=category
+              variant="Tonal">
+              </v-select>
+            </v-col>
+            <v-col>
+              <v-select
+                label="활동지역"
+                :items=area
+                variant="Tonal">
+              </v-select>
+            </v-col>
+            <v-col style="padding-top: 26px;">
+              <v-btn>적용</v-btn>
+            </v-col>
+          </v-row>
+        </v-contain>
+      </v-sheet>
+
+      <!--card 
+        <v-container fluid>
             <v-row>
               <v-col
                 v-for="n in 24"
@@ -54,12 +79,28 @@ import BannerComponent from '../components/BannerComponent.vue';
 export default {
   components:{
   'BannerComponent':BannerComponent,
+  },
+  
+data(){
+  return{
+    category:['대외활동', '취업/스터디', 'OTT', '습관챌린지', '게임', '소모임', '기타'],
+    area:['전국', '온라인', '수도권', '강원', '충청', '전라', '경상', '제주']
   }
 }
+}
+  
 </script>
 
 <style scoped>
 .rounded-card {
   border-radius:40px;
+}
+#dropdown {
+  max-width:500px;  
+}
+.selectBtn {
+  padding-top: 15px;
+  padding-left: 10px;
+  max-width: 450px;
 }
 </style>
