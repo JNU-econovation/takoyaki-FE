@@ -15,14 +15,14 @@
 export default {
   created: function () {
     this.img_idx = 0;
-    this.img_url = './images/takoyaki.jpg';
+    this.img_url = './images/takoImg.png';
   },
   data() {
     return {
       images: [
         {
           img_idx:0,
-          img_url:'./images/takoyaki.jpg',
+          img_url:'./images/takoImg.png',
         },
       ]
     }
