@@ -17,7 +17,8 @@
         <v-contain >
           <v-row>
             <v-col>
-              <v-select
+              <v-select 
+              @click="clickCategory"
               label="카테고리"
               :items=category
               variant="Tonal">
@@ -25,6 +26,7 @@
             </v-col>
             <v-col>
               <v-select
+              @click="clickArea"
                 label="활동지역"
                 :items=area
                 variant="Tonal">
@@ -79,14 +81,37 @@ import BannerComponent from '../components/BannerComponent.vue';
 export default {
   components:{
   'BannerComponent':BannerComponent,
+
   },
   
 data(){
   return{
-    category:['대외활동', '취업/스터디', 'OTT', '습관 챌린지', '게임', '소모임', '기타'],
-    area:['전국', '온라인', '수도권', '강원', '충청', '전라', '경상', '제주']
+    category:[],
+    area:[]
   }
-}
+},
+  methods: {
+    clickCategory: function () {
+      this.$axios.get('http://13.125.248.139:8080/party/category', {
+      })
+        .then((response) => {
+          this.category = response.data.data.category;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    clickArea: function () {
+      this.$axios.get('http://13.125.248.139:8080/party/activity-location', {
+      })
+        .then((response) => {
+          this.area = response.data.data.activity_location;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+  },
 }
   
 </script>
