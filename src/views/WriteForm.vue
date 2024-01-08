@@ -36,8 +36,8 @@
             <v-row>
               <v-col>
                 <v-text-field 
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                placeholder="숫자 입력"
+                oninput="this.value = this.value.replace(/[^1-9]/g, '')"
+                placeholder="0보다 큰 숫자 입력"
                 v-model="selectDuration"></v-text-field>
               </v-col>
               <v-col>
@@ -84,17 +84,17 @@
             </v-select>
             <v-text-field v-if="selectContactMethod == '전화번호'"
               placeholder="숫자 입력"
-              v-model="selectPhoneNumber"
+              v-model="contactInput"
               maxlength="13"
               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');">
             </v-text-field>
             <v-text-field v-else-if="selectContactMethod == '카카오톡 오픈채팅'" 
               placeholder="https://카카오톡URL.."
-              v-model="kakaoChatInput" >
+              v-model="contactInput" >
             </v-text-field>
             <v-text-field v-else-if="selectContactMethod == '이메일'"
               placeholder="takoyaki@gmail.com"
-              v-model="emailInput"
+              v-model="contactInput"
               @input="checkEmailValidity">
             </v-text-field>
               <div v-if="isInvalidEmail" class="error-message">
@@ -120,18 +120,19 @@
           <h3>제목</h3>
           <v-text-field
             placeholder="제목을 입력하세요"
-            maxlength="100">
+            maxlength="100"
+            v-model="title">
           </v-text-field>
-            
           
-            <TipTap>d</TipTap>
+            <TipTap></TipTap>
+            <button @click="login">login</button>
+            <v-btn @click="logincheck">logincheck</v-btn>
+            <button @click="signUp">sign</button>
             
-        
-    
-
-        <v-card-actions >
+        <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn>Click me</v-btn>
+          <v-btn @click="registerParty">Click me</v-btn>
+          
         </v-card-actions>
     </v-card>
     </v-container>
@@ -151,22 +152,20 @@ export default {
 
   data() {
     return {
-      //  editor: null,
       selectCategory:'',
       selectArea:'',
       selectContactMethod:'',
       selectDuration:'',
       selectDurationUnit:'',
-      selectRecruitNumber:'',
+      selectRecruitNumber:null,
       selectClosingDate:'',
       selectStartDate:'',
-      selectPhoneNumber: '',
-      kakaoChatInput: '',
-      emailInput: '',
+      contactInput: '',
       isInvalidEmail: false,
       isClosingValid: false ,
       isStartValid: '',
-
+      title:'',
+      id:11,
 
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
@@ -176,6 +175,56 @@ export default {
     }
   },
   methods: {
+    signUp() {
+      this.$axios.post('http:///13.125.248.139:8080/test/users/signup')
+      .then((response) => {
+          console.log(response);
+          this.id=response.data.data.id;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    login() {
+      this.$axios.post("http:///13.125.248.139:8080/test/users/login/"+this.id)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    logincheck() {
+      this.$axios.get('http:///13.125.248.139:8080/users/login-check')
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    registerParty() {
+      this.$axios.post('http:///13.125.248.139:8080/party',{
+      body: {
+        "category": this.selectCategory,
+        "activity_location": this.selectArea,
+        "activity_duration_unit": this.selectDurationUnit,
+        "contact_method": this.selectContactMethod,
+        "title": this.title,
+        "body": "열정있는 27기를 모집합니다!",
+        "recruit_number": this.selectRecruitNumber,
+        "activity_duration": this.selectDuration,
+        "planned_closing_date": this.selectClosingDate,
+        "planned_start_date": this.selectStartDate,
+        "contact": this.contactInput
+    }})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
     clickCategory: function () {
       this.$axios.get('http://13.125.248.139:8080/party/category', {
       })
