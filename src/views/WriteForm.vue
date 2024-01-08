@@ -128,7 +128,8 @@
             <button @click="login">login</button>
             <v-btn @click="logincheck">logincheck</v-btn>
             <button @click="signUp">sign</button>
-            
+            <v-btn @click="logOut">logout</v-btn>
+
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn @click="registerParty">Click me</v-btn>
@@ -180,6 +181,15 @@ export default {
       .then((response) => {
           console.log(response);
           this.id=response.data.data.id;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    logOut() {
+      this.$axios.post('http:///13.125.248.139:8080/users/logout')
+        .then((response) => {
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);
