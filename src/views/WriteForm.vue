@@ -105,6 +105,8 @@
           </v-row>
           </v-sheet>
 
+          <!--팟 소개 -->
+
             <br><br>
             <h1>팟 소개</h1>
 
@@ -116,10 +118,16 @@
 
           <br>
           <h3>제목</h3>
-          <v-text-field 
+          <v-text-field
             placeholder="제목을 입력하세요"
             maxlength="100">
           </v-text-field>
+            
+          
+            <TipTap>d</TipTap>
+            
+        
+    
 
         <v-card-actions >
           <v-spacer></v-spacer>
@@ -130,10 +138,20 @@
   </div>
 </template>
 
+
+
+
 <script>
+import TipTap from '@/components/TipTap.vue'
+
 export default {
+  components: {
+    'TipTap':TipTap,
+  }, 
+
   data() {
     return {
+      //  editor: null,
       selectCategory:'',
       selectArea:'',
       selectContactMethod:'',
@@ -211,7 +229,6 @@ export default {
       }
     },
     
-     
   
     clickContactMethod: function () {
       this.$axios.get('http://13.125.248.139:8080/party/contact-method')
