@@ -1,4 +1,4 @@
-<template>
+<template> <!--본문 미마감 타코뷰에서 현재 야끼 현황 보여주는 리스트-->
     <div class="yaki-list">
       <div v-for="yaki in yakis" :key="yaki.id" class="yaki">
         <span>{{ yaki.name }}</span>
@@ -7,7 +7,7 @@
 
         <button v-if="yaki.status !== 'accepted'" @click="acceptYaki(yaki)">수락</button>
         <button v-if="yaki.status !== 'rejected'" @click="rejectYaki(yaki)">거절</button>
-        
+
       </div>
     </div>
   </template>
