@@ -2,7 +2,7 @@
   <v-main>
     <BannerComponent></BannerComponent>
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-            <v-sheet color="grey" height="24" rounded="pill" width="145" style="padding-left: 10px;">내가 관심있는 팟</v-sheet>
+            <v-sheet height="24" width="145" style="padding-left: 5px;">👀 내가 관심있는 팟</v-sheet>
             <v-slide-group show-arrows> <!--여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때-->
               <v-slide-group-item v-for="n in 8" :key="n">
                 <v-sheet class="ma-3" color="grey-lighten-1" height="200" rounded width="250" ></v-sheet>
@@ -11,7 +11,7 @@
           </v-sheet>
           
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-      <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
+      <v-sheet style="padding-left: 0px;">🥢 모든 팟</v-sheet>
 
       <v-sheet class="selectBtn">
         <v-contain >
@@ -33,7 +33,7 @@
               </v-select>
             </v-col>
             <v-col style="padding-top: 26px;">
-              <v-btn>적용</v-btn>
+              <v-btn color="#d9d9d9" height="28" rounded="pill" width="55">적용</v-btn>
             </v-col>
           </v-row>
         </v-contain>
