@@ -124,17 +124,16 @@
             v-model="title">
           </v-text-field>
           
-            <TipTap></TipTap>
+
+            <TipTap v-on:input="handleText" ></TipTap>
+   
+            <v-btn @click="handleText">a</v-btn>
             <button @click="login">login</button>
             <v-btn @click="logincheck">logincheck</v-btn>
             <button @click="signUp">sign</button>
             <v-btn @click="logOut">logout</v-btn>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="registerParty">Click me</v-btn>
-          
-        </v-card-actions>
+        
     </v-card>
     </v-container>
   </div>
@@ -167,6 +166,7 @@ export default {
       isStartValid: '',
       title:'',
       id:11,
+      receivedcontent:'',
 
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
@@ -176,8 +176,13 @@ export default {
     }
   },
   methods: {
+    handleText(text) {
+      this.receivedcontent=text;
+      this.registerParty();
+    },
+    
     signUp() {
-      this.$axios.post('http:///13.125.248.139:8080/test/users/signup')
+      this.$axios.post('http://localhost:8081/test/users/signup')
       .then((response) => {
           console.log(response);
           this.id=response.data.data.id;
@@ -196,7 +201,7 @@ export default {
         })
     },
     login() {
-      this.$axios.post("http:///13.125.248.139:8080/test/users/login/"+this.id)
+      this.$axios.post("http://localhost:8081/test/users/login/"+this.id)
         .then((response) => {
           console.log(response);
         })
@@ -221,7 +226,7 @@ export default {
         "activity_duration_unit": this.selectDurationUnit,
         "contact_method": this.selectContactMethod,
         "title": this.title,
-        "body": "열정있는 27기를 모집합니다!",
+        "body": this.receivedcontent,
         "recruit_number": this.selectRecruitNumber,
         "activity_duration": this.selectDuration,
         "planned_closing_date": this.selectClosingDate,
@@ -236,7 +241,7 @@ export default {
       })
     },
     clickCategory: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/category', {
+      this.$axios.post('http://localhost:8081/party', {
       })
         .then((response) => {
           this.category = response.data.data.category;
