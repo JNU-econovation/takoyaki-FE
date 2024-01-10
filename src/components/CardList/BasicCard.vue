@@ -34,16 +34,7 @@
   </script>
   
   <style>
+    @import "./CardList.css"
 
-  .card-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-  .card {
-    border: 1px solid #fff2d1;
-    padding: 16px;
-    border-radius: 8px;
-  }
   </style>
   

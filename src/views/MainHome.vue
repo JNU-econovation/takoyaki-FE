@@ -1,8 +1,10 @@
 <template>
   <v-main>
-    <BannerComponent></BannerComponent>
+    <router-link to="/banner">
+      <BannerComponent></BannerComponent>
+    </router-link>
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-            <v-sheet height="24" width="145" style="padding-left: 5px;">👀 내가 관심있는 팟</v-sheet>
+            <v-sheet color="grey" height="24" rounded="pill" width="145" style="padding-left: 10px;">내가 관심있는 팟</v-sheet>
             <v-slide-group show-arrows> <!--여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때-->
               <v-slide-group-item v-for="n in 8" :key="n">
                 <v-sheet class="ma-3" color="grey-lighten-1" height="200" rounded width="250" ></v-sheet>
@@ -21,7 +23,7 @@
               @click="clickCategory"
               label="카테고리"
               :items=category
-              variant="Tonal">
+              v-model="selectCategory">
               </v-select>
             </v-col>
             <v-col>
@@ -29,13 +31,15 @@
               @click="clickArea"
                 label="활동지역"
                 :items=area
-                variant="Tonal">
+                v-model="selectArea">
               </v-select>
             </v-col>
             <v-col style="padding-top: 26px;">
-              <v-btn color="#d9d9d9" height="28" rounded="pill" width="55">적용</v-btn>
+              <v-btn>적용</v-btn>
             </v-col>
           </v-row>
+          <BasicCard></BasicCard>
+
         </v-contain>
       </v-sheet>
 
@@ -76,18 +80,21 @@
 </template>
 
 <script>
+import BasicCard from '@/components/CardList/BasicCard.vue';
 import BannerComponent from '../components/BannerComponent.vue';
 
 export default {
   components:{
   'BannerComponent':BannerComponent,
-
+  'BasicCard':BasicCard,
   },
   
 data(){
   return{
     category:[],
-    area:[]
+    area:[],
+    selectCategory:'',
+    selectArea:'',
   }
 },
   methods: {
