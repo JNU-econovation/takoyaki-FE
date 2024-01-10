@@ -167,6 +167,7 @@ export default {
       title:'',
       id:11,
       receivedcontent:'',
+      id:null,
 
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
@@ -234,7 +235,8 @@ export default {
         "contact": this.contactInput
     }})
       .then((response) => {
-        console.log(response);
+        console.log(response); 
+        this.id=response.data.data.party_id; //팟 등록 id받아옴
       })
       .catch((error) => {
         console.log(error);
