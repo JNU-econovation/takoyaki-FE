@@ -89,8 +89,10 @@
       redo
     </button> -->
     <v-divider ></v-divider>
-    <editor-content :editor="editor"  v-model="content" />
-    
+    <editor-content :editor="editor"  v-model="content"/>
+
+    <v-spacer></v-spacer>
+    <v-btn @click="sendContent" style="border: none;">팟 등록</v-btn>
   </div>
   
 </template>
@@ -107,7 +109,16 @@ export default {
   data() {
     return {
       editor: null,
-      content:'클릭하여 팟을 소개해주세요',
+      content:'',
+
+    }
+  },
+  methods: {
+    sendContent() {
+      this.$emit('input',this.content);
+    },
+    b() {
+      console.log(this.content);
     }
   },
 
