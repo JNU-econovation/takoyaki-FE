@@ -16,7 +16,7 @@
       <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
 
       <v-sheet class="selectBtn">
-        <v-contain >
+        <v-container>
           <v-row>
             <v-col>
               <v-select 
@@ -39,54 +39,30 @@
             </v-col>
           </v-row>
 
-          <!-- <v-col cols="4" sm="8">
-            <v-row>
-              <v-sheet 
-                v-for="item in list"
-                :key="item.party_id"
-                > -->
-              <BasicCard ></BasicCard>
-<!--               v-bind:propsdata="item.party_id"
- -->              <!-- </v-sheet>
-            </v-row>
-          </v-col>
- -->
-
-        </v-contain>
-      </v-sheet>
-
-      <!--card 
-        <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="n in 24"
-                :key="n"
-                cols="3"
-              >
-                <v-card class="rounded-card" width="100%" height="300">
-                  <v-toolbar color=""
-                  height="150">
-                    <v-toolbar-title>title</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-btn size="small" color="surface-variant" variant="text">
-                      <v-icon>mdi-bookmark</v-icon>
-                    </v-btn>
-                  </v-toolbar>
-                
-                </v-card>
+          <v-container>
+            <v-row >
+                <v-col 
+                  v-for="item in list"
+                  :key="item.party_id"
+                  cols="12"
+                  class="me-7"
+                  offset-sm=""
+                  > <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+                <BasicCard :party_id="item.party_id" />
+                <!--받은 키로 BasicCard에 props-->
               </v-col>
             </v-row>
-            
+          </v-container>
 
-          </v-container>-->
-
+        </v-container>
+      </v-sheet>
           <!--페이지네이션-->
           <v-row class="fixed bottom py-4">
             <v-col>
               <v-pagination :length="9"></v-pagination>
             </v-col>
           </v-row>
-
+          
     </v-sheet>
   </v-main>
 </template>
@@ -115,11 +91,12 @@ data(){
     this.$axios.get(this.$takoyaki_API + "parties?type=all&login=true&number=16&page_number=1")
       .then((response) => {
         console.log(response);
-        this.title = response.data.data[0].title;
+        this.list=response.data.data; //팟 정보의 객체를 받아옴 
+        /* this.title = response.data.data[0].title;
         this.closingDate = response.data.data[0].planned_closing_date;
         this.category = response.data.data[0].category;
         this.area = response.data.data[0].activity_location;
-        this.competitionRate = response.data.data[0].competition_rate;
+        this.competitionRate = response.data.data[0].competition_rate; */
 
       })
       .catch((error) => {
