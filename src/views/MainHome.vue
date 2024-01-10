@@ -13,7 +13,7 @@
           </v-sheet>
           
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-      <v-sheet style="padding-left: 0px;">🥢 모든 팟</v-sheet>
+      <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
 
       <v-sheet class="selectBtn">
         <v-contain >
@@ -38,6 +38,17 @@
               <v-btn>적용</v-btn>
             </v-col>
           </v-row>
+          {{ list }}
+
+          <v-col cols="12" sm="8">
+            <v-row>
+              <v-sheet 
+                v-for="item in list"
+                :key="item.id">
+
+              </v-sheet>
+            </v-row>
+          </v-col>
           <BasicCard></BasicCard>
 
         </v-contain>
@@ -95,11 +106,22 @@ data(){
     area:[],
     selectCategory:'',
     selectArea:'',
+    list:[],
   }
 },
+  created() {
+    this.$axios.get(this.$takoyaki_API+"parties/all")
+    .then((response) => {
+      this.list=response.data.data.card_list;
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+    },
+  
   methods: {
     clickCategory: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/category', {
+      this.$axios.get(this.$takoyaki_API+'party/category', {
       })
         .then((response) => {
           this.category = response.data.data.category;
@@ -109,7 +131,7 @@ data(){
         })
     },
     clickArea: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/activity-location', {
+      this.$axios.get(this.$takoyaki_API+'party/activity-location', {
       })
         .then((response) => {
           this.area = response.data.data.activity_location;

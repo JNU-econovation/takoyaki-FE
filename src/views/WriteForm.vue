@@ -167,7 +167,7 @@ export default {
       title:'',
       id:11,
       receivedcontent:'',
-      id:null,
+      party_id:null,
 
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
@@ -183,7 +183,7 @@ export default {
     },
     
     signUp() {
-      this.$axios.post('http://localhost:8081/test/users/signup')
+      this.$axios.post(this.$takoyaki_API+'test/users/signup')
       .then((response) => {
           console.log(response);
           this.id=response.data.data.id;
@@ -193,7 +193,7 @@ export default {
         })
     },
     logOut() {
-      this.$axios.post('http:///13.125.248.139:8080/users/logout')
+      this.$axios.post(this.$takoyaki_API+'users/logout')
         .then((response) => {
           console.log(response);
         })
@@ -202,7 +202,7 @@ export default {
         })
     },
     login() {
-      this.$axios.post("http://localhost:8081/test/users/login/"+this.id)
+      this.$axios.post(this.$takoyaki_API+'users/login/'+this.id)
         .then((response) => {
           console.log(response);
         })
@@ -211,7 +211,7 @@ export default {
         })
     },
     logincheck() {
-      this.$axios.get('http:///13.125.248.139:8080/users/login-check')
+      this.$axios.get(this.$takoyaki_API+'users/login-check')
         .then((response) => {
           console.log(response);
         })
@@ -220,8 +220,8 @@ export default {
         })
     },
     registerParty() {
-      this.$axios.post('http:///13.125.248.139:8080/party',{
-      body: {
+      this.$axios.post(this.$takoyaki_API+'party',
+      {
         "category": this.selectCategory,
         "activity_location": this.selectArea,
         "activity_duration_unit": this.selectDurationUnit,
@@ -233,7 +233,7 @@ export default {
         "planned_closing_date": this.selectClosingDate,
         "planned_start_date": this.selectStartDate,
         "contact": this.contactInput
-    }})
+    })
       .then((response) => {
         console.log(response); 
         this.id=response.data.data.party_id; //팟 등록 id받아옴
@@ -243,7 +243,7 @@ export default {
       })
     },
     clickCategory: function () {
-      this.$axios.post('http://localhost:8081/party', {
+      this.$axios.post(this.$takoyaki_API+'party', {
       })
         .then((response) => {
           this.category = response.data.data.category;
@@ -254,7 +254,7 @@ export default {
         })
     },
     clickArea: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/activity-location', {
+      this.$axios.get(this.$takoyaki_API+'party/activity-location', {
       })
         .then((response) => {
           this.area = response.data.data.activity_location;
@@ -264,7 +264,7 @@ export default {
         })
     },
     clickDurationUnit: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/activity-duration-unit', {
+      this.$axios.get(this.$takoyaki_API+'party/activity-duration-unit', {
       })
       .then((response) => {
         this.DurationUnit = response.data.data.activity_duration_unit;
@@ -297,7 +297,7 @@ export default {
     
   
     clickContactMethod: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/contact-method')
+      this.$axios.get(this.$takoyaki_API+'party/contact-method')
         .then((response) => {
           this.contactMethod = response.data.data.contact_method;
 /*           console.log(response);*/        
