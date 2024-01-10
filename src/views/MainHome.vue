@@ -35,11 +35,11 @@
               </v-select>
             </v-col>
             <v-col style="padding-top: 26px;">
-              <v-btn >적용</v-btn>
+              <v-btn @click="applyBtn">적용</v-btn>
             </v-col>
           </v-row>
 
-          <v-container>
+          <v-container v-if="clickApplyBtn">
             <v-row >
                 <v-col 
                   v-for="item in list"
@@ -53,6 +53,21 @@
               </v-col>
             </v-row>
           </v-container>
+
+          <v-container v-else>
+              <v-row >
+                  <v-col 
+                    v-for="item in applyList"
+                    :key="item.party_id"
+                    cols="12"
+                    class="me-7"
+                    offset-sm=""
+                    > <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+                  <BasicCard :party_id="item.party_id" />
+                  <!--받은 키로 BasicCard에 props-->
+                </v-col>
+              </v-row>
+            </v-container>
 
         </v-container>
       </v-sheet>
@@ -84,7 +99,9 @@ data(){
     selectCategory:'',
     selectArea:'',
     list:[],
+    applyList:[],
     party_id:'',
+    clickApplyBtn:true,
   }
 },
   created() {
@@ -103,6 +120,8 @@ data(){
         console.log(error);
       })
   },
+
+
   
   methods: {
     clickCategory: function () {
@@ -120,6 +139,16 @@ data(){
       })
         .then((response) => {
           this.area = response.data.data.activity_location;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    applyBtn() {
+      this.$axios.get(this.$takoyaki_API + "parties?type=all&login=true&number=16&page_number=1&category="+this.selectCategory+"&activity_location="+this.selectArea)
+        .then((response) => {
+          this.clickApplyBtn=false;
+          this.applyList=response.data.data; //해당 팟 카드리스트 받음
         })
         .catch((error) => {
           console.log(error);
