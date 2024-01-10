@@ -16,6 +16,7 @@
 <script>
 
 export default {
+  props:['party_id'],
 
   data() {
     return {
@@ -24,7 +25,6 @@ export default {
       category: '',
       area: '',
       competitionRate: '',
-      party_id:1, 
       //this.props,
       // props: ['propsdata'] //item.party_id받음
     };
