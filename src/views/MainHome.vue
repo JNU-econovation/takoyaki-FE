@@ -13,7 +13,7 @@
           </v-sheet>
           
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-      <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
+      <v-sheet style="padding-left: 0px;">🥢 모든 팟</v-sheet>
 
       <v-sheet class="selectBtn">
         <v-contain >
