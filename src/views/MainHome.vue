@@ -35,21 +35,22 @@
               </v-select>
             </v-col>
             <v-col style="padding-top: 26px;">
-              <v-btn>적용</v-btn>
+              <v-btn >적용</v-btn>
             </v-col>
           </v-row>
-          {{ list }}
 
-          <v-col cols="12" sm="8">
+          <!-- <v-col cols="4" sm="8">
             <v-row>
               <v-sheet 
                 v-for="item in list"
-                :key="item.id">
-
-              </v-sheet>
+                :key="item.party_id"
+                > -->
+              <BasicCard ></BasicCard>
+<!--               v-bind:propsdata="item.party_id"
+ -->              <!-- </v-sheet>
             </v-row>
           </v-col>
-          <BasicCard></BasicCard>
+ -->
 
         </v-contain>
       </v-sheet>
@@ -107,17 +108,24 @@ data(){
     selectCategory:'',
     selectArea:'',
     list:[],
+    party_id:'',
   }
 },
   created() {
-    this.$axios.get(this.$takoyaki_API+"parties/all")
-    .then((response) => {
-      this.list=response.data.data.card_list;
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-    },
+    this.$axios.get(this.$takoyaki_API + "parties?type=all&login=true&number=16&page_number=1")
+      .then((response) => {
+        console.log(response);
+        this.title = response.data.data[0].title;
+        this.closingDate = response.data.data[0].planned_closing_date;
+        this.category = response.data.data[0].category;
+        this.area = response.data.data[0].activity_location;
+        this.competitionRate = response.data.data[0].competition_rate;
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
   
   methods: {
     clickCategory: function () {
