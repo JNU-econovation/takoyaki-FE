@@ -7,7 +7,7 @@
             <v-sheet rounded="lg" class="mypage-card">
               <v-card class="elevation-12" max-width="500px">
                 <v-list rounded="lg">
-                  <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="litstItem"><!--라우터연결-->
+                  <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="listItem"><!--라우터연결-->
                   
                       <v-list-item-content >
                         <v-list-item-title>{{ mypage[k] }}</v-list-item-title>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.litstItem {
+.listItem {
   width: 150px;
 }
 

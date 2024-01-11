@@ -32,10 +32,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
   }
-  .card {
-    border: 1px solid #ddd;
-    padding: 16px;
-    border-radius: 8px;
-  }
+  @import "./CardList.css"
+
   </style>
   
