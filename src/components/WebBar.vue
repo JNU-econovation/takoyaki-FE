@@ -1,5 +1,7 @@
 <template>
+
     <div>
+      <SocialModal ref="socialModal" />
       <v-app-bar color="grey-lighten-4" flat height="72">
         <!--<v-avatar> 홈버튼 이미지 넣을경우
         <img src="홈버튼 이미지.jpg" alt="takoyaki Image">
@@ -21,7 +23,10 @@
               <v-icon>mdi-account</v-icon>
             </v-btn>
           </router-link>
-          <v-btn>login</v-btn>
+          <v-btn v-if="isLoggedIn" @click="logout">Logout</v-btn>
+          <v-btn v-else @click="openLoginModal">Login</v-btn>
+
+
         </v-col>
       
       </v-app-bar>
@@ -29,9 +34,36 @@
 </template>
 
 <script>
-export default {
+import SocialModal from '../components/Modal/SocialModal.vue';
 
-}
+export default {
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
+  components: {
+    SocialModal
+  },
+  methods: {
+
+    openLoginModal() {
+      // 모달 열기
+      this.$refs.socialModal.openLoginModal();
+    },
+    logout(){
+      this.$axios.post(this.$takoyaki_API +'users/logout', {
+      })
+          .then(() => {
+
+            this.isLoggedIn = false;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    }
+  }
+};
 </script>
 
 <style>
