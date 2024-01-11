@@ -44,6 +44,7 @@
                 <h1>마감+수락된 팟(연락처가 공개되었어요!)</h1>
               </v-col>
             </v-row>
+            <JoinedCard></JoinedCard>
           </v-sheet>
         </v-col>
         </v-row>
@@ -54,7 +55,11 @@
 
 
 <script>
+import JoinedCard from '@/components/CardList/JoinedCard.vue';
 export default {
+  components: {
+    'JoinedCard':JoinedCard
+  },
   data() {
     return {
       mypage: ['나의 정보', '내가 연팟', '내가 참여한 팟'],

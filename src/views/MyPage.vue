@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.litstItem {
+.listItem {
   width: 150px;
 }
 .elevation-12 {

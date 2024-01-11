@@ -4,7 +4,7 @@
       <BannerComponent></BannerComponent>
     </router-link>
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-            <v-sheet color="grey" height="24" rounded="pill" width="145" style="padding-left: 10px;">내가 관심있는 팟</v-sheet>
+            <v-sheet class="party-list">👀 내가 관심있는 팟</v-sheet>
             <v-slide-group show-arrows> <!--여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때-->
               <v-slide-group-item v-for="n in 8" :key="n">
                 <v-sheet class="ma-3" color="grey-lighten-1" height="200" rounded width="250" ></v-sheet>
@@ -13,7 +13,7 @@
           </v-sheet>
           
     <v-sheet class="mx-auto pa-2 pt-6" color="grey-lighten-2">
-      <v-sheet color="grey" height="24" rounded="pill" width="75" style="padding-left: 10px;">모든 팟</v-sheet>
+      <v-sheet class="party-list">🥢모든 팟</v-sheet>
 
       <v-sheet class="selectBtn">
         <v-contain >
@@ -34,7 +34,7 @@
                 v-model="selectArea">
               </v-select>
             </v-col>
-            <v-col style="padding-top: 26px;">
+            <v-col style="padding-top: 26px;" >
               <v-btn>적용</v-btn>
             </v-col>
           </v-row>
@@ -106,7 +106,7 @@ data(){
     area:[],
     selectCategory:'',
     selectArea:'',
-    list:[],
+    list:[     ],
   }
 },
   created() {
@@ -146,15 +146,5 @@ data(){
 </script>
 
 <style scoped>
-.rounded-card {
-  border-radius:40px;
-}
-#dropdown {
-  max-width:500px;  
-}
-.selectBtn {
-  padding-top: 15px;
-  padding-left: 10px;
-  max-width: 450px;
-}
+  @import "./style/MainHome.css"
 </style>
