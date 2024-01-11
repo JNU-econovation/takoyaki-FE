@@ -126,7 +126,6 @@
           
 
             <TipTap v-on:input="handleText" ></TipTap>
-   
             <v-btn @click="handleText">a</v-btn>
             <button @click="login">login</button>
             <v-btn @click="logincheck">logincheck</v-btn>
@@ -165,10 +164,9 @@ export default {
       isClosingValid: false ,
       isStartValid: '',
       title:'',
-      id:11,
+      id:null,
       receivedcontent:'',
-      party_id:null,
-
+      partyID:null,
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
       area: [],
@@ -186,7 +184,7 @@ export default {
       this.$axios.post(this.$takoyaki_API+'test/users/signup')
       .then((response) => {
           console.log(response);
-          this.id=response.data.data.id;
+          this.id =response.data.data.id;
         })
         .catch((error) => {
           console.log(error);
@@ -197,12 +195,12 @@ export default {
         .then((response) => {
           console.log(response);
         })
-        .catch((error) => {
+        .catch((error) => { 
           console.log(error);
         })
     },
     login() {
-      this.$axios.post(this.$takoyaki_API+'users/login/'+this.id)
+      this.$axios.post(this.$takoyaki_API+'test/users/login/'+this.id)
         .then((response) => {
           console.log(response);
         })
@@ -220,31 +218,30 @@ export default {
         })
     },
     registerParty() {
-      this.$axios.post(this.$takoyaki_API+'party',
+      this.$axios.post(this.$takoyaki_API+'party',  
       {
-        "category": this.selectCategory,
-        "activity_location": this.selectArea,
-        "activity_duration_unit": this.selectDurationUnit,
-        "contact_method": this.selectContactMethod,
-        "title": this.title,
-        "body": this.receivedcontent,
-        "recruit_number": this.selectRecruitNumber,
-        "activity_duration": this.selectDuration,
-        "planned_closing_date": this.selectClosingDate,
-        "planned_start_date": this.selectStartDate,
-        "contact": this.contactInput
+        'category': this.selectCategory,
+        'activity_location': this.selectArea,
+        'activity_duration_unit': this.selectDurationUnit,
+        'contact_method': this.selectContactMethod,
+        'title': this.title,
+        'body': this.receivedcontent,
+        'recruit_number': this.selectRecruitNumber,
+        'activity_duration': this.selectDuration,
+        'planned_closing_date': this.selectClosingDate,
+        'planned_start_date': this.selectStartDate,
+        'contact': this.contactInput
     })
       .then((response) => {
         console.log(response); 
-        this.id=response.data.data.party_id; //팟 등록 id받아옴
+        this.partyID=response.data.data.party_id; //팟 등록 id받아옴
       })
       .catch((error) => {
         console.log(error);
       })
     },
     clickCategory: function () {
-      this.$axios.post(this.$takoyaki_API+'party', {
-      })
+      this.$axios.get(this.$takoyaki_API+'party/category')
         .then((response) => {
           this.category = response.data.data.category;
           
