@@ -1,43 +1,57 @@
-
 <template>
-    <div class="BasicCard">
-      <div v-for="(card, index) in cards" :key="index" class="card">
-        <h3>{{ card.title }}</h3>
-        <p>{{ card.date }}</p>
-        <p>카테고리: {{ card.category1 }}, {{ card.category2 }}</p>
-        <p>조회수: {{ card.views }}</p>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        cards: [
-          // 카드 데이터 기본 형식
-          { title: '제목 1', date: new Date().toISOString().slice(0, 10), category1: '카테고리1', category2: '카테고리2', views: 100 },
-          
-        ]
-      };
-    },
-    created() {
-     // 날짜 받아야됨
-    }
-  };
-  </script>
-  
-  <style>
+  <div class="BasicCard">
+    <div class="card">
+      <h3>{{ title }}</h3>
 
-  .card-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-  .card {
-    border: 1px solid #ddd;
-    padding: 16px;
-    border-radius: 8px;
-  }
-  </style>
+        <p>{{ closingDate }}</p>
+
+        <p> {{ category }}, {{ area }}</p>
+
+        <p>경쟁률: {{ competitionRate }}</p>
+      <!--마우스 호버 구현 X-->
+    </div>
+  </div>
+</template>
   
+<script>
+
+export default {
+  props:['party_id'],
+
+  data() {
+    return {
+      title: '',
+      closingDate: '',
+      category: '',
+      area: '',
+      competitionRate: '',
+      //this.props,
+      // props: ['propsdata'] //item.party_id받음
+    };
+  },
+  methods: {
+
+  },
+  created() {
+    //단일 팟 조회
+    this.$axios.get(this.$takoyaki_API + "parties/" + this.party_id + "?login=true")
+      .then((response) => {
+        console.log(response);
+        this.title = response.data.data.title;
+        this.closingDate = response.data.data.planned_closing_date;
+        this.category = response.data.data.category;
+        this.area = response.data.data.activity_location;
+        this.competitionRate = response.data.data.competition_rate;
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+
+};
+</script>
+  
+<style>
+@import "./CardList.css"
+</style>

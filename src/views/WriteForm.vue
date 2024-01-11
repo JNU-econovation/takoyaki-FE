@@ -36,8 +36,8 @@
             <v-row>
               <v-col>
                 <v-text-field 
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                placeholder="숫자 입력"
+                oninput="this.value = this.value.replace(/[^1-9]/g, '')"
+                placeholder="0보다 큰 숫자 입력"
                 v-model="selectDuration"></v-text-field>
               </v-col>
               <v-col>
@@ -84,17 +84,17 @@
             </v-select>
             <v-text-field v-if="selectContactMethod == '전화번호'"
               placeholder="숫자 입력"
-              v-model="selectPhoneNumber"
+              v-model="contactInput"
               maxlength="13"
               oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');">
             </v-text-field>
             <v-text-field v-else-if="selectContactMethod == '카카오톡 오픈채팅'" 
               placeholder="https://카카오톡URL.."
-              v-model="kakaoChatInput" >
+              v-model="contactInput" >
             </v-text-field>
             <v-text-field v-else-if="selectContactMethod == '이메일'"
               placeholder="takoyaki@gmail.com"
-              v-model="emailInput"
+              v-model="contactInput"
               @input="checkEmailValidity">
             </v-text-field>
               <div v-if="isInvalidEmail" class="error-message">
@@ -104,6 +104,8 @@
           </v-flex>
           </v-row>
           </v-sheet>
+
+          <!--팟 소개 -->
 
             <br><br>
             <h1>팟 소개</h1>
@@ -116,22 +118,37 @@
 
           <br>
           <h3>제목</h3>
-          <v-text-field 
+          <v-text-field
             placeholder="제목을 입력하세요"
-            maxlength="100">
+            maxlength="100"
+            v-model="title">
           </v-text-field>
+          
 
-        <v-card-actions >
-          <v-spacer></v-spacer>
-          <v-btn>Click me</v-btn>
-        </v-card-actions>
+            <TipTap v-on:input="handleText" ></TipTap>
+            <v-btn @click="handleText">a</v-btn>
+            <button @click="login">login</button>
+            <v-btn @click="logincheck">logincheck</v-btn>
+            <button @click="signUp">sign</button>
+            <v-btn @click="logOut">logout</v-btn>
+
+        
     </v-card>
     </v-container>
   </div>
 </template>
 
+
+
+
 <script>
+import TipTap from '@/components/TipTap.vue'
+
 export default {
+  components: {
+    'TipTap':TipTap,
+  }, 
+
   data() {
     return {
       selectCategory:'',
@@ -139,17 +156,17 @@ export default {
       selectContactMethod:'',
       selectDuration:'',
       selectDurationUnit:'',
-      selectRecruitNumber:'',
+      selectRecruitNumber:null,
       selectClosingDate:'',
       selectStartDate:'',
-      selectPhoneNumber: '',
-      kakaoChatInput: '',
-      emailInput: '',
+      contactInput: '',
       isInvalidEmail: false,
       isClosingValid: false ,
       isStartValid: '',
-
-
+      title:'',
+      id:null,
+      receivedcontent:'',
+      partyID:null,
       basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
       category: [],
       area: [],
@@ -158,9 +175,73 @@ export default {
     }
   },
   methods: {
-    clickCategory: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/category', {
+    handleText(text) {
+      this.receivedcontent=text;
+      this.registerParty();
+    },
+    
+    signUp() {
+      this.$axios.post(this.$takoyaki_API+'test/users/signup')
+      .then((response) => {
+          console.log(response);
+          this.id =response.data.data.id;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    logOut() {
+      this.$axios.post(this.$takoyaki_API+'users/logout')
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => { 
+          console.log(error);
+        })
+    },
+    login() {
+      this.$axios.post(this.$takoyaki_API+'test/users/login/'+this.id)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    logincheck() {
+      this.$axios.get(this.$takoyaki_API+'users/login-check')
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    registerParty() {
+      this.$axios.post(this.$takoyaki_API+'party',  
+      {
+        'category': this.selectCategory,
+        'activity_location': this.selectArea,
+        'activity_duration_unit': this.selectDurationUnit,
+        'contact_method': this.selectContactMethod,
+        'title': this.title,
+        'body': this.receivedcontent,
+        'recruit_number': this.selectRecruitNumber,
+        'activity_duration': this.selectDuration,
+        'planned_closing_date': this.selectClosingDate,
+        'planned_start_date': this.selectStartDate,
+        'contact': this.contactInput
+    })
+      .then((response) => {
+        console.log(response); 
+        this.partyID=response.data.data.party_id; //팟 등록 id받아옴
       })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+    clickCategory: function () {
+      this.$axios.get(this.$takoyaki_API+'party/category')
         .then((response) => {
           this.category = response.data.data.category;
           
@@ -170,7 +251,7 @@ export default {
         })
     },
     clickArea: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/activity-location', {
+      this.$axios.get(this.$takoyaki_API+'party/activity-location', {
       })
         .then((response) => {
           this.area = response.data.data.activity_location;
@@ -180,7 +261,7 @@ export default {
         })
     },
     clickDurationUnit: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/activity-duration-unit', {
+      this.$axios.get(this.$takoyaki_API+'party/activity-duration-unit', {
       })
       .then((response) => {
         this.DurationUnit = response.data.data.activity_duration_unit;
@@ -211,10 +292,9 @@ export default {
       }
     },
     
-     
   
     clickContactMethod: function () {
-      this.$axios.get('http://13.125.248.139:8080/party/contact-method')
+      this.$axios.get(this.$takoyaki_API+'party/contact-method')
         .then((response) => {
           this.contactMethod = response.data.data.contact_method;
 /*           console.log(response);*/        

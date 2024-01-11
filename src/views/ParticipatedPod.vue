@@ -7,7 +7,7 @@
             <v-sheet rounded="lg" class="mypage-card">
               <v-card class="elevation-12" max-width="500px">
                 <v-list rounded="lg">
-                  <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="litstItem"><!--라우터연결-->
+                  <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="listItem"><!--라우터연결-->
                   
                       <v-list-item-content >
                         <v-list-item-title>{{ mypage[k] }}</v-list-item-title>
@@ -44,6 +44,7 @@
                 <h1>마감+수락된 팟(연락처가 공개되었어요!)</h1>
               </v-col>
             </v-row>
+            <JoinedCard></JoinedCard>
           </v-sheet>
         </v-col>
         </v-row>
@@ -54,7 +55,11 @@
 
 
 <script>
+import JoinedCard from '@/components/CardList/JoinedCard.vue';
 export default {
+  components: {
+    'JoinedCard':JoinedCard
+  },
   data() {
     return {
       mypage: ['나의 정보', '내가 연팟', '내가 참여한 팟'],
@@ -65,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.litstItem {
+.listItem {
   width: 150px;
 }
 

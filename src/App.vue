@@ -10,7 +10,6 @@
 import WebBar from './components/WebBar.vue';
 import WebFooter from './components/WebFooter.vue';
 
-
 export default {
   components: {
     'WebBar':WebBar,

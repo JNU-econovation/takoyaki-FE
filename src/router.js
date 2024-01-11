@@ -6,6 +6,8 @@ import MyPage from './views/MyPage';
 import MypageInformation from './views/MypageInformation'
 import WrittenParty from './views/WrittenParty'
 import ParticipatedPod from './views/ParticipatedPod'
+import guideTakoyaki from './views/guideTakoyaki'
+import cardListDetail from './views/cardListDetail'
 
 Vue.use(Router);
 
@@ -35,6 +37,16 @@ export default new Router({
   {
     path:'/mypage/participated-party',
     component:ParticipatedPod,
+  },
+  {
+    path: '/banner',
+    component:guideTakoyaki,
+  },
+  {
+    path: '/cardListDetail',
+    component: cardListDetail,
+    name:'cardListDetail',
+    props:true,
   }
 ],
 })

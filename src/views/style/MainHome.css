@@ -1,0 +1,27 @@
+.rounded-card {
+    border-radius:40px;
+  }
+  #dropdown {
+    max-width:500px;  
+  }
+  .selectBtn {
+    padding-top: 15px;
+    padding-left: 10px;
+    max-width: 450px;
+  
+  }
+  .mx-auto{
+    padding-left: 30px;
+  }
+  .party-list{
+    padding-left: 15px;
+    font-size: xx-large;
+    font-weight: bold;
+  }
+
+  h3{
+    font-size: 24px;
+    color: #121212;
+  }
+  
+  
