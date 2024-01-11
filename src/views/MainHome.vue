@@ -107,7 +107,7 @@ data(){
   }
 },
   created() {
-    this.$axios.get(this.$takoyaki_API + "parties?type=all&login=true&number=16&page_number=1")
+    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number=1")
       .then((response) => {
         console.log(response);
         this.list=response.data.data; //팟 정보의 객체를 받아옴 
@@ -127,7 +127,7 @@ data(){
   
   methods: {
     clickCategory: function () {
-      this.$axios.get(this.$takoyaki_API+'party/category', {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/category', {
       })
         .then((response) => {
           this.category = response.data.data.category;
@@ -137,7 +137,7 @@ data(){
         })
     },
     clickArea: function () {
-      this.$axios.get(this.$takoyaki_API+'party/activity-location', {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/activity-location', {
       })
         .then((response) => {
           this.area = response.data.data.activity_location;
@@ -147,7 +147,7 @@ data(){
         })
     },
     applyBtn() {
-      this.$axios.get(this.$takoyaki_API + "parties?type=all&login=true&number=16&page_number=1&category="+this.selectCategory+"&activity_location="+this.selectArea)
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number=1&category="+this.selectCategory+"&activity_location="+this.selectArea)
         .then((response) => {
           this.clickApplyBtn=false;
           this.applyList=response.data.data; //해당 팟 카드리스트 받음

@@ -78,7 +78,7 @@ export default {
     };
   },
   created() {
-    this.$axios.get(this.$takoyaki_API + "parties/" + this.party_id + "?login=true")
+    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties/" + this.party_id + "?login=true")
       .then((response) => {
         console.log(response);
         this.title = response.data.data.title;

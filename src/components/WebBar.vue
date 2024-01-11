@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-app-bar color="grey-lighten-4" flat height="72">
+      <v-app-bar color="#FCFCFD" flat height="72">
         <!--<v-avatar> 홈버튼 이미지 넣을경우
         <img src="홈버튼 이미지.jpg" alt="takoyaki Image">
       </v-avatar>-->

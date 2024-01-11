@@ -144,6 +144,8 @@
 <script>
 import TipTap from '@/components/TipTap.vue'
 
+
+
 export default {
   components: {
     'TipTap':TipTap,
@@ -171,7 +173,7 @@ export default {
       category: [],
       area: [],
       DurationUnit:[],
-      contactMethod:[]
+      contactMethod:[],
     }
   },
   methods: {
@@ -179,9 +181,10 @@ export default {
       this.receivedcontent=text;
       this.registerParty();
     },
+     
     
     signUp() {
-      this.$axios.post(this.$takoyaki_API+'test/users/signup')
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'test/users/signup')
       .then((response) => {
           console.log(response);
           this.id =response.data.data.id;
@@ -191,7 +194,7 @@ export default {
         })
     },
     logOut() {
-      this.$axios.post(this.$takoyaki_API+'users/logout')
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/logout')
         .then((response) => {
           console.log(response);
         })
@@ -200,7 +203,7 @@ export default {
         })
     },
     login() {
-      this.$axios.post(this.$takoyaki_API+'test/users/login/'+this.id)
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'test/users/login/'+this.id)
         .then((response) => {
           console.log(response);
         })
@@ -209,7 +212,7 @@ export default {
         })
     },
     logincheck() {
-      this.$axios.get(this.$takoyaki_API+'users/login-check')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'users/login-check')
         .then((response) => {
           console.log(response);
         })
@@ -218,7 +221,7 @@ export default {
         })
     },
     registerParty() {
-      this.$axios.post(this.$takoyaki_API+'party',  
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'party',  
       {
         'category': this.selectCategory,
         'activity_location': this.selectArea,
@@ -241,7 +244,7 @@ export default {
       })
     },
     clickCategory: function () {
-      this.$axios.get(this.$takoyaki_API+'party/category')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/category')
         .then((response) => {
           this.category = response.data.data.category;
           
@@ -251,7 +254,7 @@ export default {
         })
     },
     clickArea: function () {
-      this.$axios.get(this.$takoyaki_API+'party/activity-location', {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/activity-location', {
       })
         .then((response) => {
           this.area = response.data.data.activity_location;
@@ -261,7 +264,7 @@ export default {
         })
     },
     clickDurationUnit: function () {
-      this.$axios.get(this.$takoyaki_API+'party/activity-duration-unit', {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/activity-duration-unit', {
       })
       .then((response) => {
         this.DurationUnit = response.data.data.activity_duration_unit;
@@ -294,7 +297,7 @@ export default {
     
   
     clickContactMethod: function () {
-      this.$axios.get(this.$takoyaki_API+'party/contact-method')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/contact-method')
         .then((response) => {
           this.contactMethod = response.data.data.contact_method;
 /*           console.log(response);*/        
