@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-container>
+      <div v-if="closed_date==null">
       <v-row justify-end>
     <v-col class="text-right"> <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
 
@@ -85,7 +86,10 @@
     </div>
     </v-col>
   </v-row>
-
+</div>
+  <div v-else>
+  </div>
+  
   <!--본문시작-->
       <h1> {{ title }} </h1>
       <br>
@@ -132,6 +136,7 @@ export default {
       recruit_number:null,
       accepted_list:[],
       dialogremove:false,
+      closed_date:''
     }
   },
   
@@ -147,6 +152,7 @@ export default {
         this.waiting_list = response.data.data.waiting_list;
         this.recruit_number = response.data.data.recruit_number;
         this.accepted_list=response.data.data.accepted_list;
+        this.closed_date=response.data.data.closed_date;
       })
       .catch((error) => {
         /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`,error));
