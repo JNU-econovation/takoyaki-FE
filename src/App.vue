@@ -25,7 +25,7 @@ export default {
   font-weight: bold;
   color:black;
   height:40;
-  variant:flat;
+  visibility:flat;
   width:80px;
 }
 .text-right {
