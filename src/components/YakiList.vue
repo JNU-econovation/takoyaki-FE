@@ -1,44 +1,86 @@
 <template> <!--본문 미마감 타코뷰에서 현재 야끼 현황 보여주는 리스트-->
     <div class="yaki-list">
-      <div v-for="yaki in yakis" :key="yaki.id" class="yaki">
-        <span>{{ yaki.name }}</span>
-        <span v-if="yaki.status === 'accepted'">&#10004;</span>
+      <v-list two-line
+      v-for="(acceptedId) in accepted_list"
+      :key="acceptedId">
+        <v-list-tile>
+          <v-list-tile-content>
+            <v-list-tile-title >
+              ✔ {{ acceptedId.nickname }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+          </v-list-tile>
+      </v-list>
+      <v-list two-line
+        v-for="(waitingId,index) in waiting_list"
+        :key="waitingId">
 
-
-        <button v-if="yaki.status !== 'accepted'" @click="acceptYaki(yaki)">수락</button>
-        <button v-if="yaki.status !== 'rejected'" @click="rejectYaki(yaki)">거절</button>
-
-      </div>
+          <v-list-tile>
+            <v-list-tile-content>
+              <v-list-tile-title >
+                {{ waitingId.nickname }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn @click="accept(index)"> 수락 </v-btn>
+              <v-btn @click="reject(index)"> 거절 </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
     </div>
   </template>
   
   <script>
   export default {
+    props:['party_id'],
+
     data() {
-      return {
-        yakis: [
-          // 야끼 db에서 불러오기
-        ]
-      };
-    },
-    methods: {
-      acceptYaki(yaki) {
-        yaki.status = 'accepted';
-        // 수락 야끼 버튼 누르면 바로 이동하게 만들어야됨
-      },
-      rejectYaki(yaki) {
-        const index = this.yakis.indexOf(yaki);
-        if (index > -1) {
-          this.yakis.splice(index, 1);
-        }
+      return{
+      waiting_list:[],
+      accepted_list:[],
       }
+    },
+
+    created() {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
+        .then((response) => {
+          console.log(response)
+          this.waiting_list=response.data.data.waiting_list;
+          this.accepted_list=response.data.data.accepted_list;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    methods:{
+      accept(index) {
+        this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/"+ this.waiting_list[index].id )  
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      },
+      reject(index) {
+        this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/" + this.waiting_list[index].id)
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+
     }
+    
   };
   </script>
   
+
   <style>
   .yaki {
-   
+
   }
   .yaki button {
     
