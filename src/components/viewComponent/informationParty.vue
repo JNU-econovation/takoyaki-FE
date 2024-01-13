@@ -2,20 +2,6 @@
   <div>
     <!--해당 게시물 정보를 뿌려줄 것이기 때문에 path만을 전달하는 것이 아니라 게시물 ID도 params로 보내줘야 한다.-->
     <v-container>
-      <!-- <h1> {{ title }} </h1>
-      <br><br>
-      <YakiList></YakiList> -->
-
-      <!-- <v-row>
-        <v-col>
-          <h3> 팟 정보 </h3>
-        </v-col>
-        <v-col>
-          <h5> 마감날짜 </h5>
-        </v-col>
-        <v-col> {{ closingDate }}</v-col>
-        <v-col>{{ nickname }}</v-col>
-      </v-row> -->
       <v-row align="center">
         <v-col>
           <v-divider class="my-3 divideLine"></v-divider>
@@ -52,10 +38,6 @@
 
       <br><br>
       {{ body }} <!--tiptap에디터사용해서 <p>,<h1>태그 없애줘야 함 그리고 해당 태그를 어떻게 적용할건지 한번 더 고민해봐야 할듯-->
-
-
-
-
 
     </v-container>
   </div>
