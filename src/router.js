@@ -7,7 +7,7 @@ import MypageInformation from './views/MypageInformation'
 import WrittenParty from './views/WrittenParty'
 import ParticipatedPod from './views/ParticipatedPod'
 import guideTakoyaki from './views/guideTakoyaki'
-import cardListDetail from './views/cardListDetail'
+import userCategorize from './components/viewComponent/userCategorize'
 
 Vue.use(Router);
 
@@ -43,9 +43,9 @@ export default new Router({
     component:guideTakoyaki,
   },
   {
-    path: '/cardListDetail',
-    component: cardListDetail,
-    name:'cardListDetail',
+    path: '/userCategorize',
+    component: userCategorize,
+    name:'userCategorize',
     props:true,
   }
 ],
