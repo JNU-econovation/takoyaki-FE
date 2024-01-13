@@ -1,29 +1,102 @@
 <template>
   <div>
     <v-container>
+      <v-row justify-end>
+    <v-col class="text-right"> <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
+
+      <!--마감 모달-->
+      <v-btn @click="dialog=true">
+        마감하기
+      </v-btn>
+      <v-dialog
+        v-model="dialog"
+        width="auto"
+      >
+        <v-card>
+          <v-card-text>
+            <h2>{{title}}</h2>
+          </v-card-text>
+          <v-card-subtitle>
+            <v-col>
+              <v-row>
+                ✔  남은 자리 {{ this.recruit_number-this.waiting_list.length-this.accepted_list.length }}
+              </v-row>
+              <v-row>
+                ✔  대기 중인 야끼  {{ waiting_list.length }}
+              </v-row>
+            </v-col>
+          </v-card-subtitle>
+          <v-card-actions>
+              <v-col>
+                <v-btn @click="dialog = false">취소</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="closing">마감하기</v-btn>
+              </v-col>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-col>
+
+
+    <v-col cols="1" class="text-right">
+      <v-btn @click="edit">
+        수정
+      </v-btn>
+    </v-col>
+
+
+    <!--삭제 모달-->
+    <v-col cols="1" class="text-right">
+      <div class="text-center">
+        <v-btn
+        @click="dialogremove = true"
+      >
+        삭제
+      </v-btn>
+      <v-dialog
+        v-model="dialogremove"
+        width="auto"
+      >
+        <v-card>
+          <v-card-text>
+            {{title}}
+          </v-card-text>
+          <v-card-subtitle>
+            <v-col>
+              <v-row>
+                ✔  남은 자리 {{ this.recruit_number - this.waiting_list.length - this.accepted_list.length }}
+              </v-row>
+              <v-row>
+                ✔  대기 중인 야끼  {{ waiting_list.length }}
+              </v-row>
+            </v-col>
+          </v-card-subtitle>
+          <v-card-actions>
+            <v-col>
+              <v-btn @click="dialogremove = false">취소</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn @click="remove">삭제하기</v-btn>
+            </v-col>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+    </v-col>
+  </v-row>
+
+  <!--본문시작-->
       <h1> {{ title }} </h1>
       <br>
 
-      <!-- <v-list lines="one">
-        <v-list-item
-          v-for="n in 6"
-          :key="n"
-          :title="'Item ' + n"
-          subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit">
-        </v-list-item>
-      </v-list> -->
-
-      <YakiList :party_id="party_id"></YakiList>
-
-
-
-
-
+      <YakiList :party_id="party_id" />
+      <br><br>
 
       <v-row>
         <v-col cols="2">
           <h3> 팟 정보 </h3>
-        </v-col >
+        </v-col>
         <v-col cols="2">
           <h4> 마감날짜 </h4>
         </v-col>
@@ -32,9 +105,7 @@
         </v-col>
       </v-row>
 
-      <informationParty :party_id="party_id"></informationParty>
-
-
+      <informationParty :party_id="party_id" />
     </v-container>
   </div>
 </template>
@@ -43,12 +114,12 @@
 import informationParty from './informationParty.vue';
 import YakiList from '../YakiList.vue';
 export default {
-  props: ['party_id'],
 
   components: {
     'informationParty': informationParty,
-    'YakiList': YakiList
+    'YakiList': YakiList,
   },
+  props: ['party_id'],
 
   data() {
     return {
@@ -56,7 +127,11 @@ export default {
       nickname: '',
       closingDate: '',
       user_type: '',
-      
+      dialog:false,
+      waiting_list:[],
+      recruit_number:null,
+      accepted_list:[],
+      dialogremove:false,
     }
   },
   
@@ -64,23 +139,56 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        console.log(response)
+        /* eslint-disable */console.log(...oo_oo(`2632391628_59_8_59_29_4`,response))
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
         this.closingDate = response.data.data.planned_closing_date;
-
-
-
+        this.waiting_list = response.data.data.waiting_list;
+        this.recruit_number = response.data.data.recruit_number;
+        this.accepted_list=response.data.data.accepted_list;
       })
       .catch((error) => {
-        console.log(error);
-
+        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`,error));
       })
   },
 
   methods: {
-    
+    closing() {
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/closing")
+        .then((response) => {
+        console.log(...oo_oo(`2632391628_59_8_59_29_4`, response));
+        this.$router.push({ path: '/' })
+
+        })
+        .catch((error) => {
+        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
+        })
+    },
+    edit(){
+      this.$axios.patch(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id)
+        .then((response) => {
+          console.log(response)
+
+        })
+        .catch((error) => {
+        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
+        })
+    },
+    remove() {
+      this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id,
+      {
+
+      })
+        .then((response) => {
+          console.log(...oo_oo(`2632391628_59_8_59_29_4`, response))
+          this.$router.push({path:'/'})
+        })
+        .catch((error) => {
+        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
+        })
+    }
+
   }
 }
 </script>
