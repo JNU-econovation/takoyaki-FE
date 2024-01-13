@@ -13,13 +13,13 @@
             {{ closingDate }} 마감
           </v-row>
           <v-row>
-            신청 완료
+            <div class='complete'> 신청 완료 </div> 
+            <v-btn @click="cancelApplication"> 신청 취소 </v-btn>
           </v-row>
         </v-col>
       </v-row>
 
       <informationParty :party_id="party_id"></informationParty>
-
 
     </v-container>
   </div>
@@ -51,16 +51,32 @@ export default {
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
         this.closingDate = response.data.data.planned_closing_date;
-
-
-
       })
       .catch((error) => {
         console.log(error);
-
       })
+  },
+
+  methods:{
+    cancelApplication() {
+      this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/apply")
+        .then((response) => {
+          console.log(response)
+          this.$router.push({ path: '/' }) //신청취소버튼 클릭시 메인 홈으로 이동
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      },
+    }
   }
-}
+
 </script>
 
-<style></style>
+<style scoped>
+.complete {
+  padding-right: 60px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+</style>
