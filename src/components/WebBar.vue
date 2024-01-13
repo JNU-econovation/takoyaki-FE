@@ -1,10 +1,9 @@
 <template>
     <div>
       <v-app-bar color="#FCFCFD" flat height="72">
-        
-        <!--<v-avatar> 홈버튼 이미지 넣을경우
-        <img src="홈버튼 이미지.jpg" alt="takoyaki Image">
-      </v-avatar>-->
+        <v-avatar> 
+        <img src="public\images\takoImg.png" alt="takoyaki Image">
+      </v-avatar>
       
         <router-link to="/">
           <v-btn class="me-2">home</v-btn>
