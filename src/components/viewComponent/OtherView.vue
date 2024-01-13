@@ -13,15 +13,20 @@
             {{ closingDate }} 마감
           </v-row>
           <v-row>
-            <v-btn v-if="user_type==='OTHER'" @click="applyNow">신청하기</v-btn>
-            <div v-else-if="user_type==='YAKI'"> 신청 완료 </div>
+            <v-btn
+              v-if="user_type==='OTHER'"
+              @click="applyNow"
+            >
+              신청하기
+            </v-btn>
+            <div v-else-if="user_type==='YAKI'">
+              신청 완료
+            </div>
           </v-row>
         </v-col>
       </v-row>
       
-      <informationParty :party_id="party_id"></informationParty>
-      
-
+      <informationParty :party_id="party_id" />
     </v-container>
   </div>
 </template>
@@ -30,11 +35,11 @@
 import informationParty from './informationParty.vue';
 
 export default {
-  props:['party_id'],
 
   components: {
     'informationParty':informationParty
   },
+  props:['party_id'],
 
   data() {
     return {
@@ -48,7 +53,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        console.log(response)
+        /* eslint-disable */console.log(...oo_oo(`3618132122_51_8_51_29_4`,response))
         this.user_type = response.data.data.user_type;
         this.title=response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -58,7 +63,7 @@ export default {
 
       })
       .catch((error) => {
-        console.log(error);
+        /* eslint-disable */console.log(...oo_oo(`3618132122_61_8_61_26_4`,error));
 
       })
   },
@@ -67,11 +72,11 @@ export default {
     applyNow() {
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +"parties/"+ this.party_id+"/apply")
         .then((response) => {
-          console.log(response); 
+          /* eslint-disable */console.log(...oo_oo(`3618132122_70_10_70_31_4`,response)); 
           this.user_type='YAKI';
         })
         .catch((error) => {
-          console.log(error);
+          /* eslint-disable */console.log(...oo_oo(`3618132122_74_10_74_28_4`,error));
         })
     },
    

@@ -1,9 +1,21 @@
 <template>
   <div>
-    <TakoView v-if="user_type === 'TAKO'" :party_id="party_id"></TakoView>
-    <YakiView v-else-if="user_type === 'YAKI'" :party_id="party_id"></YakiView>
-    <OtherView v-else-if="user_type =='OTHER'" :party_id="party_id"></OtherView>
-    <loginFalse v-else :party_id="party_id"></loginFalse>
+    <TakoView
+      v-if="user_type === 'TAKO'"
+      :party_id="party_id"
+    />
+    <YakiView
+      v-else-if="user_type === 'YAKI'"
+      :party_id="party_id"
+    />
+    <OtherView
+      v-else-if="user_type =='OTHER'"
+      :party_id="party_id"
+    />
+    <loginFalse
+      v-else
+      :party_id="party_id"
+    />
   </div>
 </template>
 
@@ -14,7 +26,6 @@ import OtherView from './OtherView.vue'
 import loginFalse from './loginFalse.vue'
 
 export default {
-  props:['party_id'],
   
   components: {
     'TakoView': TakoView,
@@ -22,6 +33,7 @@ export default {
     'OtherView': OtherView,
     'loginFalse': loginFalse,
   },
+  props:['party_id'],
 
   data() {
     return{
@@ -32,11 +44,11 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        console.log(response)
+        /* eslint-disable */console.log(...oo_oo(`2463455312_35_8_35_29_4`,response))
         this.user_type = response.data.data.user_type;
       })
       .catch((error) => {
-        console.log(error);
+        /* eslint-disable */console.log(...oo_oo(`2463455312_39_8_39_26_4`,error));
       })
   }
 }

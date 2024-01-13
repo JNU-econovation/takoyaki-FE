@@ -4,28 +4,41 @@
       <v-container>
         <v-row>
           <v-col cols="2">
-            <v-sheet rounded="lg" class="mypage-card">
-              <v-card class="elevation-12" max-width="500px">
+            <v-sheet
+              rounded="lg"
+              class="mypage-card"
+            >
+              <v-card
+                class="elevation-12"
+                max-width="500px"
+              >
                 <v-list rounded="lg">
-
-                   <v-list-item v-for="(n, k) in routerMypage" :key="k" :to="`/mypage/${n}`" class="listItem"><!--라우터연결-->
+                  <v-list-item
+                    v-for="(n, k) in routerMypage"
+                    :key="k"
+                    :to="`/mypage/${n}`"
+                    class="listItem"
+                  >
+                    <!--라우터연결-->
                   
-                    <v-list-item-content >
+                    <v-list-item-content>
                       <v-list-item-title>{{ mypage[k] }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
-
                 </v-list>
               </v-card>
             </v-sheet>
           </v-col>
           <v-col>
-            <v-sheet min-height="70vh" rounded="lg" width="700px" class="card">
+            <v-sheet
+              min-height="70vh"
+              rounded="lg"
+              width="700px"
+              class="card"
+            >
               <v-col>
                 <h1>작성 목록</h1>
               </v-col>
-
-              
             </v-sheet>
           </v-col>
         </v-row>

@@ -1,20 +1,32 @@
 <template>
   <div v-if="editor">
-    <button @click="editor.chain().focus().toggleBold().run()"
-      :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }" >
-      <i class="fas fa-bold width"></i> 
+    <button
+      :disabled="!editor.can().chain().focus().toggleBold().run()"
+      :class="{ 'is-active': editor.isActive('bold') }"
+      @click="editor.chain().focus().toggleBold().run()"
+    >
+      <i class="fas fa-bold width" /> 
     </button>
-    <button @click="editor.chain().focus().toggleItalic().run()"
-      :disabled="!editor.can().chain().focus().toggleItalic().run()" :class="{ 'is-active': editor.isActive('italic') }">
-      <i class="fas fa-italic width"></i> 
+    <button
+      :disabled="!editor.can().chain().focus().toggleItalic().run()"
+      :class="{ 'is-active': editor.isActive('italic') }"
+      @click="editor.chain().focus().toggleItalic().run()"
+    >
+      <i class="fas fa-italic width" /> 
     </button>
-    <button @click="editor.chain().focus().toggleStrike().run()"
-      :disabled="!editor.can().chain().focus().toggleStrike().run()" :class="{ 'is-active': editor.isActive('strike') }">
-      <i class="fa-solid fa-strikethrough width"></i>
+    <button
+      :disabled="!editor.can().chain().focus().toggleStrike().run()"
+      :class="{ 'is-active': editor.isActive('strike') }"
+      @click="editor.chain().focus().toggleStrike().run()"
+    >
+      <i class="fa-solid fa-strikethrough width" />
     </button>
-    <button @click="editor.chain().focus().toggleCode().run()"
-      :disabled="!editor.can().chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }">
-      <i class="fa-solid fa-code width"></i>
+    <button
+      :disabled="!editor.can().chain().focus().toggleCode().run()"
+      :class="{ 'is-active': editor.isActive('code') }"
+      @click="editor.chain().focus().toggleCode().run()"
+    >
+      <i class="fa-solid fa-code width" />
     </button>
     <!-- <button @click="editor.chain().focus().unsetAllMarks().run()" class="width">
       clear marks
@@ -22,51 +34,80 @@
     <button @click="editor.chain().focus().clearNodes().run()" class="width">
       clear nodes
     </button> -->
-    <button @click="editor.chain().focus().setParagraph().run()" :class="{ 'is-active': editor.isActive('paragraph') }">
-      <i class="fa-solid fa-paragraph width"></i>
+    <button
+      :class="{ 'is-active': editor.isActive('paragraph') }"
+      @click="editor.chain().focus().setParagraph().run()"
+    >
+      <i class="fa-solid fa-paragraph width" />
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 1 })} "
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+    >
       H1
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+    >
       H2
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
+    >
       H3
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
+    >
       H4
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
+    >
       H5
     </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
+    <button
       :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
+    >
       H6
     </button>
-    <button @click="editor.chain().focus().toggleBulletList().run()"
-      :class="{ 'is-active': editor.isActive('bulletList') }">
-      <i class="fa-solid fa-list width"></i>
+    <button
+      :class="{ 'is-active': editor.isActive('bulletList') }"
+      @click="editor.chain().focus().toggleBulletList().run()"
+    >
+      <i class="fa-solid fa-list width" />
     </button>
-    <button @click="editor.chain().focus().toggleOrderedList().run()"
+    <button
       :class="{ 'is-active': editor.isActive('orderedList') }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleOrderedList().run()"
+    >
       ordered list
     </button>
-    <button @click="editor.chain().focus().toggleCodeBlock().run()"
+    <button
       :class="{ 'is-active': editor.isActive('codeBlock') }"
-      style="font-weight: bold;" class="width">
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().toggleCodeBlock().run()"
+    >
       code block
     </button>
     <!-- <button @click="editor.chain().focus().toggleBlockquote().run()"
@@ -74,8 +115,11 @@
       style="font-weight: bold;" class="width">
       blockquote
     </button> -->
-    <button @click="editor.chain().focus().setHorizontalRule().run()"
-    style="font-weight: bold;" class="width">
+    <button
+      style="font-weight: bold;"
+      class="width"
+      @click="editor.chain().focus().setHorizontalRule().run()"
+    >
       horizontal rule
     </button>
     <!-- <button @click="editor.chain().focus().setHardBreak().run()"
@@ -88,13 +132,20 @@
     <button @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()" style="font-weight: bold;" class="width">
       redo
     </button> -->
-    <v-divider ></v-divider>
-    <editor-content :editor="editor"  v-model="content"/>
+    <v-divider />
+    <editor-content
+      v-model="content"
+      :editor="editor"
+    />
 
-    <v-spacer></v-spacer>
-    <v-btn @click="sendContent" style="border: none;">팟 등록</v-btn>
+    <v-spacer />
+    <v-btn
+      style="border: none;"
+      @click="sendContent"
+    >
+      팟 등록
+    </v-btn>
   </div>
-  
 </template>
 
 <script>
@@ -113,14 +164,6 @@ export default {
 
     }
   },
-  methods: {
-    sendContent() {
-      this.$emit('input',this.content);
-    },
-    b() {
-      console.log(this.content);
-    }
-  },
 
   mounted() {
     this.editor = new Editor({
@@ -137,6 +180,14 @@ export default {
 
   beforeUnmount() {
     this.editor.destroy()
+  },
+  methods: {
+    sendContent() {
+      this.$emit('input',this.content);
+    },
+    b() {
+      console.log(this.content);
+    }
   }
 }
 </script>

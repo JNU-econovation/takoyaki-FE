@@ -4,27 +4,51 @@
     <v-container>
       <v-row align="center">
         <v-col>
-          <v-divider class="my-3 divideLine"></v-divider>
+          <v-divider class="my-3 divideLine" />
         </v-col>
       </v-row>
 
       <v-row>
-        <v-col cols="1"><strong>카테고리</strong></v-col>
-        <v-col cols="2">{{ category }}</v-col>
-        <v-col cols="1"><strong>지역:</strong></v-col>
-        <v-col cols="2">{{ area }}</v-col>
+        <v-col cols="1">
+          <strong>카테고리</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ category }}
+        </v-col>
+        <v-col cols="1">
+          <strong>지역:</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ area }}
+        </v-col>
       </v-row>
       <v-row>
-        <v-col cols="1"><strong>활동시작:</strong></v-col>
-        <v-col cols="2">{{ plannedStartDate }}</v-col>
-        <v-col cols="1"><strong>예상기간:</strong></v-col>
-        <v-col cols="2">{{ activityDuration }}</v-col>
+        <v-col cols="1">
+          <strong>활동시작:</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ plannedStartDate }}
+        </v-col>
+        <v-col cols="1">
+          <strong>예상기간:</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ activityDuration }}
+        </v-col>
       </v-row>
       <v-row>
-        <v-col cols="1"><strong>모집인원:</strong></v-col>
-        <v-col cols="2">{{ recruitNumber }}</v-col>
-        <v-col cols="1"><strong>연락방법:</strong></v-col>
-        <v-col cols="2">{{ contactMethod }}</v-col>
+        <v-col cols="1">
+          <strong>모집인원:</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ recruitNumber }}
+        </v-col>
+        <v-col cols="1">
+          <strong>연락방법:</strong>
+        </v-col>
+        <v-col cols="2">
+          {{ contactMethod }}
+        </v-col>
       </v-row>
 
       <br><br><br><br>
@@ -32,13 +56,12 @@
 
       <v-row align="center">
         <v-col>
-          <v-divider class="my-3 divideLine"></v-divider>
+          <v-divider class="my-3 divideLine" />
         </v-col>
       </v-row>
 
       <br><br>
       {{ body }} <!--tiptap에디터사용해서 <p>,<h1>태그 없애줘야 함 그리고 해당 태그를 어떻게 적용할건지 한번 더 고민해봐야 할듯-->
-
     </v-container>
   </div>
 </template>
@@ -66,7 +89,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties/" + this.party_id + "?login=true")
       .then((response) => {
-        console.log(response);
+        /* eslint-disable */console.log(...oo_oo(`3662722890_69_8_69_29_4`,response));
         this.title = response.data.data.title;
         this.closingDate = response.data.data.planned_closing_date;
         this.category = response.data.data.category;
@@ -80,7 +103,7 @@ export default {
         this.body = response.data.data.body;
       })
       .catch((error) => {
-        console.log(error);
+        /* eslint-disable */console.log(...oo_oo(`3662722890_83_8_83_26_4`,error));
       })
   },
 

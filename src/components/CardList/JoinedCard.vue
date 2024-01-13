@@ -1,15 +1,22 @@
 <template>
-    <div class="card-list">
-      <div v-for="(card, index) in cards" :key="index" class="card">
-        <h3>{{ card.title }}</h3>
+  <div class="card-list">
+    <div
+      v-for="(card, index) in cards"
+      :key="index"
+      class="card"
+    >
+      <h3>{{ card.title }}</h3>
 
-        <p>카테고리: {{ card.category }}</p>
-        <p>활동 지역: {{ card.location }}</p>
+      <p>카테고리: {{ card.category }}</p>
+      <p>활동 지역: {{ card.location }}</p>
         
-        <a :href="card.contact" target="_blank"><v-btn>연락하기</v-btn></a>
-      </div>
+      <a
+        :href="card.contact"
+        target="_blank"
+      ><v-btn>연락하기</v-btn></a>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {

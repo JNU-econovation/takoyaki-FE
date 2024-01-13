@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
-    <WebBar></WebBar>
-    <router-view></router-view><!--내가 관심있는 팟 모든팟 뿌려줌-->
-    <WebFooter></WebFooter>
+    <WebBar />
+    <router-view /><!--내가 관심있는 팟 모든팟 뿌려줌-->
+    <WebFooter />
   </v-app>
 </template>
 

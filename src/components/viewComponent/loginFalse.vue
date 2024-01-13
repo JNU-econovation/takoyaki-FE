@@ -11,11 +11,15 @@
         <v-col cols="2">
           <h5> 마감날짜 </h5>
         </v-col>
-        <v-col cols="2"> {{ closingDate }}</v-col>
-        <v-col cols="2">{{ nickname }}</v-col>
+        <v-col cols="2">
+          {{ closingDate }}
+        </v-col>
+        <v-col cols="2">
+          {{ nickname }}
+        </v-col>
       </v-row>
 
-      <informationParty :party_id="party_id"></informationParty>
+      <informationParty :party_id="party_id" />
     </v-container>
   </div>
 </template>
@@ -24,11 +28,11 @@
 import informationParty from './informationParty.vue';
 
 export default {
-  props: ['party_id'],
 
   components: {
     'informationParty': informationParty
   },
+  props: ['party_id'],
 
   data() {
     return {
@@ -41,7 +45,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        console.log(response)
+        /* eslint-disable */console.log(...oo_oo(`1784080432_44_8_44_29_4`,response))
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -51,7 +55,7 @@ export default {
 
       })
       .catch((error) => {
-        console.log(error);
+        /* eslint-disable */console.log(...oo_oo(`1784080432_54_8_54_26_4`,error));
 
       })
   }
