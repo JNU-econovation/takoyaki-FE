@@ -20,7 +20,7 @@
             </v-sheet>
           </v-col>
           <v-col>
-            <v-sheet min-height="70vh" rounded="lg" width="700px" class="card">
+            <v-sheet min-height="70vh" rounded="lg" width="700px" class="MyPageBG">
               <v-col>
                 <h1>작성 목록</h1>
               </v-col>
@@ -60,8 +60,8 @@ export default {
   padding-top: 50px;
 }
 
-.card {
-  padding-left: 200px;
+.MyPageBG {
+  padding-left: 150px;
   padding-top: 50px;
 }
 
