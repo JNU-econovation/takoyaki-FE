@@ -6,7 +6,7 @@
         <p>카테고리: {{ card.category }}</p>
         <p>활동 지역: {{ card.location }}</p>
         
-        <a :href="card.contact" target="_blank"><v-btn>연락하기</v-btn></a>
+        <a :href="card.contact" target="_blank"><v-btn style="width: 250px; position: relative;">연락하기</v-btn></a>
       </div>
     </div>
   </template>
