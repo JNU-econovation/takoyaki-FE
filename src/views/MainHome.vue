@@ -48,7 +48,7 @@
                   class="me-7"
                   offset-sm=""
                   > <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-                  <router-link :to="{name:'cardListDetail', params:{party_id: item.party_id}}">
+                  <router-link :to="{name:'userCategorize', params:{party_id: item.party_id}}">
                 <BasicCard :party_id="item.party_id" />
                 <!--받은 키로 BasicCard에 props-->
               </router-link>
@@ -65,8 +65,10 @@
                     class="me-7"
                     offset-sm=""
                     > <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+                    <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
                   <BasicCard :party_id="item.party_id" />
                   <!--받은 키로 BasicCard에 props-->
+                  </router-link>
                 </v-col>
               </v-row>
             </v-container>
