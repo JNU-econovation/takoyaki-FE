@@ -2,32 +2,34 @@
   <div>
     <v-container>
       <div v-if="closed_date==null">
-        <h1> {{ title }} </h1>
-        <br><br>
-        <v-row>
-          <v-col cols="2">
-            <h3> 팟 정보 </h3>
-          </v-col>
-          <v-col>{{ nickname }}</v-col>
-          <v-col>
-            <v-row>
-              {{ closingDate }} 마감
-            </v-row>
-            <v-row>
-              <v-btn
-                v-if="user_type==='OTHER'"
-                @click="applyNow"
-              >
-                신청하기
-              </v-btn>
-              <div v-else-if="user_type==='YAKI'">
-                신청 완료
-              </div>
-            </v-row>
-          </v-col>
-        </v-row>
+        <div v-if="user_type==='OTHER'">
+          <h1> {{ title }} </h1>
+          <br><br>
+          <v-row>
+            <v-col cols="2">
+              <h3> 팟 정보 </h3>
+            </v-col>
+            <v-col>{{ nickname }}</v-col>
+            <v-col>
+              <v-row>
+                {{ closingDate }} 마감
+              </v-row>
+              <v-row>
+                <v-btn
+                  @click="applyNow"
+                >
+                  신청하기
+                </v-btn>
+              </v-row>
+            </v-col>
+          </v-row>
+          <informationParty :party_id="party_id" />
+</div>
+        <div v-else-if="user_type === 'YAKI'">
+          <YakiView :party_id="party_id"></YakiView>
+        </div>
       </div>
-      
+
       <div v-else>
         <h1> {{ title }} </h1>
         <br><br>
@@ -39,19 +41,21 @@
           <v-spacer />
           <v-col> 마감된 팟이에요! </v-col>
         </v-row>
+        <informationParty :party_id="party_id" />
       </div>
-      <informationParty :party_id="party_id" />
+      
     </v-container>
   </div>
 </template>
 
 <script>
 import informationParty from './informationParty.vue';
-
+import YakiView from './YakiView.vue';
 export default {
 
   components: {
-    'informationParty':informationParty
+    'informationParty':informationParty,
+    'YakiView': YakiView
   },
   props:['party_id'],
 
