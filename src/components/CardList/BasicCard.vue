@@ -3,7 +3,7 @@
     <div
       v-if="closed_date==null"
       class="card"
-    >
+    ><!--마감이 안 된 팟-->
       <h3>{{ title }}</h3>
 
       <p>{{ closingDate }}</p>
@@ -16,7 +16,7 @@
     <div
       v-else
       class="card"
-    >
+    ><!--마감 된 팟-->
       <h3>{{ title }} 마감</h3>
     </div>
   </div>

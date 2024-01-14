@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-
       <div v-if="closed_date==null">
         <h1> {{ title }} </h1>
         <br><br>
@@ -10,7 +9,6 @@
             <h3> 팟 정보 </h3>
           </v-col>
           <v-col>{{ nickname }}</v-col>
-
           <div v-if="yaki_status === 'WAITING'">
             <v-col>
               <v-row>
@@ -57,7 +55,6 @@
       </div>
       <informationParty :party_id="party_id" />
     </v-container>
-
   </div>
 </template>
 
@@ -65,7 +62,6 @@
 import informationParty from './informationParty.vue';
 
 export default {
-
   components: {
     'informationParty': informationParty
   },
