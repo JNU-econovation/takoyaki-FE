@@ -2,95 +2,109 @@
   <div>
     <v-container>
       <div v-if="closed_date==null">
-      <v-row justify-end>
-    <v-col class="text-right"> <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
+        <v-row justify-end>
+          <v-col class="text-right">
+            <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
 
-      <!--마감 모달-->
-      <v-btn @click="dialog=true">
-        마감하기
-      </v-btn>
-      <v-dialog
-        v-model="dialog"
-        width="auto"
-      >
-        <v-card>
-          <v-card-text>
-            <h2>{{title}}</h2>
-          </v-card-text>
-          <v-card-subtitle>
-            <v-col>
-              <v-row>
-                ✔  남은 자리 {{ this.recruit_number-this.waiting_list.length-this.accepted_list.length }}
-              </v-row>
-              <v-row>
-                ✔  대기 중인 야끼  {{ waiting_list.length }}
-              </v-row>
-            </v-col>
-          </v-card-subtitle>
-          <v-card-actions>
-              <v-col>
-                <v-btn @click="dialog = false">취소</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="closing">마감하기</v-btn>
-              </v-col>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-col>
-
-
-    <v-col cols="1" class="text-right">
-      <v-btn @click="edit">
-        수정
-      </v-btn>
-    </v-col>
+            <!--마감 모달-->
+            <v-btn @click="dialog=true">
+              마감하기
+            </v-btn>
+            <v-dialog
+              v-model="dialog"
+              width="auto"
+            >
+              <v-card>
+                <v-card-text>
+                  <h2>{{ title }}</h2>
+                </v-card-text>
+                <v-card-subtitle>
+                  <v-col>
+                    <v-row>
+                      ✔  남은 자리 {{ recruit_number-waiting_list.length-accepted_list.length }}
+                    </v-row>
+                    <v-row>
+                      ✔  대기 중인 야끼  {{ waiting_list.length }}
+                    </v-row>
+                  </v-col>
+                </v-card-subtitle>
+                <v-card-actions>
+                  <v-col>
+                    <v-btn @click="dialog = false">
+                      취소
+                    </v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn @click="closing">
+                      마감하기
+                    </v-btn>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
 
 
-    <!--삭제 모달-->
-    <v-col cols="1" class="text-right">
-      <div class="text-center">
-        <v-btn
-        @click="dialogremove = true"
-      >
-        삭제
-      </v-btn>
-      <v-dialog
-        v-model="dialogremove"
-        width="auto"
-      >
-        <v-card>
-          <v-card-text>
-            {{title}}
-          </v-card-text>
-          <v-card-subtitle>
-            <v-col>
-              <v-row>
-                ✔  남은 자리 {{ this.recruit_number - this.waiting_list.length - this.accepted_list.length }}
-              </v-row>
-              <v-row>
-                ✔  대기 중인 야끼  {{ waiting_list.length }}
-              </v-row>
-            </v-col>
-          </v-card-subtitle>
-          <v-card-actions>
-            <v-col>
-              <v-btn @click="dialogremove = false">취소</v-btn>
-            </v-col>
-            <v-col>
-              <v-btn @click="remove">삭제하기</v-btn>
-            </v-col>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
-    </v-col>
-  </v-row>
-</div>
-  <div v-else>
-  </div>
+          <v-col
+            cols="1"
+            class="text-right"
+          >
+            <v-btn @click="edit">
+              수정
+            </v-btn>
+          </v-col>
+
+
+          <!--삭제 모달-->
+          <v-col
+            cols="1"
+            class="text-right"
+          >
+            <div class="text-center">
+              <v-btn
+                @click="dialogremove = true"
+              >
+                삭제
+              </v-btn>
+              <v-dialog
+                v-model="dialogremove"
+                width="auto"
+              >
+                <v-card>
+                  <v-card-text>
+                    {{ title }}
+                  </v-card-text>
+                  <v-card-subtitle>
+                    <v-col>
+                      <v-row>
+                        ✔  남은 자리 {{ recruit_number - waiting_list.length - accepted_list.length }}
+                      </v-row>
+                      <v-row>
+                        ✔  대기 중인 야끼  {{ waiting_list.length }}
+                      </v-row>
+                    </v-col>
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-col>
+                      <v-btn @click="dialogremove = false">
+                        취소
+                      </v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="remove">
+                        삭제하기
+                      </v-btn>
+                    </v-col>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      <div v-else />
   
-  <!--본문시작-->
+      <!--본문시작-->
       <h1> {{ title }} </h1>
       <br>
 
@@ -136,7 +150,7 @@ export default {
       recruit_number:null,
       accepted_list:[],
       dialogremove:false,
-      closed_date:''
+      closed_date:'',
     }
   },
   
@@ -144,7 +158,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`2632391628_59_8_59_29_4`,response))
+        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_147_28_147_85_4`,...oo_oo(`2632391628_59_8_59_29_4`,response)))
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -155,7 +169,7 @@ export default {
         this.closed_date=response.data.data.closed_date;
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`,error));
+        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_158_28_158_82_4`,...oo_oo(`2632391628_69_8_69_26_4`,error)));
       })
   },
 
@@ -163,35 +177,30 @@ export default {
     closing() {
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/closing")
         .then((response) => {
-        console.log(...oo_oo(`2632391628_59_8_59_29_4`, response));
+        /* eslint-disable */console.log(...oo_oo(`3248742735_166_8_166_66_4`,...oo_oo(`2632391628_59_8_59_29_4`, response)));
         this.$router.push({ path: '/' })
 
         })
         .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
+        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_171_28_171_83_4`,...oo_oo(`2632391628_69_8_69_26_4`, error)));
         })
     },
     edit(){
-      this.$axios.patch(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id)
-        .then((response) => {
-          console.log(response)
-
-        })
-        .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
-        })
+      this.$router.push(
+        { path: '/editComponent'});
     },
+      
     remove() {
       this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id,
       {
 
       })
         .then((response) => {
-          console.log(...oo_oo(`2632391628_59_8_59_29_4`, response))
+          /* eslint-disable */console.log(...oo_oo(`3248742735_184_10_184_68_4`,...oo_oo(`2632391628_59_8_59_29_4`, response)))
           this.$router.push({path:'/'})
         })
         .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2632391628_69_8_69_26_4`, error));
+        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_188_28_188_83_4`,...oo_oo(`2632391628_69_8_69_26_4`, error)));
         })
     }
 

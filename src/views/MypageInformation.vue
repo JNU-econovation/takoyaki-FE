@@ -31,7 +31,12 @@
           </v-col>
 
           <v-col>
-            <v-sheet min-height="70vh" rounded="lg" width="700px" class="MyPageBG">
+            <v-sheet
+              min-height="70vh"
+              rounded="lg"
+              width="700px"
+              class="MyPageBG"
+            >
               <h1>나의 정보</h1>
               <br><br>
               <h4>회원 정보 수정</h4>

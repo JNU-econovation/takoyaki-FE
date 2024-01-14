@@ -1,8 +1,15 @@
 <template>
-    <div>
-      <v-app-bar color="#FCFCFD" flat height="72">
-        <v-avatar> 
-        <img src="public\images\takoImg.png" alt="takoyaki Image">
+  <div>
+    <v-app-bar
+      color="#FCFCFD"
+      flat
+      height="72"
+    >
+      <v-avatar> 
+        <img
+          src="public\images\takoImg.png"
+          alt="takoyaki Image"
+        >
       </v-avatar>
       
       <router-link to="/">

@@ -128,6 +128,7 @@ data(){
     applyList:[],
     party_id:'',
     clickApplyBtn:true,
+    
   }
 },
   created() {
