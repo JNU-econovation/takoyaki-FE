@@ -30,10 +30,27 @@
             </v-sheet>
           </v-col>
           <v-col>
-            <v-sheet min-height="70vh" rounded="lg" width="700px" class="MyPageBG">
+            <v-sheet
+              min-height="70vh"
+              rounded="lg"
+              width="700px"
+              class="MyPageBG"
+            >
               <v-col>
                 <h1>작성 목록</h1>
               </v-col>
+              <v-row>
+                <v-col
+                  v-for="item in written_list"
+                  :key="item.party_id"
+                  cols="12"
+                  class="me-7"
+                >
+                  <router-link :to="{name:'userCategorize', params:{party_id:item.party_id}}">
+                    <BasicCard :party_id="item.party_id" />
+                  </router-link>
+                </v-col>
+              </v-row>
             </v-sheet>
           </v-col>
         </v-row>
@@ -44,12 +61,27 @@
 
 
 <script>
+import BasicCard from '@/components/CardList/BasicCard.vue';
 export default {
+  components:{
+    'BasicCard': BasicCard
+  },
   data() {
     return {
       mypage: ['나의 정보', '내가 연팟', '내가 참여한 팟'],
-      routerMypage: ['my-information', 'written-party', 'participated-party']
+      routerMypage: ['my-information', 'written-party', 'participated-party'],
+      written_list:[],
     }
+  },
+  created() {
+    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=wrote&number=6&page=1')
+      .then((response) => {
+        /* eslint-disable */console.log(...oo_oo(`3929895578_74_8_74_29_4`,response));
+        this.written_list=response.data.data;
+      })
+      .catch((error) => {
+        /* eslint-disable */console.log(...oo_oo(`3929895578_78_8_78_26_4`,error));
+      })
   }
 }
 </script>
