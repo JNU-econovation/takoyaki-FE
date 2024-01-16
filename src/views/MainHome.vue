@@ -60,10 +60,10 @@
               </v-btn>
             </v-col>
           </v-row>
-
+  
           <v-container v-if="clickApplyBtn">
             <v-row>
-              <v-col 
+              <v-col
                 v-for="item in list"
                 :key="item.party_id"
                 cols="12"

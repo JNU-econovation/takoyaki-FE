@@ -3,7 +3,7 @@
     <v-main class="bg-grey-lighten-3">
       <v-container>
         <v-row>
-          <v-col cols="2">
+          <v-col cols="1">
             <v-sheet
               rounded="lg"
               class="mypage-card"
