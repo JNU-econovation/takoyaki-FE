@@ -151,7 +151,7 @@ export default {
       .catch((error) => {
         /* eslint-disable */console.log(...oo_oo(`2121293739_121_8_121_26_4`,error));
       }),
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=closed&number=3&page=1')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=closed')
         .then((response) => {
           /* eslint-disable */console.log(...oo_oo(`2121293739_125_10_125_31_4`,response));
           this.closedList = response.data.data;
@@ -162,7 +162,7 @@ export default {
       },
   methods: {
     waiting() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting&number=3&page=1')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting')
         .then((response) => {
           /* eslint-disable */console.log(...oo_oo(`2121293739_136_10_136_31_4`,response));
           this.list=response.data.data;
@@ -172,7 +172,7 @@ export default {
         })
     },
     accepted() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_accepted&number=3&page=1')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_accepted')
         .then((response) => {
           /* eslint-disable */console.log(...oo_oo(`2121293739_146_10_146_31_4`,response));
           this.list = response.data.data;
