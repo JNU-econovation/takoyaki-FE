@@ -33,7 +33,7 @@
             <v-sheet
               min-height="70vh"
               rounded="lg"
-              width="700px"
+              width="1500px"
               class="MyPageBG"
             >
               <v-col>
@@ -43,8 +43,8 @@
                 <v-col
                   v-for="item in written_list"
                   :key="item.party_id"
-                  cols="12"
-                  class="me-7"
+                  cols="3"
+                  style="padding: 30px;"
                 >
                   <router-link :to="{name:'userCategorize', params:{party_id:item.party_id}}">
                     <BasicCard :party_id="item.party_id" />

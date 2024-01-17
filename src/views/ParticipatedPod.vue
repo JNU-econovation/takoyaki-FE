@@ -30,9 +30,9 @@
         </v-col>
         <v-col>
           <v-sheet
-            height="50vh"
+            height="70vh"
             rounded="lg"
-            width="1270px"
+            width="1500px"
             class="MyPageBG"
           >
             <!--화면 상단 부분-->
@@ -54,25 +54,20 @@
                 </v-row>
               </v-col> 
             </v-row>
+
             <v-row>
-              <v-slide-group
-                style="height: 370px;"
-                class="pa-10"
+              <v-col
+                v-for="(item) in list"
+                :key="item.party_id"
+                cols="3"
+                style="padding: 30px;"
               >
-                <v-slide-group-item
-                  v-for="(item) in list"
-                  :key="item.party_id"
-                  cols="12"
-                  class="me-7"
-                  offset-sm=""
-                >
-                  <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-                  <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
-                    <BasicCard :party_id="item.party_id" />
-                    <!--받은 키로 BasicCard에 props-->
-                  </router-link>
-                </v-slide-group-item>
-              </v-slide-group>
+                <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+                <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
+                  <BasicCard :party_id="item.party_id" />
+                  <!--받은 키로 BasicCard에 props-->
+                </router-link>
+              </v-col>
             </v-row>
             <!--화면의 중앙에 구분선-->
             <v-row align="center">
@@ -88,34 +83,17 @@
             </v-row>
 
             <v-row>
-              <v-slide-group
-                style="height: 370px;"
-                class="pa-10"
-              >
-                <v-slide-group-item
-                  v-for="(closedItem) in closedList"
-                  :key="closedItem.party_id"
-                  cols="12"
-                  class="me-7"
-                  offset-sm=""
-                >
-                  <router-link :to="{ name: 'userCategorize', params: { party_id: closedItem.party_id } }">
-                    <JoinedCard :party_id="closedItem.party_id" />
-                  </router-link>
-                </v-slide-group-item>
-              </v-slide-group>
-
-              <!-- <v-col 
-                v-for="closedItem in closedList"
+              <v-col
+                v-for="(closedItem) in closedList"
                 :key="closedItem.party_id"
-                cols="12"
+                cols="3"
                 class="me-7"
                 offset-sm=""
               >
                 <router-link :to="{ name: 'userCategorize', params: { party_id: closedItem.party_id } }">
                   <JoinedCard :party_id="closedItem.party_id" />
                 </router-link>
-              </v-col> 이렇게 하면 카드 title이 밖으로 나오지 않음 -->
+              </v-col>
             </v-row>
           </v-sheet>
         </v-col>
