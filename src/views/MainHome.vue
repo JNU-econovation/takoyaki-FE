@@ -60,48 +60,48 @@
               </v-btn>
             </v-col>
           </v-row>
-  
-          <v-container v-if="clickApplyBtn">
-            <v-row>
-              <v-col
-                v-for="item in list"
-                :key="item.party_id"
-                cols="12"
-                class="me-7"
-                offset-sm=""
-              >
-                <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-                <router-link :to="{name:'userCategorize', params:{party_id: item.party_id}}">
-                  <BasicCard :party_id="item.party_id" />
-                <!--받은 키로 BasicCard에 props-->
-                </router-link>
-              </v-col>
-            </v-row>
-          </v-container>
-
-          <v-container v-else>
-            <v-row>
-              <v-col 
-                v-for="item in applyList"
-                :key="item.party_id"
-                cols="12"
-                class="me-7"
-                offset-sm=""
-              >
-                <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-                <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
-                  <BasicCard :party_id="item.party_id" />
-                  <!--받은 키로 BasicCard에 props-->
-                </router-link>
-              </v-col>
-            </v-row>
-          </v-container>
         </v-container>
       </v-sheet>
+    
+      <v-container v-if="clickApplyBtn">
+        <v-row>
+          <v-col
+            v-for="item in list"
+            :key="item.party_id"
+            cols="3"
+            style="padding: 30px;"
+          >
+            <router-link :to="{name:'userCategorize', params:{party_id: item.party_id}}">
+              <BasicCard :party_id="item.party_id" />
+            </router-link>
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <v-container v-else>
+        <v-row>
+          <v-col 
+            v-for="item in applyList"
+            :key="item.party_id"
+            cols="3"
+            style="padding: 30px;"
+          >
+            <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+            <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
+              <BasicCard :party_id="item.party_id" />
+              <!--받은 키로 BasicCard에 props-->
+            </router-link>
+          </v-col>
+        </v-row>
+      </v-container>
       <!--페이지네이션-->
       <v-row class="fixed bottom py-4">
         <v-col>
-          <v-pagination :length="9" />
+          <v-pagination
+            v-model="page"
+            rounded="circle"
+            :length="total_pages"
+            @input="handlePage" />
         </v-col>
       </v-row>
     </v-sheet>
@@ -128,14 +128,16 @@ data(){
     applyList:[],
     party_id:'',
     clickApplyBtn:true,
-    
-  }
+    page:null,
+    total_pages:null,
+}
 },
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number=1")
       .then((response) => {
         /* eslint-disable */console.log(...oo_oo(`3513465649_114_8_114_29_4`,response));
         this.list=response.data.data; //팟 정보의 객체를 받아옴 
+        this.total_pages=response.data.meta.total_pages;
         /* this.title = response.data.data[0].title;
         this.closingDate = response.data.data[0].planned_closing_date;
         this.category = response.data.data[0].category;
@@ -148,8 +150,6 @@ data(){
       })
   },
 
-
-  
   methods: {
     clickCategory: function () {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/category', {
@@ -181,6 +181,16 @@ data(){
           /* eslint-disable */console.log(...oo_oo(`3513465649_158_10_158_28_4`,error));
         })
     },
+    handlePage() {
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number="+this.page)
+        .then((response) => {
+          console.log(response);
+          this.list = response.data.data; //팟 정보의 객체를 받아옴 
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
   },
 }
   
