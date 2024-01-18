@@ -76,13 +76,13 @@
     created() {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
         .then((response) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_73_30_73_88_4`,...oo_oo(`4162966104_47_10_47_31_4`,response)))
+          console.log(response)
           this.waiting_list=response.data.data.waiting_list;
           this.accepted_list=response.data.data.accepted_list;
           this.closed_date =response.data.data.closed_date;
         })
         .catch((error) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_79_30_79_85_4`,...oo_oo(`4162966104_52_10_52_28_4`,error)));
+          console.log(error)
         })
     },
     methods:{

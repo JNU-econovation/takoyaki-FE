@@ -7,6 +7,7 @@ import MypageInformation from './views/MypageInformation'
 import WrittenParty from './views/WrittenParty'
 import ParticipatedPod from './views/ParticipatedPod'
 import guideTakoyaki from './views/guideTakoyaki'
+import userCategorize from "./components/viewComponent/userCategorize";
 Vue.use(Router);
 
 export default new Router({
@@ -40,6 +41,12 @@ export default new Router({
   {
     path: '/banner',
     component:guideTakoyaki,
+  },
+  {
+    path: '/userCategorize',
+    component: userCategorize,
+    name:'userCategorize',
+    props:true,
   }
 ],
 })
