@@ -24,9 +24,9 @@
             </v-col>
           </v-row>
           <informationParty :party_id="party_id" />
-</div>
+        </div>
         <div v-else-if="user_type === 'YAKI'">
-          <YakiView :party_id="party_id"></YakiView>
+          <YakiView :party_id="party_id" />
         </div>
       </div>
 
@@ -43,7 +43,6 @@
         </v-row>
         <informationParty :party_id="party_id" />
       </div>
-      
     </v-container>
   </div>
 </template>
@@ -92,14 +91,13 @@ export default {
     applyNow() {
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +"parties/"+ this.party_id+"/apply")
         .then((response) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`426099745_91_30_91_88_4`,...oo_oo(`3618132122_70_10_70_31_4`,response))); 
+          console.log(response)
           this.user_type='YAKI';
         })
         .catch((error) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`426099745_95_30_95_85_4`,...oo_oo(`3618132122_74_10_74_28_4`,error)));
+          console.log(error)
         })
     },
-   
 }}
 </script>
 

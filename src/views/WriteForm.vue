@@ -6,92 +6,145 @@
 
         <v-row align="center">
           <v-col>
-            <v-divider class="my-3 divideLine"/>
+            <v-divider class="my-3 divideLine" />
           </v-col>
         </v-row>
 
-        <v-sheet id="dropdown-example" grid-list-xl>
-          <v-row row wrap >
-            <v-flex xs12 sm4 v-for="(k) in basicInformation" v-bind:key="k" class="me-16">
-            
-              <p style="font-weight: bold;">{{k}}</p>
+        <v-sheet
+          id="dropdown-example"
+          grid-list-xl
+        >
+          <v-row
+            row
+            wrap
+          >
+            <v-flex
+              v-for="k in basicInformation"
+              :key="k"
+              xs12
+              sm4
+              class="me-16"
+            >
+              <p style="font-weight: bold">
+                {{ k }}
+              </p>
 
-              <v-overflow-btn v-if="k=='카테고리'" class="width"
-                              @click="clickCategory"
-                              :items=category
-                              label="카테고리"
-                              target="#dropdown-example"
-                              v-model="selectCategory"
+              <v-overflow-btn
+                v-if="k == '카테고리'"
+                v-model="selectCategory"
+                class="width"
+                :items="category"
+                label="카테고리"
+                target="#dropdown-example"
+                @click="clickCategory"
               />
 
-              <v-overflow-btn v-if="k == '활동 지역'" class="width"
-                              @click="clickArea"
-                              :items=area
-                              label="활동 지역"
-                              target="#dropdown-example"
-                              v-model="selectArea"
+              <v-overflow-btn
+                v-if="k == '활동 지역'"
+                v-model="selectArea"
+                class="width"
+                :items="area"
+                label="활동 지역"
+                target="#dropdown-example"
+                @click="clickArea"
               />
 
-              <v-sheet v-if="k=='예상 기간'">
+              <v-sheet v-if="k == '예상 기간'">
                 <v-row>
                   <v-col>
-                    <v-text-field 
+                    <v-text-field
+                      v-model="selectDuration"
                       oninput="this.value = this.value.replace(/[^1-9]/g, '')"
                       placeholder="0보다 큰 숫자 입력"
-                      v-model="selectDuration"/>
+                    />
                   </v-col>
                   <v-col>
                     <v-select
-                      @click="clickDurationUnit"
-                      :items=DurationUnit
+                      v-model="selectDurationUnit"
+                      :items="DurationUnit"
                       placeholder="기간"
-                      v-model="selectDurationUnit"/>
+                      @click="clickDurationUnit"
+                    />
                   </v-col>
                 </v-row>
               </v-sheet>
 
-              <v-text-field v-if="k == '모집 인원'"
-                            placeholder="숫자 입력"
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            v-model="selectRecruitNumber"/>
-          
+              <v-text-field
+                v-if="k == '모집 인원'"
+                v-model="selectRecruitNumber"
+                placeholder="숫자 입력"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              />
+
               <v-sheet v-if="k == '마감 날짜'">
-                <input class="calendar" style="outline: auto;"
-                  type="date" 
+                <input
+                  v-model="selectClosingDate"
+                  class="calendar"
+                  style="outline: auto"
+                  type="date"
                   @input="checkClosingDate"
-                  v-model="selectClosingDate">
-                <p v-if="isClosingValid" class="width"/>
-                <p v-else class="error-message width">현재날짜로부터 6개월 안쪽으로 정해주세요 </p>
+                >
+                <p
+                  v-if="isClosingValid"
+                  class="width"
+                />
+                <p
+                  v-else
+                  class="error-message width"
+                >
+                  현재날짜로부터 6개월 안쪽으로 정해주세요
+                </p>
               </v-sheet>
-              
+              ,
               <v-sheet v-if="k == '활동 시작'">
-                <input style="outline: auto;" class="calendar"
-                       type="date"
-                       v-model="selectStartDate"
-                       @input="checkStartDate">
-                <p v-if="isStartValid" class="error-message width">마감 날짜와 같거나 커야 합니다</p>
+                <input
+                  v-model="selectStartDate"
+                  style="outline: auto"
+                  class="calendar"
+                  type="date"
+                  @input="checkStartDate"
+                >
+                <p
+                  v-if="isStartValid"
+                  class="error-message width"
+                >
+                  마감 날짜와 같거나 커야 합니다
+                </p>
               </v-sheet>
 
-              <v-sheet  v-if="k == '연락 방법'" class="width">
+              <v-sheet
+                v-if="k == '연락 방법'"
+                class="width"
+              >
                 <v-select
-                  @click="clickContactMethod"
-                  :items=contactMethod
+                  v-model="selectContactMethod"
+                  :items="contactMethod"
                   placeholder="연락 수단"
                   variant="Tonal"
-                  v-model="selectContactMethod"/>
-                <v-text-field v-if="selectContactMethod == '전화번호'"
-                              placeholder="숫자 입력"
-                              v-model="contactInput"
-                              maxlength="13"
-                              oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');"/>
-                <v-text-field v-else-if="selectContactMethod == '카카오톡 오픈채팅'" 
-                              placeholder="https://카카오톡URL.."
-                              v-model="contactInput" />
-                <v-text-field v-else-if="selectContactMethod == '이메일'"
-                              placeholder="takoyaki@gmail.com"
-                              v-model="contactInput"
-                              @input="checkEmailValidity"/>
-                <div v-if="isInvalidEmail" class="error-message">
+                  @click="clickContactMethod"
+                />
+                <v-text-field
+                  v-if="selectContactMethod == '전화번호'"
+                  v-model="contactInput"
+                  placeholder="숫자 입력"
+                  maxlength="13"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');"
+                />
+                <v-text-field
+                  v-else-if="selectContactMethod == '카카오톡 오픈채팅'"
+                  v-model="contactInput"
+                  placeholder="https://카카오톡URL.."
+                />
+                <v-text-field
+                  v-else-if="selectContactMethod == '이메일'"
+                  v-model="contactInput"
+                  placeholder="takoyaki@gmail.com"
+                  @input="checkEmailValidity"
+                />
+                <div
+                  v-if="isInvalidEmail"
+                  class="error-message"
+                >
                   이메일 형식이 올바르지 않습니다.
                 </div>
               </v-sheet>
@@ -106,168 +159,188 @@
 
         <v-row align="center">
           <v-col>
-            <v-divider class="my-3 divideLine"/>
+            <v-divider class="my-3 divideLine" />
           </v-col>
         </v-row>
 
         <br>
         <h3>제목</h3>
         <v-text-field
+          v-model="title"
           placeholder="제목을 입력하세요"
           maxlength="100"
-          v-model="title"/>
-          
+        />
 
-        <TipTap v-on:input="handleText" :register="registerBtn=false"/>
-        <v-btn @click="handleText">a</v-btn>
-        <button @click="login">login</button>
-        <v-btn @click="logincheck">logincheck</v-btn>
-        <button @click="signUp">sign</button>
-        <v-btn @click="logOut">logout</v-btn>
-
-        
+        <TipTap
+          :register="(registerBtn = false)"
+          @input="handleText"
+        />
+        <v-btn @click="handleText">
+          a
+        </v-btn>
+        <button @click="login">
+          login
+        </button>
+        <v-btn @click="logincheck">
+          logincheck
+        </v-btn>
+        <button @click="signUp">
+          sign
+        </button>
+        <v-btn @click="logOut">
+          logout
+        </v-btn>
       </v-card>
     </v-container>
   </div>
 </template>
 
-
-
-
 <script>
-import TipTap from '@/components/TipTap.vue'
-
-
+import TipTap from "@/components/TipTap.vue";
 
 export default {
-  props:['register'],
   components: {
-    'TipTap':TipTap,
-  }, 
+    TipTap: TipTap,
+  },
+  props: ["register"],
 
   data() {
     return {
-      selectCategory:'',
-      selectArea:'',
-      selectContactMethod:'',
-      selectDuration:'',
-      selectDurationUnit:'',
-      selectRecruitNumber:null,
-      selectClosingDate:'',
-      selectStartDate:'',
-      contactInput: '',
+      selectCategory: "",
+      selectArea: "",
+      selectContactMethod: "",
+      selectDuration: "",
+      selectDurationUnit: "",
+      selectRecruitNumber: null,
+      selectClosingDate: "",
+      selectStartDate: "",
+      contactInput: "",
       isInvalidEmail: false,
-      isClosingValid: false ,
-      isStartValid: '',
-      title:'',
-      id:null,
-      receivedcontent:'',
-      partyID:null,
-      basicInformation:['카테고리', '활동 지역',  '예상 기간', '모집 인원', '마감 날짜','활동 시작','연락 방법'],
+      isClosingValid: false,
+      isStartValid: "",
+      title: "",
+      id: null,
+      receivedcontent: "",
+      partyID: null,
+      basicInformation: [
+        "카테고리",
+        "활동 지역",
+        "예상 기간",
+        "모집 인원",
+        "마감 날짜",
+        "활동 시작",
+        "연락 방법",
+      ],
       category: [],
       area: [],
-      DurationUnit:[],
-      contactMethod:[],
-    }
+      DurationUnit: [],
+      contactMethod: [],
+    };
   },
   methods: {
     handleText(text) {
-      this.receivedcontent=text;
+      this.receivedcontent = text;
       this.registerParty();
     },
-     
-    
+
     signUp() {
-      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'test/users/signup')
-      .then((response) => {
+      this.$axios
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/signup")
+        .then((response) => {
           console.log(response);
-          this.id =response.data.data.id;
+          this.id = response.data.data.id;
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
     },
     logOut() {
-      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/logout')
+      this.$axios
+        .post(process.env.VUE_APP_TAKOYAKI_API + "users/logout")
         .then((response) => {
           console.log(response);
         })
-        .catch((error) => { 
+        .catch((error) => {
           console.log(error);
-        })
+        });
     },
     login() {
-      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'test/users/login/'+49)
+      this.$axios
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 49)
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
     },
     logincheck() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'users/login-check')
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "users/login-check")
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
     },
     registerParty() {
-      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'party',  
-      {
-        'category': this.selectCategory,
-        'activity_location': this.selectArea,
-        'activity_duration_unit': this.selectDurationUnit,
-        'contact_method': this.selectContactMethod,
-        'title': this.title,
-        'body': this.receivedcontent,
-        'recruit_number': this.selectRecruitNumber,
-        'activity_duration': this.selectDuration,
-        'planned_closing_date': this.selectClosingDate,
-        'planned_start_date': this.selectStartDate,
-        'contact': this.contactInput
-    })
-      .then((response) => {
-        console.log(response); 
-        this.partyID=response.data.data.party_id; //팟 등록 id받아옴
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    },
-    clickCategory: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/category')
+      this.$axios
+        .post(process.env.VUE_APP_TAKOYAKI_API + "party", {
+          category: this.selectCategory,
+          activity_location: this.selectArea,
+          activity_duration_unit: this.selectDurationUnit,
+          contact_method: this.selectContactMethod,
+          title: this.title,
+          body: this.receivedcontent,
+          recruit_number: this.selectRecruitNumber,
+          activity_duration: this.selectDuration,
+          planned_closing_date: this.selectClosingDate,
+          planned_start_date: this.selectStartDate,
+          contact: this.contactInput,
+        })
         .then((response) => {
-          this.category = response.data.data.category;
-          
+          console.log(response);
+          this.partyID = response.data.data.party_id; //팟 등록 id받아옴
         })
         .catch((error) => {
           console.log(error);
+        });
+    },
+    clickCategory: function () {
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/category")
+        .then((response) => {
+          this.category = response.data.data.category;
         })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     clickArea: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/activity-location', {
-      })
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/activity-location", {})
         .then((response) => {
           this.area = response.data.data.activity_location;
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
     },
     clickDurationUnit: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/activity-duration-unit', {
-      })
-      .then((response) => {
-        this.DurationUnit = response.data.data.activity_duration_unit;
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  },
-    checkClosingDate:function(){
+      this.$axios
+        .get(
+          process.env.VUE_APP_TAKOYAKI_API + "party/activity-duration-unit",
+          {}
+        )
+        .then((response) => {
+          this.DurationUnit = response.data.data.activity_duration_unit;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    checkClosingDate: function () {
       const selectedDateObj = new Date(this.selectClosingDate);
       const currentDate = new Date();
 
@@ -276,42 +349,40 @@ export default {
         !isNaN(selectedDateObj.getTime()) &&
         selectedDateObj >= currentDate.setDate(currentDate.getDate()) &&
         selectedDateObj <= currentDate.setDate(currentDate.getDate() + 180);
-      },
+    },
     checkStartDate: function () {
       //입력된 문자열을 날짜 객체로 변환
       const selectStartDateObject = new Date(this.selectStartDate);
       const selectClosingDateObj = new Date(this.selectClosingDate);
       //마감날짜보다 큰지 여부 확인
-      if(selectStartDateObject>= selectClosingDateObj){
-        this.isStartValid=false;
-      }else {
-        this.isStartValid=true;
+      if (selectStartDateObject >= selectClosingDateObj) {
+        this.isStartValid = false;
+      } else {
+        this.isStartValid = true;
       }
     },
-    
-  
+
     clickContactMethod: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'party/contact-method')
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/contact-method")
         .then((response) => {
           this.contactMethod = response.data.data.contact_method;
-/*           console.log(response);*/        
-})
+          /*           console.log(response);*/
+        })
         .catch((error) => {
           console.log(error);
-        })
+        });
     },
-    checkEmailValidity:function() {
+    checkEmailValidity: function () {
       //이메일 형식 검사
-      const emailPattern = /[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*/;
+      const emailPattern =
+        /[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*/;
       //입력된 이메일이 정규표현식과 일치하는지 확인
       //만약 일치하지 않으면 isInvalidEmail을 true로 업데이트
       this.isInvalidEmail = !emailPattern.test(this.emailInput);
     },
-  }
-  }
-  
-
-
+  },
+};
 </script>
 
 <style>
@@ -324,10 +395,10 @@ export default {
   margin-bottom: 30px;
 }
 .error-message {
-  color: #ff5555; 
-  font-size: 14px; 
+  color: #ff5555;
+  font-size: 14px;
 }
 .width {
-  margin-top:-15px;
+  margin-top: -15px;
 }
 </style>

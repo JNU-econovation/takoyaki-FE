@@ -123,40 +123,40 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting')
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`2121293739_117_8_117_29_4`,response));
+        console.log(response)
         this.list = response.data.data;
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2121293739_121_8_121_26_4`,error));
+        console.log(error)
       }),
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=closed')
         .then((response) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_125_10_125_31_4`,response));
+          console.log(response)
           this.closedList = response.data.data;
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_129_10_129_28_4`,error));
+          console.log(error)
         })
       },
   methods: {
     waiting() {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting')
         .then((response) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_136_10_136_31_4`,response));
+          console.log(response)
           this.list=response.data.data;
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_140_10_140_28_4`,error));
+          console.log(error)
         })
     },
     accepted() {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_accepted')
         .then((response) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_146_10_146_31_4`,response));
+          console.log(response)
           this.list = response.data.data;
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`2121293739_150_10_150_28_4`,error));
+          console.log(error)
         })
     }
   }

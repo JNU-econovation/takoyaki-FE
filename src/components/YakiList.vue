@@ -89,19 +89,19 @@
       accept(index) {
         this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/"+ this.waiting_list[index].id )  
           .then((response) => {
-            /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_86_32_86_90_4`,...oo_oo(`4162966104_59_12_59_33_4`,response)))
+            console.log(response)
           })
           .catch((error) => {
-            /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_89_32_89_87_4`,...oo_oo(`4162966104_62_12_62_30_4`,error)));
+            console.log(error)
           })
       },
       reject(index) {
         this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/" + this.waiting_list[index].id)
           .then((response) => {
-            /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_95_32_95_90_4`,...oo_oo(`4162966104_68_12_68_33_4`,response)))
+            console.log(response)
           })
           .catch((error) => {
-            /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`2756238643_98_32_98_87_4`,...oo_oo(`4162966104_71_12_71_30_4`,error)));
+            console.log(error)
           })
       }
 

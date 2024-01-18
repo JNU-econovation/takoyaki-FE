@@ -45,7 +45,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`1784080432_44_8_44_29_4`,response))
+        console.log(response)
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -55,7 +55,7 @@ export default {
 
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`1784080432_54_8_54_26_4`,error));
+        console.log(error)
 
       })
   }

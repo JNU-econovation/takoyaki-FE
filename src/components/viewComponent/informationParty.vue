@@ -89,7 +89,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties/" + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`3662722890_69_8_69_29_4`,response));
+        console.log(response)
         this.title = response.data.data.title;
         this.closingDate = response.data.data.planned_closing_date;
         this.category = response.data.data.category;
@@ -103,7 +103,7 @@ export default {
         this.body = response.data.data.body;
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`3662722890_83_8_83_26_4`,error));
+        console.log(error)
       })
   },
 

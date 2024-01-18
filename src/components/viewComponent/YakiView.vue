@@ -80,7 +80,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_66_28_66_85_4`,...oo_oo(`4036828524_49_8_49_29_4`,response)))
+        console.log(response)
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -89,7 +89,7 @@ export default {
         this.yaki_status=response.data.data.yaki_status;
       })
       .catch((error) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_74_28_74_82_4`,...oo_oo(`4036828524_56_8_56_26_4`,error)));
+        console.log(error)
       })
   },
 
@@ -97,21 +97,21 @@ export default {
     cancelApplication() {
       this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/apply")
         .then((response) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_82_30_82_88_4`,...oo_oo(`4036828524_64_10_64_31_4`,response)))
+          console.log(response)
           this.$router.push({ path: '/' }) //신청취소버튼 클릭시 메인 홈으로 이동
         })
         .catch((error) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_86_30_86_85_4`,...oo_oo(`4036828524_68_10_68_28_4`,error)));
+          console.log(error)
         })
       },
       leaving() {
         this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/leaving")
         .then((response) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_82_30_82_88_4`, ...oo_oo(`4036828524_64_10_64_31_4`, response)))
+          console.log(response)
           this.$router.push({ path: '/' }) //신청취소버튼 클릭시 메인 홈으로 이동
         })
         .catch((error) => {
-          /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`4008950287_86_30_86_85_4`, ...oo_oo(`4036828524_68_10_68_28_4`, error)));
+          console.log(error)
         })
       }
     }

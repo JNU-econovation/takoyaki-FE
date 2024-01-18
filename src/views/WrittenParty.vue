@@ -76,11 +76,11 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=wrote&number=6&page=1')
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`3929895578_74_8_74_29_4`,response));
+        console.log(response)
         this.written_list=response.data.data;
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`3929895578_78_8_78_26_4`,error));
+        console.log(error)
       })
   }
 }

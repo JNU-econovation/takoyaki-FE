@@ -44,11 +44,11 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`2463455312_35_8_35_29_4`,response))
+        console.log(response)
         this.user_type = response.data.data.user_type;
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`2463455312_39_8_39_26_4`,error));
+        console.log(error)
       })
   }
 }

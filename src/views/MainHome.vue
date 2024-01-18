@@ -26,7 +26,7 @@
         </v-slide-group-item>
       </v-slide-group>
     </v-sheet>
-          
+
     <v-sheet
       class="mx-auto pa-2 pt-6"
       color="grey-lighten-2"
@@ -39,7 +39,7 @@
         <v-container>
           <v-row>
             <v-col>
-              <v-select 
+              <v-select
                 v-model="selectCategory"
                 label="카테고리"
                 :items="category"
@@ -54,7 +54,7 @@
                 @click="clickArea"
               />
             </v-col>
-            <v-col style="padding-top: 26px;">
+            <v-col style="padding-top: 26px">
               <v-btn @click="applyBtn">
                 적용
               </v-btn>
@@ -62,16 +62,21 @@
           </v-row>
         </v-container>
       </v-sheet>
-    
+
       <v-container v-if="clickApplyBtn">
         <v-row>
           <v-col
             v-for="item in list"
             :key="item.party_id"
             cols="3"
-            style="padding: 30px;"
+            style="padding: 30px"
           >
-            <router-link :to="{name:'userCategorize', params:{party_id: item.party_id}}">
+            <router-link
+              :to="{
+                name: 'userCategorize',
+                params: { party_id: item.party_id },
+              }"
+            >
               <BasicCard :party_id="item.party_id" />
             </router-link>
           </v-col>
@@ -80,14 +85,19 @@
 
       <v-container v-else>
         <v-row>
-          <v-col 
+          <v-col
             v-for="item in applyList"
             :key="item.party_id"
             cols="3"
-            style="padding: 30px;"
+            style="padding: 30px"
           >
             <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-            <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
+            <router-link
+              :to="{
+                name: 'userCategorize',
+                params: { party_id: item.party_id },
+              }"
+            >
               <BasicCard :party_id="item.party_id" />
               <!--받은 키로 BasicCard에 props-->
             </router-link>
@@ -101,7 +111,8 @@
             v-model="page"
             rounded="circle"
             :length="total_pages"
-            @input="handlePage" />
+            @input="handlePage"
+          />
         </v-col>
       </v-row>
     </v-sheet>
@@ -109,93 +120,107 @@
 </template>
 
 <script>
-import BasicCard from '@/components/CardList/BasicCard.vue';
-import BannerComponent from '../components/BannerComponent.vue';
+import BasicCard from "@/components/CardList/BasicCard.vue";
+import BannerComponent from "../components/BannerComponent.vue";
 
 export default {
-  components:{
-  'BannerComponent':BannerComponent,
-  'BasicCard':BasicCard,
+  components: {
+    BannerComponent: BannerComponent,
+    BasicCard: BasicCard,
   },
-  
-data(){
-  return{
-    category:[],
-    area:[],
-    selectCategory:'',
-    selectArea:'',
-    list:[],
-    applyList:[],
-    party_id:'',
-    clickApplyBtn:true,
-    page:null,
-    total_pages:null,
-}
-},
+
+  data() {
+    return {
+      category: [],
+      area: [],
+      selectCategory: "",
+      selectArea: "",
+      list: [],
+      applyList: [],
+      party_id: "",
+      clickApplyBtn: true,
+      page: null,
+      total_pages: null,
+    };
+  },
   created() {
-    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number=1")
+    this.$axios
+      .get(
+        process.env.VUE_APP_TAKOYAKI_API +
+          "parties?type=all&login=true&number=16&page_number=1"
+      )
       .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`3513465649_114_8_114_29_4`,response));
-        this.list=response.data.data; //팟 정보의 객체를 받아옴 
-        this.total_pages=response.data.meta.total_pages;
+        console.log(response)
+        this.list = response.data.data; //팟 정보의 객체를 받아옴
+        this.total_pages = response.data.meta.total_pages;
         /* this.title = response.data.data[0].title;
         this.closingDate = response.data.data[0].planned_closing_date;
         this.category = response.data.data[0].category;
         this.area = response.data.data[0].activity_location;
         this.competitionRate = response.data.data[0].competition_rate; */
-
       })
       .catch((error) => {
-        /* eslint-disable */console.log(...oo_oo(`3513465649_124_8_124_26_4`,error));
-      })
+        console.log(error)
+      });
   },
 
   methods: {
     clickCategory: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/category', {
-      })
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/category", {})
         .then((response) => {
           this.category = response.data.data.category;
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`3513465649_138_10_138_28_4`,error));
-        })
+          console.log(error)
+        });
     },
     clickArea: function () {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API+'party/activity-location', {
-      })
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/activity-location", {})
         .then((response) => {
           this.area = response.data.data.activity_location;
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`3513465649_148_10_148_28_4`,error));
-        })
+          console.log(error)
+        });
     },
     applyBtn() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number=1&category="+this.selectCategory+"&activity_location="+this.selectArea)
+      this.$axios
+        .get(
+          process.env.VUE_APP_TAKOYAKI_API +
+            "parties?type=all&login=true&number=16&page_number=1&category=" +
+            this.selectCategory +
+            "&activity_location=" +
+            this.selectArea
+        )
         .then((response) => {
-          this.clickApplyBtn=false;
-          this.applyList=response.data.data; //해당 팟 카드리스트 받음
+          this.clickApplyBtn = false;
+          this.applyList = response.data.data; //해당 팟 카드리스트 받음
         })
         .catch((error) => {
-          /* eslint-disable */console.log(...oo_oo(`3513465649_158_10_158_28_4`,error));
-        })
+          console.log(error)
+        });
     },
     handlePage() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties?type=all&login=true&number=16&page_number="+this.page)
+      this.$axios
+        .get(
+          process.env.VUE_APP_TAKOYAKI_API +
+            "parties?type=all&login=true&number=16&page_number=" +
+            this.page
+        )
         .then((response) => {
           console.log(response);
-          this.list = response.data.data; //팟 정보의 객체를 받아옴 
+          this.list = response.data.data; //팟 정보의 객체를 받아옴
         })
         .catch((error) => {
           console.log(error);
-        })
-    }
+        });
+    },
   },
-}
-  
+};
 </script>
 
 <style scoped>
-  @import "./style/MainHome.css"
+@import "./style/MainHome.css";
 </style>

@@ -158,7 +158,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_147_28_147_85_4`,...oo_oo(`2632391628_59_8_59_29_4`,response)))
+        console.log(response)
         this.user_type = response.data.data.user_type;
         this.title = response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -169,7 +169,7 @@ export default {
         this.closed_date=response.data.data.closed_date;
       })
       .catch((error) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_158_28_158_82_4`,...oo_oo(`2632391628_69_8_69_26_4`,error)));
+        console.log(error)
       })
   },
 
@@ -177,12 +177,12 @@ export default {
     closing() {
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/closing")
         .then((response) => {
-        /* eslint-disable */console.log(...oo_oo(`3248742735_166_8_166_66_4`,...oo_oo(`2632391628_59_8_59_29_4`, response)));
+        console.log(response)
         this.$router.push({ path: '/' })
 
         })
         .catch((error) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_171_28_171_83_4`,...oo_oo(`2632391628_69_8_69_26_4`, error)));
+        console.log(error)
         })
     },
     edit(){
@@ -196,11 +196,11 @@ export default {
 
       })
         .then((response) => {
-          /* eslint-disable */console.log(...oo_oo(`3248742735_184_10_184_68_4`,...oo_oo(`2632391628_59_8_59_29_4`, response)))
+          console.log(response)
           this.$router.push({path:'/'})
         })
         .catch((error) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`3248742735_188_28_188_83_4`,...oo_oo(`2632391628_69_8_69_26_4`, error)));
+        console.log(error)
         })
     }
 
