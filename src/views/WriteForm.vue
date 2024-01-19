@@ -95,7 +95,7 @@
                   현재날짜로부터 6개월 안쪽으로 정해주세요
                 </p>
               </v-sheet>
-              ,
+              
               <v-sheet v-if="k == '활동 시작'">
                 <input
                   v-model="selectStartDate"
