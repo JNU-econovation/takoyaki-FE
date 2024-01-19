@@ -71,7 +71,7 @@ export default {
   created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`426099745_71_28_71_85_4`,...oo_oo(`3618132122_51_8_51_29_4`,response)))
+        console.log(response)
         this.user_type = response.data.data.user_type;
         this.title=response.data.data.title;
         this.nickname = response.data.data.nickname;
@@ -82,7 +82,7 @@ export default {
 
       })
       .catch((error) => {
-        /* eslint-disable *//* eslint-disable */console.log(...oo_oo(`426099745_82_28_82_82_4`,...oo_oo(`3618132122_61_8_61_26_4`,error)));
+        console.log(error)
 
       })
   },

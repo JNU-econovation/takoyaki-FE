@@ -21,7 +21,7 @@
                 <v-card-subtitle>
                   <v-col>
                     <v-row>
-                      ✔  남은 자리 {{ recruit_number-waiting_list.length-accepted_list.length }}
+                      ✔  남은 자리 {{ recruit_number-accepted_list.length }}
                     </v-row>
                     <v-row>
                       ✔  대기 중인 야끼  {{ waiting_list.length }}
@@ -77,7 +77,7 @@
                   <v-card-subtitle>
                     <v-col>
                       <v-row>
-                        ✔  남은 자리 {{ recruit_number - waiting_list.length - accepted_list.length }}
+                        ✔  남은 자리 {{ recruit_number - accepted_list.length }}
                       </v-row>
                       <v-row>
                         ✔  대기 중인 야끼  {{ waiting_list.length }}
