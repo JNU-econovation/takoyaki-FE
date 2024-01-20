@@ -48,7 +48,7 @@ export default new Router({
     component:OAuth,
   },
   {
-    path: '/userCategorize',
+    path: '/userCategorize/:party_id',
     component: userCategorize,
     name:'userCategorize',
     props:true,

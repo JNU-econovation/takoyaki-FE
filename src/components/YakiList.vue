@@ -70,6 +70,7 @@
         this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/"+ this.waiting_list[index].id )  
           .then((response) => {
             console.log(response)
+            window.location.reload();
           })
           .catch((error) => {
             console.log(error)
