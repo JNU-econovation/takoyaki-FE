@@ -63,8 +63,7 @@
   
   <script>
   export default {
-    props:['party_id'],
-
+    props:['party_id'], 
     data() {
       return{
       waiting_list:[],

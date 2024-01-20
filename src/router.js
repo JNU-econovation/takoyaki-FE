@@ -7,6 +7,7 @@ import MypageInformation from './views/MypageInformation'
 import WrittenParty from './views/WrittenParty'
 import ParticipatedPod from './views/ParticipatedPod'
 import guideTakoyaki from './views/guideTakoyaki'
+import OAuth from "./views/OAuth.vue";
 import userCategorize from "./components/viewComponent/userCategorize";
 Vue.use(Router);
 
@@ -41,6 +42,10 @@ export default new Router({
   {
     path: '/banner',
     component:guideTakoyaki,
+  },
+  {
+    path: '/oauth',
+    component:OAuth,
   },
   {
     path: '/userCategorize',

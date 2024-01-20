@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SocialModal ref="socialModal" />
     <v-app-bar
       color="#FCFCFD"
       flat
@@ -32,16 +33,53 @@
             <v-icon>mdi-account</v-icon>
           </v-btn>
         </router-link>
-        <v-btn>login</v-btn>
+        <v-btn
+          v-if="isLoggedIn"
+          @click="logout"
+        >
+          Logout
+        </v-btn>
+        <v-btn
+          v-else
+          @click="openLoginModal"
+        >
+          Login
+        </v-btn>
       </v-col>
     </v-app-bar>
   </div>
 </template>
 
 <script>
-export default {
+import SocialModal from '../components/Modal/SocialModal.vue';
 
-}
+export default {
+  components: {
+    SocialModal
+  },
+data() {
+    return {
+      isLoggedIn: false
+    }
+  },
+  methods: {
+    openLoginModal() {
+      // 모달 열기
+      this.$refs.socialModal.openLoginModal();
+    },
+    logout(){
+      this.$axios.post(this.$takoyaki_API +'users/logout', {
+      })
+          .then(() => {
+            this.isLoggedIn = false;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    }
+  }
+};
+
 </script>
 
 <style>

@@ -42,7 +42,7 @@
               <v-select
                 v-model="selectCategory"
                 label="카테고리"
-                :items="category"
+                :items="categoryList"
                 @click="clickCategory"
               />
             </v-col>
@@ -80,6 +80,10 @@
               <BasicCard
                 :party_id="item.party_id"
                 :competition_rate="item.competition_rate"
+                :title="item.title"
+                :category="item.category"
+                :activity_location="item.activity_location"
+                :planned_closing_date="item.planned_closing_date"
               />
             </router-link>
           </v-col>
@@ -104,6 +108,10 @@
               <BasicCard
                 :party_id="item.party_id"
                 :competition_rate="item.competition_rate"
+                :title="item.title"
+                :category="item.category"
+                :activity_location="item.activity_location"
+                :planned_closing_date="item.planned_closing_date"
               />
               <!--받은 키로 BasicCard에 props-->
             </router-link>
@@ -136,7 +144,7 @@ export default {
 
   data() {
     return {
-      category: [],
+      categoryList: [],
       area: [],
       selectCategory: "",
       selectArea: "",
@@ -145,6 +153,10 @@ export default {
       clickApplyBtn: true,
       page: null,
       total_pages: null,
+      title:'',
+      category:'',
+      activity_location:'',
+      planned_closing_date:'',
     };
   },
   created() {
@@ -157,6 +169,10 @@ export default {
         console.log(response)
         this.list = response.data.data; //팟 정보의 객체를 받아옴
         this.total_pages = response.data.meta.total_pages;
+        this.title=response.data.data.title;
+        this.category=response.data.data.category;
+        this.activity_location=response.data.data.activity_location;
+        this.planned_closing_date=response.data.data.planned_closing_date;
       })
       .catch((error) => {
         console.log(error)
@@ -166,9 +182,9 @@ export default {
   methods: {
     clickCategory: function () {
       this.$axios
-        .get(process.env.VUE_APP_TAKOYAKI_API + "party/category", {})
+        .get(process.env.VUE_APP_TAKOYAKI_API + "party/category")
         .then((response) => {
-          this.category = response.data.data.category;
+          this.categoryList = response.data.data.category;
         })
         .catch((error) => {
           console.log(error)

@@ -9,9 +9,9 @@
       <!--마감이 안 된 팟-->
       <h3>{{ title }}</h3>
 
-      <p>{{ closingDate }}</p>
+      <p>{{ planned_closing_date }}</p>
 
-      <p>{{ category }}, {{ area }}</p>
+      <p>{{ category }}, {{ activity_location }}</p>
 
       
       <v-hover v-slot="{ hover }">
@@ -33,41 +33,13 @@
 
 <script>
 export default {
-  props: ["party_id","competition_rate"],
+  props: ["party_id","competition_rate","title","category","activity_location","planned_closing_date"],
   data() {
     return {
-      title: "",
-      closingDate: "",
-      category: "",
-      area: "",
-      closed_date: "",
       view_count:null,
     };
   },
-  created() {
-    //단일 팟 조회
-    this.$axios
-      .get(
-        process.env.VUE_APP_TAKOYAKI_API +
-          "parties/" +
-          this.party_id +
-          "?login=true"
-      )
-      .then((response) => {
-        console.log(response)
-        this.title = response.data.data.title;
-        this.closingDate = response.data.data.planned_closing_date;
-        this.category = response.data.data.category;
-        this.area = response.data.data.activity_location;
-        this.closed_date = response.data.data.closed_date;
-        this.view_count=response.data.data.view_count
-      })
-      .catch((error) => {
-        console.log(error)
-      });
   }
-  }
-
 </script>
 
 <style>

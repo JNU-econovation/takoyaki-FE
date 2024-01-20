@@ -91,6 +91,9 @@
                       </v-btn>
                     </v-col>
                     <v-col>
+                      \
+
+                       
                       <v-btn @click="remove">
                         삭제하기
                       </v-btn>
@@ -168,7 +171,7 @@ export default {
         this.accepted_list=response.data.data.accepted_list;
         this.closed_date=response.data.data.closed_date;
       })
-      .catch((error) => {
+      .catch((error) => {d
         console.log(error)
       })
   },
@@ -191,10 +194,7 @@ export default {
     },
       
     remove() {
-      this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id,
-      {
-
-      })
+      this.$axios.delete(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id,)
         .then((response) => {
           console.log(response)
           this.$router.push({path:'/'})
