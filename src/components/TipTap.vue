@@ -140,8 +140,7 @@ button {
   border: 2px solid #f1f1f1 ; /* 테두리 스타일 및 색상 지정 */
   background-color: #f7f7f7;
   border-radius: 5px; /* 테두리의 모서리를 둥글게 만듭니다. */
-  margin-right: 5px;
-  margin-bottom: 10px;
+
 }
 
 .tiptap {

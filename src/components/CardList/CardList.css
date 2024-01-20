@@ -2,9 +2,13 @@
 .card-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 10%;
   }
   
+.party-list{
+  padding-right: 50px;
+  padding-left: 50px;
+}
   
   .card {
 
@@ -13,9 +17,9 @@
   z-index: 1;
   background-color: white; /* 아래쪽 색상 */
   color: #664B3B;
-  height: 280px;
-  width: 300px;
-  padding: 16px;
+  height: 250%;
+  width: 100%;
+  padding: 30px;
   border-radius: 15%; /* 모든 모서리가 둥글게 */
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* 상단을 제외한 반투명 그림자 */
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main style="padding: 100px; padding-left: 16%; padding-right: 16%;">
     <router-link to="/banner">
       <BannerComponent />
     </router-link>
@@ -33,7 +33,6 @@
     >
       <v-sheet class="party-list">
         🥢모든 팟
-      </v-sheet>
 
       <v-sheet class="selectBtn">
         <v-container>
@@ -62,6 +61,7 @@
           </v-row>
         </v-container>
       </v-sheet>
+    </v-sheet>
 
       <v-container v-if="clickApplyBtn">
         <v-row>
@@ -237,5 +237,7 @@ export default {
 </script>
 
 <style scoped>
+
+
 @import "./style/MainHome.css";
 </style>
