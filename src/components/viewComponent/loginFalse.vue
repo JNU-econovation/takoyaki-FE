@@ -19,7 +19,15 @@
         </v-col>
       </v-row>
 
-      <informationParty :party_id="party_id" />
+      <informationParty
+        :category="category"
+        :activity-duration="activityDuration"
+        :recruit-number="recruitNumber"
+        :planned-start-date="plannedStartDate"
+        :contact-method="contactMethod"
+        :body="body"
+        :activity_location="activity_location"
+      />
     </v-container>
   </div>
 </template>
@@ -28,37 +36,11 @@
 import informationParty from './informationParty.vue';
 
 export default {
-
   components: {
     'informationParty': informationParty
   },
-  props: ['party_id'],
+  props: ["title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location"],
 
-  data() {
-    return {
-      title: '',
-      nickname: '',
-      closingDate: '',
-    }
-  },
-
-  created() {
-    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
-      .then((response) => {
-        console.log(response)
-        this.user_type = response.data.data.user_type;
-        this.title = response.data.data.title;
-        this.nickname = response.data.data.nickname;
-        this.closingDate = response.data.data.planned_closing_date;
-
-
-
-      })
-      .catch((error) => {
-        console.log(error)
-
-      })
-  }
 }
 </script>
 

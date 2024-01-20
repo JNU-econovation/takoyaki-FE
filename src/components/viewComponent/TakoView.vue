@@ -21,7 +21,7 @@
                 <v-card-subtitle>
                   <v-col>
                     <v-row>
-                      ✔  남은 자리 {{ recruit_number-accepted_list.length }}
+                      ✔  남은 자리 {{ recruitNumber-accepted_list.length }}
                     </v-row>
                     <v-row>
                       ✔  대기 중인 야끼  {{ waiting_list.length }}
@@ -77,7 +77,7 @@
                   <v-card-subtitle>
                     <v-col>
                       <v-row>
-                        ✔  남은 자리 {{ recruit_number - accepted_list.length }}
+                        ✔  남은 자리 {{ recruitNumber - accepted_list.length }}
                       </v-row>
                       <v-row>
                         ✔  대기 중인 야끼  {{ waiting_list.length }}
@@ -91,9 +91,6 @@
                       </v-btn>
                     </v-col>
                     <v-col>
-                      \
-
-                       
                       <v-btn @click="remove">
                         삭제하기
                       </v-btn>
@@ -111,7 +108,12 @@
       <h1> {{ title }} </h1>
       <br>
 
-      <YakiList :party_id="party_id" />
+      <YakiList
+        :party_id="party_id"
+        :waiting_list="waiting_list"
+        :accepted_list="accepted_list"
+        :closed_date="closed_date"
+      />
       <br><br>
 
       <v-row>
@@ -126,7 +128,18 @@
         </v-col>
       </v-row>
 
-      <informationParty :party_id="party_id" />
+      <informationParty
+        :title="title"
+        :closing-date="closingDate"
+        :nickname="nickname"
+        :category="category"
+        :activity-duration="activityDuration"
+        :recruit-number="recruitNumber"
+        :planned-start-date="plannedStartDate"
+        :contact-method="contactMethod"
+        :body="body"
+        :activity_location="activity_location"
+      />
     </v-container>
   </div>
 </template>
@@ -140,25 +153,16 @@ export default {
     'informationParty': informationParty,
     'YakiList': YakiList,
   },
-  props: ['party_id'],
-
+  props: ["party_id","title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","waiting_list","accepted_list","closed_date"],
   data() {
     return {
-      title: '',
-      nickname: '',
-      closingDate: '',
-      user_type: '',
       dialog:false,
-      waiting_list:[],
-      recruit_number:null,
-      accepted_list:[],
       dialogremove:false,
-      closed_date:'',
     }
   },
   
 
-  created() {
+  /* created() {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
       .then((response) => {
         console.log(response)
@@ -174,7 +178,7 @@ export default {
       .catch((error) => {d
         console.log(error)
       })
-  },
+  }, */
 
   methods: {
     closing() {
