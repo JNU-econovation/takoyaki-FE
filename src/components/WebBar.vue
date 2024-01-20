@@ -4,7 +4,7 @@
     <v-app-bar
       color="#FCFCFD"
       flat
-      height="72"
+      height="90px"
     >
       <v-avatar> 
         <img
@@ -15,13 +15,13 @@
       
       <router-link to="/">
         <v-btn class="me-2">
-          home
+          HOME
         </v-btn>
       </router-link>  
       <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
       <router-link to="/writeform">
         <v-btn class="me-2">
-          글 쓰기
+          글쓰기
         </v-btn>
       </router-link>
       
@@ -83,5 +83,7 @@ data() {
 </script>
 
 <style>
+
+
 
 </style>

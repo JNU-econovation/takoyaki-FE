@@ -1,5 +1,5 @@
 <template>
-  <v-main style="padding: 100px; padding-left: 16%; padding-right: 16%;">
+  <v-main style="padding-left: 10em; padding-right: 10em;">
     <router-link to="/banner">
       <BannerComponent />
     </router-link>
@@ -63,6 +63,7 @@
       </v-sheet>
     </v-sheet>
 
+    <v-container style="padding-left: 3px;">
       <v-container v-if="clickApplyBtn">
         <v-row>
           <v-col
@@ -118,6 +119,9 @@
           </v-col>
         </v-row>
       </v-container>
+    </v-container>
+
+    
       <!--페이지네이션-->
       <v-row class="fixed bottom py-4">
         <v-col>
