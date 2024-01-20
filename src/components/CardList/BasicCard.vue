@@ -13,14 +13,19 @@
 
       <p>{{ category }}, {{ area }}</p>
 
-      <p>경쟁률: {{ competitionRate }}</p>
-      <!--마우스 호버 구현 X-->
+      
+      <v-hover v-slot="{ hover }">
+        <v-btn>
+          {{ hover ? view_count : competition_rate }}
+        </v-btn>
+      </v-hover>
     </div>
+
+    <!--마감 된 팟-->
     <div
       v-else
       class="card"
     >
-      <!--마감 된 팟-->
       <h3>{{ title }} 마감</h3>
     </div>
   </div>
@@ -28,18 +33,15 @@
 
 <script>
 export default {
-  props: ["party_id"],
-
+  props: ["party_id","competition_rate"],
   data() {
     return {
       title: "",
       closingDate: "",
       category: "",
       area: "",
-      competitionRate: "",
       closed_date: "",
-      //this.props,
-      // props: ['propsdata'] //item.party_id받음
+      view_count:null,
     };
   },
   created() {
@@ -57,15 +59,15 @@ export default {
         this.closingDate = response.data.data.planned_closing_date;
         this.category = response.data.data.category;
         this.area = response.data.data.activity_location;
-        this.competitionRate = response.data.data.competition_rate;
         this.closed_date = response.data.data.closed_date;
+        this.view_count=response.data.data.view_count
       })
       .catch((error) => {
         console.log(error)
       });
-  },
-  methods: {},
-};
+  }
+  }
+
 </script>
 
 <style>

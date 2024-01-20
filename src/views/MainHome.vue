@@ -77,7 +77,10 @@
                 params: { party_id: item.party_id },
               }"
             >
-              <BasicCard :party_id="item.party_id" />
+              <BasicCard
+                :party_id="item.party_id"
+                :competition_rate="item.competition_rate"
+              />
             </router-link>
           </v-col>
         </v-row>
@@ -98,7 +101,10 @@
                 params: { party_id: item.party_id },
               }"
             >
-              <BasicCard :party_id="item.party_id" />
+              <BasicCard
+                :party_id="item.party_id"
+                :competition_rate="item.competition_rate"
+              />
               <!--받은 키로 BasicCard에 props-->
             </router-link>
           </v-col>
@@ -122,7 +128,6 @@
 <script>
 import BasicCard from "@/components/CardList/BasicCard.vue";
 import BannerComponent from "../components/BannerComponent.vue";
-
 export default {
   components: {
     BannerComponent: BannerComponent,
@@ -137,7 +142,6 @@ export default {
       selectArea: "",
       list: [],
       applyList: [],
-      party_id: "",
       clickApplyBtn: true,
       page: null,
       total_pages: null,
@@ -153,11 +157,6 @@ export default {
         console.log(response)
         this.list = response.data.data; //팟 정보의 객체를 받아옴
         this.total_pages = response.data.meta.total_pages;
-        /* this.title = response.data.data[0].title;
-        this.closingDate = response.data.data[0].planned_closing_date;
-        this.category = response.data.data[0].category;
-        this.area = response.data.data[0].activity_location;
-        this.competitionRate = response.data.data[0].competition_rate; */
       })
       .catch((error) => {
         console.log(error)
