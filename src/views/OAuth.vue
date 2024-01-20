@@ -19,7 +19,7 @@ export default {
       const social = localStorage.getItem('social');
       localStorage.removeItem('social');
       localStorage.removeItem('is_info_needed');
-      await this.$axios.post(this.$takoyaki_API + 'users/oauth/login/'+social+window.location.search, {})
+      await this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'users/oauth/login/'+social+window.location.search, {})
         .then((response) => {
           console.log(response)
           if (response.data.success) {

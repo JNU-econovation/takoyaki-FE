@@ -98,7 +98,7 @@ export default {
       this.isAdditionalInfoModalOpen = true;
     },
     async loginWith(provider) {
-      await this.$axios.get(this.$takoyaki_API +'users/oauth/login-url/'+provider, {
+      await this.$axios.get(process.env.VUE_APP_TAKOYAKI_API +'users/oauth/login-url/'+provider, {
       })
           .then((response) => {
             this.loginURL = response.data.data['login_url'];
@@ -164,7 +164,7 @@ export default {
         //TODO: 닉네임 길이 확인하세요 모달창
       }
       console.log(this.nickname);
-      await this.$axios.post(this.$takoyaki_API +'users/oauth/login/additional-info', {
+      await this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/oauth/login/additional-info', {
         "nickname": this.nickname
       })
           .then((response) => {
