@@ -60,8 +60,7 @@ export default {
 </script>
 <style>
 #banner {
-  width: 80%;
-  
+
   position: relative;
 
   
