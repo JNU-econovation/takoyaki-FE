@@ -1,33 +1,61 @@
 <template>
   <div>
-    <div class="login-modal" v-if="isModalOpen">
-      <div class="social-modal" v-if="isSocialModalOpen">
-          <div class="status-bar">
-            <button @click="closeSocialLoginModal">✕</button>
-          </div>
-          <div class="content-box">
-            <h2>Welcome to <strong>Takoyaki!</strong></h2>
-            <div class="social-buttons">
-              <button @click="loginWith('kakao')">
-                <img src="/images/kakaotalk.png" alt="카카오 로그인">
-              </button>
-              <button @click="loginWith('naver')">
-                <img src="/images/naver.png" alt="네이버 로그인">
-              </button>
-              <button @click="loginWith('google')">
-                <img src="/images/google.png" alt="구글 로그인">
-              </button>
-            </div>
-          </div>
-      </div>
-      <div class="additional-info-modal" v-if="isAdditionalInfoModalOpen">
+    <div
+      v-if="isModalOpen"
+      class="login-modal"
+    >
+      <div
+        v-if="isSocialModalOpen"
+        class="social-modal"
+      >
         <div class="status-bar">
-          <button @click="closeAdditionalInfoModal">✕</button>
+          <button @click="closeSocialLoginModal">
+            ✕
+          </button>
+        </div>
+        <div class="content-box">
+          <h2>Welcome to <strong>Takoyaki!</strong></h2>
+          <div class="social-buttons">
+            <button @click="loginWith('kakao')">
+              <img
+                src="/images/kakaotalk.png"
+                alt="카카오 로그인"
+              >
+            </button>
+            <button @click="loginWith('naver')">
+              <img
+                src="/images/naver.png"
+                alt="네이버 로그인"
+              >
+            </button>
+            <button @click="loginWith('google')">
+              <img
+                src="/images/google.png"
+                alt="구글 로그인"
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="isAdditionalInfoModalOpen"
+        class="additional-info-modal"
+      >
+        <div class="status-bar">
+          <button @click="closeAdditionalInfoModal">
+            ✕
+          </button>
         </div>
         <div class="content-box">
           <h2>Enter Your Nickname</h2>
-          <input type="text" v-model="nickname" placeholder="Nickname">
-          <button @click="setNickname">Submit</button>
+          <input
+            v-model="nickname"
+            type="text"
+            placeholder="Nickname"
+          >
+          <button @click="setNickname">
+            Submit
+          </button>
         </div>
       </div>
     </div>
@@ -166,11 +194,11 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  //padding: 20px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  //display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
