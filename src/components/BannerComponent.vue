@@ -7,6 +7,7 @@
         :src="img_url"
         class="banner-image"
       >
+      
       <div
         id="beforearr"
         style="color:gray"
@@ -31,14 +32,14 @@ export default {
       images: [
         {
           img_idx:0,
-          img_url:'./images/takoImg.png',
+          img_url:'./images/takoImg.jpg',
         },
       ]
     }
   },
   created: function () {
     this.img_idx = 0;
-    this.img_url = './images/takoImg.png';
+    this.img_url = './images/takoImg.jpg';
   },
   /*다른 이미지가 있으면 돌아가게끔
   methods: {
@@ -59,14 +60,17 @@ export default {
 </script>
 <style>
 #banner {
-  width: 100%;
+  width: 80%;
+  
   position: relative;
+
   
 }
 
 #bannerimg {
   width: 100%;
   height: 500px;
+  padding-left:20%;
  
 }
 
@@ -84,10 +88,11 @@ export default {
   right: 3%;
   top: 50%;
 }
+
 .banner-image {
-  with:100%;
-  height:100%;
-  padding-left: 100px;
+  
+  height:80%;
+  padding-left: 10%;
   padding-top:50px;
   padding-bottom:50px ;
 }
