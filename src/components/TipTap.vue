@@ -1,5 +1,6 @@
 <template>
   <div v-if="editor">
+
     <button
       :disabled="!editor.can().chain().focus().toggleBold().run()"
       :class="{ 'is-active': editor.isActive('bold') }"
@@ -7,6 +8,7 @@
     >
       <i class="fas fa-bold width" /> 
     </button>
+
     <button
       :disabled="!editor.can().chain().focus().toggleItalic().run()"
       :class="{ 'is-active': editor.isActive('italic') }"
@@ -14,6 +16,7 @@
     >
       <i class="fas fa-italic width" /> 
     </button>
+
     <button
       :disabled="!editor.can().chain().focus().toggleStrike().run()"
       :class="{ 'is-active': editor.isActive('strike') }"
@@ -21,33 +24,7 @@
     >
       <i class="fa-solid fa-strikethrough width" />
     </button>
-    <button
-      :disabled="!editor.can().chain().focus().toggleCode().run()"
-      :class="{ 'is-active': editor.isActive('code') }"
-      @click="editor.chain().focus().toggleCode().run()"
-    >
-      <i class="fa-solid fa-code width" />
-    </button>
-    <!-- <button @click="editor.chain().focus().unsetAllMarks().run()" class="width">
-      clear marks
-    </button>
-    <button @click="editor.chain().focus().clearNodes().run()" class="width">
-      clear nodes
-    </button> -->
-    <button
-      :class="{ 'is-active': editor.isActive('paragraph') }"
-      @click="editor.chain().focus().setParagraph().run()"
-    >
-      <i class="fa-solid fa-paragraph width" />
-    </button>
-    <button
-      :class="{ 'is-active': editor.isActive('heading', { level: 1 })} "
-      style="font-weight: bold;"
-      class="width"
-      @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-    >
-      H1
-    </button>
+
     <button
       :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
       style="font-weight: bold;"
@@ -56,14 +33,7 @@
     >
       H2
     </button>
-    <button
-      :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }"
-      style="font-weight: bold;"
-      class="width"
-      @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
-    >
-      H3
-    </button>
+
     <button
       :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }"
       style="font-weight: bold;"
@@ -72,14 +42,7 @@
     >
       H4
     </button>
-    <button
-      :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }"
-      style="font-weight: bold;"
-      class="width"
-      @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
-    >
-      H5
-    </button>
+  
     <button
       :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }"
       style="font-weight: bold;"
@@ -88,59 +51,33 @@
     >
       H6
     </button>
+
     <button
       :class="{ 'is-active': editor.isActive('bulletList') }"
       @click="editor.chain().focus().toggleBulletList().run()"
     >
       <i class="fa-solid fa-list width" />
     </button>
-    <button
-      :class="{ 'is-active': editor.isActive('orderedList') }"
-      style="font-weight: bold;"
-      class="width"
-      @click="editor.chain().focus().toggleOrderedList().run()"
-    >
-      ordered list
-    </button>
-    <button
-      :class="{ 'is-active': editor.isActive('codeBlock') }"
-      style="font-weight: bold;"
-      class="width"
-      @click="editor.chain().focus().toggleCodeBlock().run()"
-    >
-      code block
-    </button>
-    <!-- <button @click="editor.chain().focus().toggleBlockquote().run()"
-      :class="{ 'is-active': editor.isActive('blockquote') }"
-      style="font-weight: bold;" class="width">
-      blockquote
-    </button> -->
+
     <button
       style="font-weight: bold;"
       class="width"
       @click="editor.chain().focus().setHorizontalRule().run()"
     >
-      horizontal rule
+      구분선
     </button>
-    <!-- <button @click="editor.chain().focus().setHardBreak().run()"
-    style="font-weight: bold; " class="width">
-      hard break
-    </button> -->
-    <!-- <button @click="editor.chain().focus().undo().run()" :disabled="!editor.can().chain().focus().undo().run()" style="font-weight: bold;" class="width">
-      undo
-    </button>
-    <button @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()" style="font-weight: bold;" class="width">
-      redo
-    </button> -->
-    <v-divider />
+
+    <v-divider/>
+    
     <editor-content
       v-model="content"
       :editor="editor"
+      
     />
 
     <v-spacer />
     <v-btn
-      style="border: none;"
+      style="border: none; width: 80%;"
       @click="sendContent"
     >
       팟 등록
@@ -195,10 +132,13 @@ export default {
 <style lang="scss" scoped>
 /* Basic editor styles */
 button {
-  padding: 3px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right:15px;
   text-align: center;
   text-decoration: none;
-  border: 1.5px solid ; /* 테두리 스타일 및 색상 지정 */
+  border: 2px solid #f1f1f1 ; /* 테두리 스타일 및 색상 지정 */
+  background-color: #f7f7f7;
   border-radius: 5px; /* 테두리의 모서리를 둥글게 만듭니다. */
   margin-right: 5px;
   margin-bottom: 10px;
