@@ -10,10 +10,7 @@
       <v-col class="text-left">
 
         <v-avatar> 
-        <img
-          src="public\images\takoImg.png"
-          alt="takoyaki Image"
-        >
+     
       </v-avatar>
       <router-link to="/">
         <v-btn depressed color="transparent" class="me-2">
@@ -85,7 +82,10 @@ data() {
 </script>
 
 <style scoped>
-
+.v-btn{
+  font-size: large;
+  color:#777E90;
+}
 
 .text-left{
   padding-left: 8%;
