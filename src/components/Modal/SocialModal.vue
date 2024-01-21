@@ -9,10 +9,13 @@
         class="social-modal"
       >
         <div class="status-bar">
-          <button @click="closeSocialLoginModal">
+          <button
+            @click="closeSocialLoginModal"
+          >
             ✕
           </button>
         </div>
+
         <div class="content-box">
           <h2>Welcome to <strong>Takoyaki!</strong></h2>
           <div class="social-buttons">
@@ -41,20 +44,23 @@
         v-if="isAdditionalInfoModalOpen"
         class="additional-info-modal"
       >
+        <!--닉네임 입력하라는 모달창 -->
         <div class="status-bar">
-          <button @click="closeAdditionalInfoModal">
+          <button
+            @click="closeAdditionalInfoModal"
+          >
             ✕
           </button>
         </div>
         <div class="content-box">
-          <h2>Enter Your Nickname</h2>
+          <h2>닉네임을 입력해주세요!</h2>
           <input
             v-model="nickname"
             type="text"
             placeholder="Nickname"
           >
           <button @click="setNickname">
-            Submit
+            가입
           </button>
         </div>
       </div>
@@ -216,7 +222,7 @@ export default {
 .status-bar{
   display: flex;
   justify-content: flex-end; /* 내부 요소를 오른쪽으로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+  text-align: center; /* 수직 가운데 정렬 (선택 사항) */
   margin: 0px;
   height: 50px;
   background-color: rgb(230, 230, 230);
@@ -255,7 +261,7 @@ overflow: hidden;
 
 .additional-info-modal button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: FFF2D1;
   color: white;
   border: none;
   border-radius: 5px;

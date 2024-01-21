@@ -2,13 +2,12 @@
   <div>
     <v-container>
       <v-card class="writtenCard">
-        
         <br>
         <h1>제목</h1>
         <v-text-field
           v-model="title"
           placeholder="제목을 입력하세요"
-          maxlength="100"
+          maxlength="2"
         />
         <h1>기본정보를 입력해주세요.</h1>
 
@@ -18,150 +17,149 @@
           </v-col>
         </v-row>
 
-        <v-container class="infoContent" >
-        <v-sheet
-          id="dropdown-example"
-          grid-list-xl
-        >
-          <v-row
-            row
-            wrap
-            
+        <v-container class="infoContent">
+          <v-sheet
+            id="dropdown-example"
+            grid-list-xl
           >
-            <v-flex
-              v-for="k in basicInformation"
-              :key="k"
-              xs12
-              sm4
-              class="me-16"
+            <v-row
+              row
+              wrap
             >
-              <p style="font-weight: bold">
-                {{ k }}
-              </p>
-
-              <v-overflow-btn
-                v-if="k == '카테고리'"
-                v-model="selectCategory"
-                class="width"
-                :items="category"
-                label="카테고리"
-                target="#dropdown-example"
-                @click="clickCategory"
-              />
-
-              <v-overflow-btn
-                v-if="k == '활동 지역'"
-                v-model="selectArea"
-                class="width"
-                :items="area"
-                label="활동 지역"
-                target="#dropdown-example"
-                @click="clickArea"
-              />
-
-              <v-sheet v-if="k == '예상 기간'">
-                <v-row>
-                  <v-col>
-                    <v-text-field
-                      v-model="selectDuration"
-                      oninput="this.value = this.value.replace(/[^1-9]/g, '')"
-                      placeholder="0보다 큰 숫자 입력"
-                    />
-                  </v-col>
-                  <v-col>
-                    <v-select
-                      v-model="selectDurationUnit"
-                      :items="DurationUnit"
-                      placeholder="기간"
-                      @click="clickDurationUnit"
-                    />
-                  </v-col>
-                </v-row>
-              </v-sheet>
-
-              <v-text-field
-                v-if="k == '모집 인원'"
-                v-model="selectRecruitNumber"
-                placeholder="숫자 입력"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-              />
-
-              <v-sheet v-if="k == '마감 날짜'">
-                <input
-                  v-model="selectClosingDate"
-                  class="calendar"
-                  style="outline: auto"
-                  type="date"
-                  @input="checkClosingDate"
-                >
-                <p
-                  v-if="isClosingValid"
-                  class="width"
-                />
-                <p
-                  v-else
-                  class="error-message width"
-                >
-                  6개월 이내의 날짜를 선택해주세요.
-                </p>
-              </v-sheet>
-              
-              <v-sheet v-if="k == '활동 시작'">
-                <input
-                  v-model="selectStartDate"
-                  style="outline: auto"
-                  class="calendar"
-                  type="date"
-                  @input="checkStartDate"
-                >
-                <p
-                  v-if="isStartValid"
-                  class="error-message width"
-                >
-                  마감 날짜와 같거나 커야 합니다
-                </p>
-              </v-sheet>
-
-              <v-sheet
-                v-if="k == '연락 방법'"
-                class="width"
+              <v-flex
+                v-for="k in basicInformation"
+                :key="k"
+                xs12
+                sm4
+                class="me-16"
               >
-                <v-select
-                  v-model="selectContactMethod"
-                  :items="contactMethod"
-                  placeholder="연락 수단"
-                  variant="Tonal"
-                  @click="clickContactMethod"
+                <p style="font-weight: bold">
+                  {{ k }}
+                </p>
+
+                <v-overflow-btn
+                  v-if="k == '카테고리'"
+                  v-model="selectCategory"
+                  class="width"
+                  :items="category"
+                  label="카테고리"
+                  target="#dropdown-example"
+                  @click="clickCategory"
                 />
+
+                <v-overflow-btn
+                  v-if="k == '활동 지역'"
+                  v-model="selectArea"
+                  class="width"
+                  :items="area"
+                  label="활동 지역"
+                  target="#dropdown-example"
+                  @click="clickArea"
+                />
+
+                <v-sheet v-if="k == '예상 기간'">
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                        v-model="selectDuration"
+                        oninput="this.value = this.value.replace(/[^1-9]/g, '')"
+                        placeholder="0보다 큰 숫자 입력"
+                      />
+                    </v-col>
+                    <v-col>
+                      <v-select
+                        v-model="selectDurationUnit"
+                        :items="DurationUnit"
+                        placeholder="기간"
+                        @click="clickDurationUnit"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-sheet>
+
                 <v-text-field
-                  v-if="selectContactMethod == '전화번호'"
-                  v-model="contactInput"
+                  v-if="k == '모집 인원'"
+                  v-model="selectRecruitNumber"
                   placeholder="숫자 입력"
-                  maxlength="13"
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                 />
-                <v-text-field
-                  v-else-if="selectContactMethod == '카카오톡 오픈채팅'"
-                  v-model="contactInput"
-                  placeholder="https://카카오톡URL.."
-                />
-                <v-text-field
-                  v-else-if="selectContactMethod == '이메일'"
-                  v-model="contactInput"
-                  placeholder="takoyaki@gmail.com"
-                  @input="checkEmailValidity"
-                />
-                <div
-                  v-if="isInvalidEmail"
-                  class="error-message"
+
+                <v-sheet v-if="k == '마감 날짜'">
+                  <input
+                    v-model="selectClosingDate"
+                    class="calendar"
+                    style="outline: auto"
+                    type="date"
+                    @input="checkClosingDate"
+                  >
+                  <p
+                    v-if="isClosingValid"
+                    class="width"
+                  />
+                  <p
+                    v-else
+                    class="error-message width"
+                  >
+                    6개월 이내의 날짜를 선택해주세요.
+                  </p>
+                </v-sheet>
+              
+                <v-sheet v-if="k == '활동 시작'">
+                  <input
+                    v-model="selectStartDate"
+                    style="outline: auto"
+                    class="calendar"
+                    type="date"
+                    @input="checkStartDate"
+                  >
+                  <p
+                    v-if="isStartValid"
+                    class="error-message width"
+                  >
+                    마감 날짜와 같거나 커야 합니다
+                  </p>
+                </v-sheet>
+
+                <v-sheet
+                  v-if="k == '연락 방법'"
+                  class="width"
                 >
-                  이메일 형식이 올바르지 않습니다.
-                </div>
-              </v-sheet>
-            </v-flex>
-          </v-row>
-        </v-sheet>
-      </v-container>
+                  <v-select
+                    v-model="selectContactMethod"
+                    :items="contactMethod"
+                    placeholder="연락 수단"
+                    variant="Tonal"
+                    @click="clickContactMethod"
+                  />
+                  <v-text-field
+                    v-if="selectContactMethod == '전화번호'"
+                    v-model="contactInput"
+                    placeholder="숫자 입력"
+                    maxlength="13"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');"
+                  />
+                  <v-text-field
+                    v-else-if="selectContactMethod == '카카오톡 오픈채팅'"
+                    v-model="contactInput"
+                    placeholder="https://카카오톡URL.."
+                  />
+                  <v-text-field
+                    v-else-if="selectContactMethod == '이메일'"
+                    v-model="contactInput"
+                    placeholder="takoyaki@gmail.com"
+                    @input="checkEmailValidity"
+                  />
+                  <div
+                    v-if="isInvalidEmail"
+                    class="error-message"
+                  >
+                    이메일 형식이 올바르지 않습니다.
+                  </div>
+                </v-sheet>
+              </v-flex>
+            </v-row>
+          </v-sheet>
+        </v-container>
 
         <!--팟 소개 -->
 
@@ -269,7 +267,7 @@ export default {
     },
     login() {
       this.$axios
-        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 9)
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 11)
         .then((response) => {
           console.log(response);
         })

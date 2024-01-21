@@ -14,13 +14,35 @@
             <br><br>
             <h4>회원 정보 수정</h4>
             <br>닉네임
-            <br><v-card>
-              <v-card-title>
-                {{ nickname }}
-                <v-spacer />
-                <v-btn>수정</v-btn>
-              </v-card-title>
-            </v-card>
+            <br>
+            <div v-if="checkChanged">
+              <v-card>
+                <v-card-title>
+                  {{ nickname }}
+                  <v-spacer />
+                  <v-btn @click="changed">
+                    수정
+                  </v-btn>
+                </v-card-title>
+              </v-card>
+            </div>
+            <div v-else>
+              <v-text-field
+                v-model="newNickname"
+                placeholder="2~16자리/공백불가인 새로운닉네임을 입력해주세요"
+              />
+              <v-btn
+                style="margin-right: 10px;"
+                @click="changeNickname"
+              >
+                수정
+              </v-btn>
+              <v-btn
+                @click="x"
+              >
+                취소
+              </v-btn>
+            </div>
             <br>
             <br>
             <p>연결된 계정</p>
@@ -78,6 +100,8 @@ export default {
             nickname: '',
             email: '',
             social: '',
+            checkChanged:true,
+            newNickname:''
         };
     },
     created() {
@@ -91,6 +115,28 @@ export default {
             .catch((error) => {
             console.log(error);
         });
+    },
+    methods:{
+      changed(){
+        this.checkChanged=false;
+      },
+
+      changeNickname(){
+          this.$axios.patch(process.env.VUE_APP_TAKOYAKI_API + 'users/nickname',
+          {
+            "nickname":this.newNickname
+          })
+            .then((response) => {
+            console.log(response);
+            this.checkChanged=true;
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
+      x(){
+        this.checkChanged=true;
+      }
     }
 }
 </script>
