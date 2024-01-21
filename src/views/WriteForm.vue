@@ -8,7 +8,8 @@
         <v-text-field
           v-model="title"
           placeholder="제목을 입력하세요"
-          maxlength="100"
+          maxlength="20"
+          
         />
         <h1>기본정보를 입력해주세요.</h1>
 
@@ -166,7 +167,7 @@
         <!--팟 소개 -->
 
         <br><br>
-        <h1>팟 소개</h1>
+        <h1>팟 소개</h1> 
 
         <v-row align="center">
           <v-col>

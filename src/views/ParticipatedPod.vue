@@ -28,6 +28,7 @@
             </v-card>
           </v-sheet>
         </v-col>
+        
         <v-col>
           <v-sheet
             height="70vh"

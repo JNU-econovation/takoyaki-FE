@@ -36,9 +36,9 @@
               width="1500px"
               class="MyPageBG"
             >
-              <v-col>
+              
                 <h1>작성 목록</h1>
-              </v-col>
+              
               <v-row>
                 <v-col
                   v-for="item in written_list"
@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      mypage: ['나의 정보', '내가 연팟', '내가 참여한 팟'],
+      mypage: ['나의 정보', '내가 연 팟', '내가 참여한 팟'],
       routerMypage: ['my-information', 'written-party', 'participated-party'],
       written_list:[],
     }

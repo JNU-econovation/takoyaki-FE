@@ -77,7 +77,7 @@
 
     <v-spacer />
     <v-btn
-      style="border: none; width: 80%;"
+      style="border: none; width: 60%;"
       @click="sendContent"
     >
       팟 등록
@@ -197,4 +197,6 @@ button {
     border-top: 2px solid rgba(#0D0D0D, 0.1);
     margin: 2rem 0;
   }
-}</style>
+
+}
+</style>

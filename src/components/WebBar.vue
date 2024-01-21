@@ -82,10 +82,7 @@ data() {
 </script>
 
 <style scoped>
-.v-btn{
-  font-size: large;
-  color:#777E90;
-}
+
 
 .text-left{
   padding-left: 8%;
