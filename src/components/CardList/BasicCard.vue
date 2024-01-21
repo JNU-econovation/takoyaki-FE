@@ -11,15 +11,16 @@
 
       <p>{{ planned_closing_date }}</p>
 
-      <p>{{ category }}, {{ activity_location }}</p>
-
+      <p>{{ category }} {{ activity_location }}</p>
+      {{ hi }}
       
       <v-hover v-slot="{ hover }">
         <v-btn>
-          {{ hover ? view_count : competition_rate }}
+          {{ hover ? hi : occupation_rate }}
         </v-btn>
       </v-hover>
     </div>
+    
 
     <!--마감 된 팟-->
     <div
@@ -33,12 +34,8 @@
 
 <script>
 export default {
-  props: ["party_id","competition_rate","title","category","activity_location","planned_closing_date"],
-  data() {
-    return {
-      view_count:null,
-    };
-  },
+  props: ["party_id","competition_rate","title","category","activity_location","planned_closing_date","occupation_rate","closed_date"],
+  
   }
 </script>
 
