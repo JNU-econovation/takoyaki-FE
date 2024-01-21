@@ -2,10 +2,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import MainHome from './views/MainHome.vue';
 import WriteForm from './views/WriteForm';
-import MyPage from './views/MyPage';
-import MypageInformation from './views/MypageInformation'
-import WrittenParty from './views/WrittenParty'
-import ParticipatedPod from './views/ParticipatedPod'
+import MypageInformation from './views/mypage/MypageInformation'
+import WrittenParty from './views/mypage/WrittenParty'
+import ParticipatedPod from './views/mypage/ParticipatedPod'
 import guideTakoyaki from './views/guideTakoyaki'
 import OAuth from "./views/OAuth.vue";
 import userCategorize from "./components/viewComponent/userCategorize";
@@ -22,10 +21,6 @@ export default new Router({
   {
     path:'/writeform',
     component:WriteForm,
-  },
-  {
-    path:'/mypage',
-    component:MyPage,
   },
   {
     path:'/mypage/my-information',

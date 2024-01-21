@@ -2,32 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols="1">
-          <v-sheet
-            rounded="lg"
-            class="mypage-card"
-          >
-            <v-card 
-              class="elevation-12"
-              max-width="500px"
-            >
-              <v-list rounded="lg">
-                <v-list-item
-                  v-for="(n, k) in routerMypage"
-                  :key="k"
-                  :to="`/mypage/${n}`"
-                  class="listItem"
-                >
-                  <!--라우터연결-->
-                  
-                  <v-list-item-content>
-                    <v-list-item-title>{{ mypage[k] }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-sheet>
-        </v-col>
+        <MyPage />
         <v-col>
           <v-sheet
             height="70vh"
@@ -90,7 +65,7 @@
                     :planned_closing_date="item.planned_closing_date"
                     :occupation_rate="item.occupation_rate"
                   />
-                  <!--받은 키로 BasicCard에 props-->
+                <!--받은 키로 BasicCard에 props-->
                 </router-link>
               </v-col>
             </v-row>
@@ -153,12 +128,14 @@
 <script>
 import JoinedCard from '@/components/CardList/JoinedCard.vue';
 import BasicCard from '@/components/CardList/BasicCard.vue';
+import MyPage from './MyPage.vue';
 
 export default {
   components: {
-    'JoinedCard':JoinedCard,
-    'BasicCard':BasicCard,
-  },
+    'JoinedCard': JoinedCard,
+    'BasicCard': BasicCard,
+    'MyPage':MyPage
+},
   data() {
     return {
       mypage: ['나의 정보', '내가 연팟', '내가 참여한 팟'],
