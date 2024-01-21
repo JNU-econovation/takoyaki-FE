@@ -16,6 +16,7 @@
       :waiting_list="waiting_list"
       :accepted_list="accepted_list"
       :closed_date="closed_date"
+      :view_count="view_count"
     />
     <YakiView
       v-else-if="user_type === 'YAKI'"
@@ -32,6 +33,7 @@
       :activity_location="activity_location"
       :closed_date="closed_date"
       :yaki_status="yaki_status"
+      :view_count="view_count"
     />
     <OtherView
       v-else-if="user_type =='OTHER'"
@@ -49,6 +51,7 @@
       :user_type="user_type"
       :closed_date="closed_date"
       :yaki_status="yaki_status"
+      :view_count="view_count"
     />
     <loginFalse
       v-else
@@ -62,6 +65,7 @@
       :contact-method="contactMethod"
       :body="body"
       :activity_location="activity_location"
+      :view_count="view_count"
     />
   </div>
 </template>
@@ -100,7 +104,8 @@ export default {
       waiting_list:[],
       accepted_list:[],
       closed_date:'',
-      yaki_status:''
+      yaki_status:'',
+      view_count:null,
     }
   },
 
@@ -108,7 +113,7 @@ export default {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id)
       .then((response) => {
         console.log(response)
-        this.user_type = response.data.data.user_type;
+        this.user_type = response.data.meta.user_type;
         this.title = response.data.data.title;
         this.closingDate = response.data.data.planned_closing_date;
         this.category = response.data.data.category;
@@ -125,11 +130,13 @@ export default {
         this.accepted_list=response.data.data.accepted_list;
         this.closed_date=response.data.data.closed_date;
         this.yaki_status=response.data.data.yaki_status;
+        this.view_count=response.data.data.view_count;
+        
       })
       .catch((error) => {
         console.log(error)
       })
-  }
+    }
 }
 
 </script>

@@ -18,7 +18,6 @@
           {{ nickname }}
         </v-col>
       </v-row>
-
       <informationParty
         :category="category"
         :activity-duration="activityDuration"
@@ -27,6 +26,7 @@
         :contact-method="contactMethod"
         :body="body"
         :activity_location="activity_location"
+        :view_count="view_count"
       />
     </v-container>
   </div>
@@ -39,7 +39,7 @@ export default {
   components: {
     'informationParty': informationParty
   },
-  props: ["title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location"],
+  props: ["title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","view_count"],
 
 }
 </script>

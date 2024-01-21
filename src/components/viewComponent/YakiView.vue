@@ -61,6 +61,7 @@
         :contact-method="contactMethod"
         :body="body"
         :activity_location="activity_location"
+        :view_count="view_count"
       />
     </v-container>
   </div>
@@ -73,7 +74,7 @@ export default {
   components: {
     'informationParty': informationParty
   },
-  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","yaki_status"],
+  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","yaki_status","view_count"],
 
   methods:{
     cancelApplication() {

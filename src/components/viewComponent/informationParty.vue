@@ -47,11 +47,16 @@
           <strong>연락방법:</strong>
         </v-col>
         <v-col cols="2">
-          {{ contactMethod }}
+          {{ contactMethod }} 
         </v-col>
       </v-row>
+      <br><br><br>
+      <p :style="{ textAlign: 'right' }">
+        조회수: {{ view_count }}
+      </p>
+      
 
-      <br><br><br><br>
+      <br><br>
       <h3> 팟 소개 </h3>
 
       <v-row align="center">
@@ -68,21 +73,10 @@
 
 <script>
 export default {
-  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location"],
+  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","view_count"],
 
   data() {
     return {
-      /* title: '',
-      closingDate: '',
-      category: '',
-      area: '',
-      competitionRate: '',
-      nickname: '',
-      activityDuration: '',
-      recruitNumber: null,
-      plannedStartDate: '',
-      contactMethod: '',
-      body: '', */
       informationList: ['카테고리', '활동 시작', '모집 인원', '연락 방법', '지역', '예상 기간']
     };
   },

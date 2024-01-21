@@ -31,6 +31,7 @@
             :contact-method="contactMethod"
             :body="body"
             :activity_location="activity_location"
+            :view_count="view_count"
           />
         </div>
         <div v-else-if="user_type === 'YAKI'">
@@ -70,6 +71,7 @@
           :contact-method="contactMethod"
           :body="body"
           :activity_location="activity_location"
+          :view_count="view_count"
         />
       </div>
     </v-container>
@@ -85,7 +87,7 @@ export default {
     'informationParty':informationParty,
     'YakiView': YakiView
   },
-    props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","closed_date","yaki_status"],
+    props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","closed_date","yaki_status","view_count"],
   
   
     methods: {
