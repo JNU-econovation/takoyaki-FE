@@ -51,20 +51,45 @@
                     수락
                   </v-btn>
                   <!--대기중누르면 누른표시나게 색깔을 다르게 한다거나 추가해야함-->
+                  <v-col class="text-right">
+                    <v-btn
+                      class="icon"
+                      style="border-radius: 100%;"
+                      @click="showBackFour"
+                    >
+                      <i class="fa-solid fa-arrow-left" />
+                    </v-btn>
+                    <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
+                    <v-btn
+                      class="icon"
+                      style="border-radius: 100%;"
+                      @click="showNextFour"
+                    >
+                      <i class="fa-solid fa-arrow-right" />
+                    </v-btn>
+                  </v-col>
                 </v-row>
-              </v-col> 
+              </v-col>
             </v-row>
 
             <v-row>
               <v-col
-                v-for="(item) in list"
+                v-for="(item) in visibleItem" 
                 :key="item.party_id"
                 cols="3"
                 style="padding: 30px;"
               >
                 <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
                 <router-link :to="{ name: 'userCategorize', params: { party_id: item.party_id } }">
-                  <BasicCard :party_id="item.party_id" />
+                  <BasicCard
+                    :party_id="item.party_id"
+                    :competition_rate="item.competition_rate"
+                    :title="item.title"
+                    :category="item.category"
+                    :activity_location="item.activity_location"
+                    :planned_closing_date="item.planned_closing_date"
+                    :occupation_rate="item.occupation_rate"
+                  />
                   <!--받은 키로 BasicCard에 props-->
                 </router-link>
               </v-col>
@@ -81,17 +106,39 @@
                 <h1>마감+수락된 팟(연락처가 공개되었어요!)</h1>
               </v-col>
             </v-row>
-
+            <v-col class="text-right">
+              <v-btn
+                class="icon"
+                style="border-radius: 100%;"
+                @click="showBack2Four"
+              >
+                <i class="fa-solid fa-arrow-left" />
+              </v-btn>
+              <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
+              <v-btn
+                class="icon"
+                style="border-radius: 100%;"
+                @click="showNext2Four"
+              >
+                <i class="fa-solid fa-arrow-right" />
+              </v-btn>
+            </v-col>
             <v-row>
               <v-col
-                v-for="(closedItem) in closedList"
+                v-for="(closedItem) in visibleItem2"
                 :key="closedItem.party_id"
                 cols="3"
-                class="me-7"
-                offset-sm=""
+                style="padding: 30px;"
               >
                 <router-link :to="{ name: 'userCategorize', params: { party_id: closedItem.party_id } }">
-                  <JoinedCard :party_id="closedItem.party_id" />
+                  <JoinedCard
+                    :party_id="closedItem.party_id"
+                    :competition_rate="closedItem.competition_rate"
+                    :title="closedItem.title"
+                    :category="closedItem.category"
+                    :activity_location="closedItem.activity_location"
+                    :planned_closing_date="closedItem.planned_closing_date"
+                  />
                 </router-link>
               </v-col>
             </v-row>
@@ -106,6 +153,7 @@
 <script>
 import JoinedCard from '@/components/CardList/JoinedCard.vue';
 import BasicCard from '@/components/CardList/BasicCard.vue';
+
 export default {
   components: {
     'JoinedCard':JoinedCard,
@@ -117,22 +165,36 @@ export default {
       routerMypage: ['my-information', 'written-party', 'participated-party'],
       list:[],
       closedList:[],
-
+      itemsPerPage:4, 
+      currentPage:1,
+      current2Page:1
     }
   },
+      computed: {
+        visibleItem(){
+          const starIndex=(this.currentPage-1)*this.itemsPerPage;
+          const endIndex= starIndex+this.itemsPerPage;
+          return this.list.slice(starIndex,endIndex); 
+        },
+        visibleItem2(){
+          const starIndex=(this.current2Page-1)*this.itemsPerPage;
+          const endIndex= starIndex+this.itemsPerPage;
+          return this.closedList.slice(starIndex,endIndex); 
+        },
+    },
   created() {
-    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting')
+    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/not-closed-waiting?number=4000&page_number=1')
       .then((response) => {
         console.log(response)
-        this.list = response.data.data;
+        this.list = response.data.data.card_list;
       })
       .catch((error) => {
         console.log(error)
       }),
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=closed')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/closed?number=4000&page_number=1')
         .then((response) => {
           console.log(response)
-          this.closedList = response.data.data;
+          this.closedList = response.data.data.card_list;
         })
         .catch((error) => {
           console.log(error)
@@ -140,30 +202,47 @@ export default {
       },
   methods: {
     waiting() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_waiting')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/not-closed-waiting?number=4000&page_number=1')
         .then((response) => {
           console.log(response)
-          this.list=response.data.data;
+          this.list=response.data.data.card_list;
         })
         .catch((error) => {
           console.log(error)
         })
     },
     accepted() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=not_closed_accepted')
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/not-closed-accepted?number=4000&page_number=1')
         .then((response) => {
           console.log(response)
-          this.list = response.data.data;
+          this.list = response.data.data.card_list;
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    showNextFour() {
+      this.currentPage++;
+    },
+    showBackFour(){
+      this.currentPage--;
+    },
+    showNext2Four(){
+      this.current2Page++;
+    },
+    showBack2Four(){
+      this.current2Page--;
     }
+    
+    
   }
 }
 </script>
 
 <style scoped>
+.icon {
+  margin-right: 13px;
+}
 .listItem {
   width: 150px;
 }
