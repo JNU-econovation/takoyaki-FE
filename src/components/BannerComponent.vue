@@ -32,14 +32,14 @@ export default {
       images: [
         {
           img_idx:0,
-          img_url:'./images/takoImg.jpg',
+          img_url:'/images/BannerDesign.png',
         },
       ]
     }
   },
   created: function () {
     this.img_idx = 0;
-    this.img_url = './images/takoImg.jpg';
+    this.img_url = '/images/BannerDesign.png';
   },
   /*다른 이미지가 있으면 돌아가게끔
   methods: {
@@ -69,14 +69,13 @@ export default {
 #bannerimg {
   width: 100%;
   height: 500px;
-  padding-left:20%;
- 
+
 }
 
 #beforearr {
   display: block;
   position: absolute;
-  left: 3%;
+  left: 3%;                                                                                                                                          
   top: 50%;
   height: 100%;
 }
@@ -89,10 +88,11 @@ export default {
 }
 
 .banner-image {
-  
-  height:80%;
-  padding-left: 10%;
-  padding-top:50px;
+  margin:auto;
+  display:block;
+  height:60%;
+  top:150%;
+
   padding-bottom:50px ;
 }
 </style>

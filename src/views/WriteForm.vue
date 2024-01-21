@@ -8,7 +8,7 @@
         <v-text-field
           v-model="title"
           placeholder="제목을 입력하세요"
-          maxlength="20"
+          maxlength="100"
           
         />
         <h1>기본정보를 입력해주세요.</h1>
@@ -179,6 +179,8 @@
           :register="(registerBtn = false)"
           @input="handleText"
         />
+
+
         <v-btn @click="handleText">
           a
         </v-btn>
@@ -270,7 +272,7 @@ export default {
     },
     login() {
       this.$axios
-        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 9)
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 49)
         .then((response) => {
           console.log(response);
         })
@@ -306,7 +308,6 @@ export default {
         .then((response) => {
           console.log(response);
           this.partyID = response.data.data.party_id; //팟 등록 id받아옴
-          this.$router.push({ path: '/' })
         })
         .catch((error) => {
           console.log(error);

@@ -1,20 +1,21 @@
 <template>
   <div>
+
     <div
       v-if="isModalOpen"
       class="login-modal"
-    >
+    >   
       <div
         v-if="isSocialModalOpen"
         class="social-modal"
       >
-        <div class="status-bar">
-          <button @click="closeSocialLoginModal">
+       <div class="status-bar">
+          <button class = "close" @click="closeSocialLoginModal">
             ✕
           </button>
         </div>
         <div class="content-box">
-          <h2>Welcome to <strong>Takoyaki!</strong></h2>
+          <h2 class="content-title"><strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌</h2>
           <div class="social-buttons">
             <button @click="loginWith('kakao')">
               <img
@@ -35,14 +36,18 @@
               >
             </button>
           </div>
+
         </div>
       </div>
+
+
+
       <div
         v-if="isAdditionalInfoModalOpen"
         class="additional-info-modal"
       >
         <div class="status-bar">
-          <button @click="closeAdditionalInfoModal">
+          <button class = "close" @click="closeAdditionalInfoModal">
             ✕
           </button>
         </div>
@@ -60,6 +65,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -187,6 +193,12 @@ export default {
 </script>
 
 <style>
+
+.modal_background{
+  position: fixed;
+  top:0; left:0; bottom: 0; right: 0;
+  background:rgba(0, 0, 0, 0.2);
+}
 /* 모달 스타일링 예시 */
 .social-modal {
   position: fixed;
@@ -200,10 +212,12 @@ export default {
   z-index: 1000;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: row;
   overflow: hidden;
 }
-
+.content-title {
+  margin-left: 20px;
+}
 .social-buttons {
   display: flex;
   justify-content: space-between;
@@ -215,19 +229,18 @@ export default {
 }
 .status-bar{
   display: flex;
-  justify-content: flex-end; /* 내부 요소를 오른쪽으로 정렬 */
-  align-items: center; /* 수직 가운데 정렬 (선택 사항) */
-  margin: 0px;
-  height: 50px;
-  background-color: rgb(230, 230, 230);
+  background-color: transparent;
+  font-size: 25px;
+}
+.close{
+  position: absolute;
+  margin-left:87%;
 }
 .content-box {
   padding: 20px;
+  flex-wrap: wrap-reverse;
 }
-.status-bar button {
-  margin-right: 10px;
-  font-size: 25px;
-}
+
 
 .additional-info-modal{
   /* 추가 정보 모달 스타일 */

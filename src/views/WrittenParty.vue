@@ -33,7 +33,7 @@
             <v-sheet
               min-height="70vh"
               rounded="lg"
-              width="1500px"
+              width="700px"
               class="MyPageBG"
             >
               

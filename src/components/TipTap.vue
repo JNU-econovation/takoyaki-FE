@@ -72,6 +72,7 @@
     <editor-content
       v-model="content"
       :editor="editor"
+      style="height: 300px;"
       
     />
 
@@ -132,6 +133,8 @@ export default {
 <style lang="scss" scoped>
 /* Basic editor styles */
 button {
+
+  margin-right: 10px;
   padding: 5px;
   padding-left: 15px;
   padding-right:15px;
