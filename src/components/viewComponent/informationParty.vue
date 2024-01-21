@@ -66,21 +66,45 @@
       </v-row>
 
       <br><br>
-      {{ body }} <!--tiptap에디터사용해서 <p>,<h1>태그 없애줘야 함 그리고 해당 태그를 어떻게 적용할건지 한번 더 고민해봐야 할듯-->
+      <div class="editor">
+        <editor-content :editor="editor" />
+      </div>
     </v-container>
   </div>
 </template>
 
 <script>
+import { Editor, EditorContent } from "@tiptap/vue-2";
+import { StarterKit } from "@tiptap/starter-kit";
+
 export default {
+  components: {
+    EditorContent,
+  },
+
   props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","view_count"],
 
   data() {
     return {
-      informationList: ['카테고리', '활동 시작', '모집 인원', '연락 방법', '지역', '예상 기간']
+      informationList: ['카테고리', '활동 시작', '모집 인원', '연락 방법', '지역', '예상 기간'],
+      editor: null,
     };
+  },
+
+  mounted() {
+    this.editor = new Editor({
+      extensions: [StarterKit],
+      editorProps: {
+        attributes: {
+          class: "Editor",
+        },
+      },
+      content: this.body,
+    });
+    console.log(this.body);
   },
 }
 </script>
 
 <style></style>
+

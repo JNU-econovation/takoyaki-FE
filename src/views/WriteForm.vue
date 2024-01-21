@@ -176,6 +176,8 @@
           :register="(registerBtn = false)"
           @input="handleText"
         />
+        <!--그대로 보내줘서 오류가 발생함-->
+
         <v-btn @click="handleText">
           a
         </v-btn>

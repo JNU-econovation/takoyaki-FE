@@ -11,7 +11,7 @@
       :recruit-number="recruitNumber"
       :planned-start-date="plannedStartDate"
       :contact-mthod="contactMethod"
-      :body="bodey"
+      :body="body"
       :activity_location="activity_location"
       :waiting_list="waiting_list"
       :accepted_list="accepted_list"
