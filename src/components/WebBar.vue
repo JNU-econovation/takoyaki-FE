@@ -67,7 +67,7 @@ data() {
       this.$refs.socialModal.openLoginModal();
     },
     logout(){
-      this.$axios.post(this.$takoyaki_API +'users/logout', {
+      this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/logout', {
       })
           .then(() => {
             this.isLoggedIn = false;

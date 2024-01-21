@@ -34,102 +34,117 @@
       <v-sheet class="party-list">
         🥢모든 팟
 
-      <v-sheet class="selectBtn">
-        <v-container>
+        <v-sheet class="selectBtn">
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-select
+                  v-model="selectCategory"
+                  label="카테고리"
+                  :items="categoryList"
+                  @click="clickCategory"
+                />
+              </v-col>
+              <v-col>
+                <v-select
+                  v-model="selectArea"
+                  label="활동지역"
+                  :items="area"
+                  @click="clickArea"
+                />
+              </v-col>
+              <v-col style="padding-top: 26px">
+                <v-btn @click="applyBtn">
+                  적용
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-sheet>
+      </v-sheet>
+
+      <v-container style="padding-left: 3px;">
+        <v-container v-if="clickApplyBtn">
           <v-row>
-            <v-col>
-              <v-select
-                v-model="selectCategory"
-                label="카테고리"
-                :items="categoryList"
-                @click="clickCategory"
-              />
+            <v-col
+              v-for="item in list"
+              :key="item.party_id"
+              cols="3"
+              style="padding: 30px"
+            >
+              <router-link
+                :to="{
+                  name: 'userCategorize',
+                  params: { party_id: item.party_id },
+                }"
+              >
+                <BasicCard
+                  :party_id="item.party_id"
+                  :competition_rate="item.competition_rate"
+                  :title="item.title"
+                  :category="item.category"
+                  :activity_location="item.activity_location"
+                  :planned_closing_date="item.planned_closing_date"
+                  :occupation_rate="item.occupation_rate"
+                />
+              </router-link>
             </v-col>
+          </v-row> 
+          <v-row class="fixed bottom py-4">
             <v-col>
-              <v-select
-                v-model="selectArea"
-                label="활동지역"
-                :items="area"
-                @click="clickArea"
+              <!--페이지네이션-->
+              <v-pagination
+                v-model="page"
+                rounded="circle"
+                :length="total_pages"
+                @input="handlePage"
               />
-            </v-col>
-            <v-col style="padding-top: 26px">
-              <v-btn @click="applyBtn">
-                적용
-              </v-btn>
             </v-col>
           </v-row>
         </v-container>
-      </v-sheet>
-    </v-sheet>
 
-    <v-container style="padding-left: 3px;">
-      <v-container v-if="clickApplyBtn">
-        <v-row>
-          <v-col
-            v-for="item in list"
-            :key="item.party_id"
-            cols="3"
-            style="padding: 30px"
-          >
-            <router-link
-              :to="{
-                name: 'userCategorize',
-                params: { party_id: item.party_id },
-              }"
+        <!--해당 카테고리,활동지역 조회 페이지-->
+        <v-container v-else>
+          <v-row>
+            <v-col
+              v-for="item in applyList"
+              :key="item.party_id"
+              cols="3"
+              style="padding: 30px"
             >
-              <BasicCard
-                :party_id="item.party_id"
-                :competition_rate="item.competition_rate"
-                :title="item.title"
-                :category="item.category"
-                :activity_location="item.activity_location"
-                :planned_closing_date="item.planned_closing_date"
-              />
-            </router-link>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <v-container v-else>
-        <v-row>
-          <v-col
-            v-for="item in applyList"
-            :key="item.party_id"
-            cols="3"
-            style="padding: 30px"
-          >
-            <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-            <router-link
-              :to="{
-                name: 'userCategorize',
-                params: { party_id: item.party_id },
-              }"
-            >
-              <BasicCard
-                :party_id="item.party_id"
-                :competition_rate="item.competition_rate"
-                :title="item.title"
-                :category="item.category"
-                :activity_location="item.activity_location"
-                :planned_closing_date="item.planned_closing_date"
-              />
+              <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+              <router-link
+                :to="{
+                  name: 'userCategorize',
+                  params: { party_id: item.party_id },
+                }"
+              >
+                <BasicCard
+                  :party_id="item.party_id"
+                  :competition_rate="item.competition_rate"
+                  :title="item.title"
+                  :category="item.category"
+                  :activity_location="item.activity_location"
+                  :planned_closing_date="item.planned_closing_date"
+                  :occupation_rate="item.occupation_rate"
+                />
               <!--받은 키로 BasicCard에 props-->
-            </router-link>
-          </v-col>
-        </v-row>
+              </router-link>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
-    </v-container>
 
     
       <!--페이지네이션-->
       <v-row class="fixed bottom py-4">
         <v-col>
+          <!--페이지네이션-->
           <v-pagination
             v-model="page"
             rounded="circle"
             :length="total_pages"
-            @input="handlePage"
+            @input="handleCategorizePage"
           />
         </v-col>
       </v-row>
@@ -161,33 +176,50 @@ export default {
       category:'',
       activity_location:'',
       planned_closing_date:'',
+      occupation_rate:'',
+      waiting_list:[],
     };
   },
   created() {
     this.$axios
       .get(
         process.env.VUE_APP_TAKOYAKI_API +
-          "parties?type=all&login=true&number=16&page_number=1"
+          "parties?number=16&page_number=1"
       )
       .then((response) => {
         console.log(response)
-        this.list = response.data.data; //팟 정보의 객체를 받아옴
-        this.total_pages = response.data.meta.total_pages;
-        this.title=response.data.data.title;
-        this.category=response.data.data.category;
-        this.activity_location=response.data.data.activity_location;
-        this.planned_closing_date=response.data.data.planned_closing_date;
+        this.list=response.data.data.card_list;
+        this.total_pages=response.data.meta.total_pages;
       })
       .catch((error) => {
         console.log(error)
-      });
+      })
+
+
+      
   },
 
   methods: {
+    waitingList(ID){
+      const apiUrl=process.env.VUE_APP_TAKOYAKI_API+'parties/'+ID
+      const response= this.$axios.get(apiUrl);
+      const waitingL=response.data.data.waiting_list;
+      for(const temp of this.list)
+
+      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
+      .then((response) => {
+        console.log(response)
+        this.waiting_list=response.data.data.waiting_list;
+      })
+      .catch((error) => {
+        console.log(error)
+      })},
+      
     clickCategory: function () {
       this.$axios
         .get(process.env.VUE_APP_TAKOYAKI_API + "party/category")
         .then((response) => {
+          console.log(response);
           this.categoryList = response.data.data.category;
         })
         .catch((error) => {
@@ -208,14 +240,14 @@ export default {
       this.$axios
         .get(
           process.env.VUE_APP_TAKOYAKI_API +
-            "parties?type=all&login=true&number=16&page_number=1&category=" +
+            "parties?number=16&page_number=1&category=" +
             this.selectCategory +
             "&activity_location=" +
             this.selectArea
         )
         .then((response) => {
           this.clickApplyBtn = false;
-          this.applyList = response.data.data; //해당 팟 카드리스트 받음
+          this.applyList = response.data.data.card_list; //해당 팟 카드리스트 받음
         })
         .catch((error) => {
           console.log(error)
@@ -225,17 +257,35 @@ export default {
       this.$axios
         .get(
           process.env.VUE_APP_TAKOYAKI_API +
-            "parties?type=all&login=true&number=16&page_number=" +
+            "parties?number=16&page_number=" +
             this.page
         )
         .then((response) => {
           console.log(response);
-          this.list = response.data.data; //팟 정보의 객체를 받아옴
+          this.list = response.data.data.card_list; //팟 정보의 객체를 받아옴
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    handleCategorizePage(){
+      this.$axios
+        .get(
+          process.env.VUE_APP_TAKOYAKI_API +
+            "parties?number=16&page_number=" +
+            this.page+"&category=" +
+            this.selectCategory +
+            "&activity_location=" +
+            this.selectArea
+        )
+        .then((response) => {
+          console.log(response);
+          this.applyList = response.data.data.card_list; //팟 정보의 객체를 받아옴
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
 };
 </script>

@@ -47,11 +47,31 @@
                   style="padding: 30px;"
                 >
                   <router-link :to="{name:'userCategorize', params:{party_id:item.party_id}}">
-                    <BasicCard :party_id="item.party_id" />
+                    <BasicCard
+                      :party_id="item.party_id"
+                      :competition_rate="item.competition_rate"
+                      :title="item.title"
+                      :category="item.category"
+                      :activity_location="item.activity_location"
+                      :planned_closing_date="item.planned_closing_date"
+                      :closed_date="item.closed_date"
+                      :occupation_rate="item.occupation_rate"
+                    />
                   </router-link>
                 </v-col>
               </v-row>
             </v-sheet>
+          </v-col>
+        </v-row>
+        <v-row class="fixed bottom py-4">
+          <v-col>
+            <!--페이지네이션-->
+            <v-pagination
+              v-model="page"
+              rounded="circle"
+              :length="total_pages"
+              @input="handlePage"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -74,14 +94,34 @@ export default {
     }
   },
   created() {
-    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties?type=wrote&number=6&page=1')
+    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/wrote?number=8&page_number=1')
       .then((response) => {
         console.log(response)
-        this.written_list=response.data.data;
+        this.written_list=response.data.data.card_list;
+        this.closed_date=response.data.data.closed_date;
+        this.occupation_rate=response.data.data.occupation_rate;
+        this.total_pages=response.data.meta.total_pages;
       })
       .catch((error) => {
         console.log(error)
       })
+  },
+  methods:{
+    handlePage() {
+      this.$axios
+        .get(
+          process.env.VUE_APP_TAKOYAKI_API +
+            "parties/wrote?number=8&page_number=" +
+            this.page
+        )
+        .then((response) => {
+          console.log(response);
+          this.written_list = response.data.data.card_list; //팟 정보의 객체를 받아옴
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   }
 }
 </script>

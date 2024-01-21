@@ -19,7 +19,7 @@
           <strong>지역:</strong>
         </v-col>
         <v-col cols="2">
-          {{ area }}
+          {{ activity_location }}
         </v-col>
       </v-row>
       <v-row>
@@ -47,11 +47,16 @@
           <strong>연락방법:</strong>
         </v-col>
         <v-col cols="2">
-          {{ contactMethod }}
+          {{ contactMethod }} 
         </v-col>
       </v-row>
+      <br><br><br>
+      <p :style="{ textAlign: 'right' }">
+        조회수: {{ view_count }}
+      </p>
+      
 
-      <br><br><br><br>
+      <br><br>
       <h3> 팟 소개 </h3>
 
       <v-row align="center">
@@ -68,45 +73,13 @@
 
 <script>
 export default {
-  props: ['party_id'],
+  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","view_count"],
 
   data() {
     return {
-      title: '',
-      closingDate: '',
-      category: '',
-      area: '',
-      competitionRate: '',
-      nickname: '',
-      activityDuration: '',
-      recruitNumber: null,
-      plannedStartDate: '',
-      contactMethod: '',
-      body: '',
       informationList: ['카테고리', '활동 시작', '모집 인원', '연락 방법', '지역', '예상 기간']
     };
   },
-  created() {
-    this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + "parties/" + this.party_id + "?login=true")
-      .then((response) => {
-        console.log(response)
-        this.title = response.data.data.title;
-        this.closingDate = response.data.data.planned_closing_date;
-        this.category = response.data.data.category;
-        this.area = response.data.data.activity_location;
-        this.competitionRate = response.data.data.competition_rate;
-        this.nickname = response.data.data.nickname;
-        this.activityDuration = response.data.data.activity_duration;
-        this.recruitNumber = response.data.data.recruit_number;
-        this.plannedStartDate = response.data.data.planned_start_date;
-        this.contactMethod = response.data.data.contact_method;
-        this.body = response.data.data.body;
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  },
-
 }
 </script>
 

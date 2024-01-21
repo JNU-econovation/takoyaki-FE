@@ -63,32 +63,14 @@
   
   <script>
   export default {
-    props:['party_id'], 
-    data() {
-      return{
-      waiting_list:[],
-      accepted_list:[],
-      closed_date:''
-      }
-    },
+    props:['party_id','closed_date','waiting_list','accepted_list'], 
 
-    created() {
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "?login=true")
-        .then((response) => {
-          console.log(response)
-          this.waiting_list=response.data.data.waiting_list;
-          this.accepted_list=response.data.data.accepted_list;
-          this.closed_date =response.data.data.closed_date;
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
     methods:{
       accept(index) {
         this.$axios.post(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id + "/applicant/"+ this.waiting_list[index].id )  
           .then((response) => {
             console.log(response)
+            window.location.reload();
           })
           .catch((error) => {
             console.log(error)
