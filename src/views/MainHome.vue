@@ -63,6 +63,7 @@
         </v-container>
       </v-sheet>
 
+      <!--모든 팟 조회-->
       <v-container v-if="clickApplyBtn">
         <v-row>
           <v-col
@@ -91,6 +92,7 @@
         </v-row> 
         <v-row class="fixed bottom py-4">
           <v-col>
+            <!--페이지네이션-->
             <v-pagination
               v-model="page"
               rounded="circle"
@@ -101,9 +103,7 @@
         </v-row>
       </v-container>
 
-    
-
-
+      <!--해당 카테고리,활동지역 조회 페이지-->
       <v-container v-else>
         <v-row>
           <v-col
@@ -134,6 +134,7 @@
         </v-row>
         <v-row class="fixed bottom py-4">
           <v-col>
+            <!--페이지네이션-->
             <v-pagination
               v-model="page"
               rounded="circle"
@@ -143,8 +144,6 @@
           </v-col>
         </v-row>
       </v-container>
-
-      <!--페이지네이션-->
     </v-sheet>
   </v-main>
 </template>
@@ -181,7 +180,7 @@ export default {
     this.$axios
       .get(
         process.env.VUE_APP_TAKOYAKI_API +
-          "parties?number=2&page_number=1"
+          "parties?number=16&page_number=1"
       )
       .then((response) => {
         console.log(response)
@@ -203,7 +202,6 @@ export default {
       const waitingL=response.data.data.waiting_list;
       for(const temp of this.list)
 
-      
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
       .then((response) => {
         console.log(response)
@@ -238,7 +236,7 @@ export default {
       this.$axios
         .get(
           process.env.VUE_APP_TAKOYAKI_API +
-            "parties?number=2&page_number=1&category=" +
+            "parties?number=16&page_number=1&category=" +
             this.selectCategory +
             "&activity_location=" +
             this.selectArea
@@ -255,7 +253,7 @@ export default {
       this.$axios
         .get(
           process.env.VUE_APP_TAKOYAKI_API +
-            "parties?number=2&page_number=" +
+            "parties?number=16&page_number=" +
             this.page
         )
         .then((response) => {
@@ -270,7 +268,7 @@ export default {
       this.$axios
         .get(
           process.env.VUE_APP_TAKOYAKI_API +
-            "parties?number=2&page_number=" +
+            "parties?number=16&page_number=" +
             this.page+"&category=" +
             this.selectCategory +
             "&activity_location=" +
@@ -289,7 +287,5 @@ export default {
 </script>
 
 <style scoped>
-
-
 @import "./style/MainHome.css";
 </style>
