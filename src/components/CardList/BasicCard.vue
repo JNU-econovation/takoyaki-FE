@@ -8,17 +8,30 @@
     >
       <!--마감이 안 된 팟-->
       <h3>{{ title }}</h3>
-
-      <p>{{ planned_closing_date }}</p>
-
-      <p>{{ category }} {{ activity_location }}</p>
-      {{ hi }}
-      
-      <v-hover v-slot="{ hover }">
-        <v-btn>
-          {{ hover ? hi : occupation_rate }}
+      <v-container class="button">
+        <v-btn style=" border-color: #fff2d1; background-color: white; color: #664B3B;">
+          {{ planned_closing_date }}
         </v-btn>
-      </v-hover>
+          
+        <v-container
+          style="padding-top: 10px; padding-left: 0px;"
+          class="SortedCard"
+        >
+          <v-btn style="background-color: #fff2d1; color: #664B3B;">
+            {{ category }}
+          </v-btn>
+          <v-btn style="background-color: #fff2d1; color: #664B3B;">
+            {{ activity_location }}
+          </v-btn>
+        </v-container>
+
+         
+        <v-hover v-slot="{ hover }">
+          <v-btn>
+            {{ hover ? hi : occupation_rate }}
+          </v-btn>
+        </v-hover>
+      </v-container>
     </div>
     
 
@@ -39,6 +52,6 @@ export default {
   }
 </script>
 
-<style>
+<style scoped>
 @import "./CardList.css";
 </style>

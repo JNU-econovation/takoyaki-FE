@@ -2,6 +2,14 @@
   <div>
     <v-container>
       <v-card class="writtenCard">
+        
+        <br>
+        <h1>제목</h1>
+        <v-text-field
+          v-model="title"
+          placeholder="제목을 입력하세요"
+          maxlength="100"
+        />
         <h1>기본정보를 입력해주세요.</h1>
 
         <v-row align="center">
@@ -10,6 +18,7 @@
           </v-col>
         </v-row>
 
+        <v-container class="infoContent" >
         <v-sheet
           id="dropdown-example"
           grid-list-xl
@@ -17,6 +26,7 @@
           <v-row
             row
             wrap
+            
           >
             <v-flex
               v-for="k in basicInformation"
@@ -92,7 +102,7 @@
                   v-else
                   class="error-message width"
                 >
-                  현재날짜로부터 6개월 안쪽으로 정해주세요
+                  6개월 이내의 날짜를 선택해주세요.
                 </p>
               </v-sheet>
               
@@ -151,6 +161,7 @@
             </v-flex>
           </v-row>
         </v-sheet>
+      </v-container>
 
         <!--팟 소개 -->
 
@@ -162,14 +173,6 @@
             <v-divider class="my-3 divideLine" />
           </v-col>
         </v-row>
-
-        <br>
-        <h3>제목</h3>
-        <v-text-field
-          v-model="title"
-          placeholder="제목을 입력하세요"
-          maxlength="100"
-        />
 
         <TipTap
           :register="(registerBtn = false)"
@@ -387,6 +390,10 @@ export default {
 </script>
 
 <style>
+
+.infoContent{
+  padding: 30px;
+}
 .writtenCard {
   padding-left: 50px;
   padding-top: 60px;

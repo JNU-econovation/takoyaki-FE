@@ -13,7 +13,7 @@
   .mx-auto{
     padding-left: 30px;
   }
-  .party-list{
+  .party-list{ /*내가 관심잇는 팟, 모든 팟, 드롭다운*/
     padding-left: 15px;
     font-size: xx-large;
     font-weight: bold;
@@ -25,3 +25,7 @@
   }
   
   
+.party-list{
+  padding-right: 50px;
+  padding-left: 50px;
+}

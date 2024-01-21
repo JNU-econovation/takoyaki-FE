@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main style="padding-left: 10em; padding-right: 10em;">
     <router-link to="/banner">
       <BannerComponent />
     </router-link>
@@ -33,117 +33,121 @@
     >
       <v-sheet class="party-list">
         🥢모든 팟
+
+        <v-sheet class="selectBtn">
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-select
+                  v-model="selectCategory"
+                  label="카테고리"
+                  :items="categoryList"
+                  @click="clickCategory"
+                />
+              </v-col>
+              <v-col>
+                <v-select
+                  v-model="selectArea"
+                  label="활동지역"
+                  :items="area"
+                  @click="clickArea"
+                />
+              </v-col>
+              <v-col style="padding-top: 26px">
+                <v-btn @click="applyBtn">
+                  적용
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-sheet>
       </v-sheet>
 
-      <v-sheet class="selectBtn">
-        <v-container>
+      <v-container style="padding-left: 3px;">
+        <v-container v-if="clickApplyBtn">
           <v-row>
-            <v-col>
-              <v-select
-                v-model="selectCategory"
-                label="카테고리"
-                :items="categoryList"
-                @click="clickCategory"
-              />
+            <v-col
+              v-for="item in list"
+              :key="item.party_id"
+              cols="3"
+              style="padding: 30px"
+            >
+              <router-link
+                :to="{
+                  name: 'userCategorize',
+                  params: { party_id: item.party_id },
+                }"
+              >
+                <BasicCard
+                  :party_id="item.party_id"
+                  :competition_rate="item.competition_rate"
+                  :title="item.title"
+                  :category="item.category"
+                  :activity_location="item.activity_location"
+                  :planned_closing_date="item.planned_closing_date"
+                  :occupation_rate="item.occupation_rate"
+                />
+              </router-link>
             </v-col>
+          </v-row> 
+          <v-row class="fixed bottom py-4">
             <v-col>
-              <v-select
-                v-model="selectArea"
-                label="활동지역"
-                :items="area"
-                @click="clickArea"
+              <!--페이지네이션-->
+              <v-pagination
+                v-model="page"
+                rounded="circle"
+                :length="total_pages"
+                @input="handlePage"
               />
-            </v-col>
-            <v-col style="padding-top: 26px">
-              <v-btn @click="applyBtn">
-                적용
-              </v-btn>
             </v-col>
           </v-row>
         </v-container>
-      </v-sheet>
 
-      <!--모든 팟 조회-->
-      <v-container v-if="clickApplyBtn">
-        <v-row>
-          <v-col
-            v-for="item in list"
-            :key="item.party_id"
-            cols="3"
-            style="padding: 30px"
-          >
-            <router-link
-              :to="{
-                name: 'userCategorize',
-                params: { party_id: item.party_id },
-              }"
+        <!--해당 카테고리,활동지역 조회 페이지-->
+        <v-container v-else>
+          <v-row>
+            <v-col
+              v-for="item in applyList"
+              :key="item.party_id"
+              cols="3"
+              style="padding: 30px"
             >
-              <BasicCard
-                :party_id="item.party_id"
-                :competition_rate="item.competition_rate"
-                :title="item.title"
-                :category="item.category"
-                :activity_location="item.activity_location"
-                :planned_closing_date="item.planned_closing_date"
-                :occupation_rate="item.occupation_rate"
-              />
-            </router-link>
-          </v-col>
-        </v-row> 
-        <v-row class="fixed bottom py-4">
-          <v-col>
-            <!--페이지네이션-->
-            <v-pagination
-              v-model="page"
-              rounded="circle"
-              :length="total_pages"
-              @input="handlePage"
-            />
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <!--해당 카테고리,활동지역 조회 페이지-->
-      <v-container v-else>
-        <v-row>
-          <v-col
-            v-for="item in applyList"
-            :key="item.party_id"
-            cols="3"
-            style="padding: 30px"
-          >
-            <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
-            <router-link
-              :to="{
-                name: 'userCategorize',
-                params: { party_id: item.party_id },
-              }"
-            >
-              <BasicCard
-                :party_id="item.party_id"
-                :competition_rate="item.competition_rate"
-                :title="item.title"
-                :category="item.category"
-                :activity_location="item.activity_location"
-                :planned_closing_date="item.planned_closing_date"
-                :occupation_rate="item.occupation_rate"
-              />
+              <!--키로 각각 모든 카드 리스트의 id를 가져옴 -->
+              <router-link
+                :to="{
+                  name: 'userCategorize',
+                  params: { party_id: item.party_id },
+                }"
+              >
+                <BasicCard
+                  :party_id="item.party_id"
+                  :competition_rate="item.competition_rate"
+                  :title="item.title"
+                  :category="item.category"
+                  :activity_location="item.activity_location"
+                  :planned_closing_date="item.planned_closing_date"
+                  :occupation_rate="item.occupation_rate"
+                />
               <!--받은 키로 BasicCard에 props-->
-            </router-link>
-          </v-col>
-        </v-row>
-        <v-row class="fixed bottom py-4">
-          <v-col>
-            <!--페이지네이션-->
-            <v-pagination
-              v-model="page"
-              rounded="circle"
-              :length="total_pages"
-              @input="handleCategorizePage"
-            />
-          </v-col>
-        </v-row>
+              </router-link>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
+
+    
+      <!--페이지네이션-->
+      <v-row class="fixed bottom py-4">
+        <v-col>
+          <!--페이지네이션-->
+          <v-pagination
+            v-model="page"
+            rounded="circle"
+            :length="total_pages"
+            @input="handleCategorizePage"
+          />
+        </v-col>
+      </v-row>
     </v-sheet>
   </v-main>
 </template>
@@ -287,5 +291,7 @@ export default {
 </script>
 
 <style scoped>
+
+
 @import "./style/MainHome.css";
 </style>

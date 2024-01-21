@@ -4,46 +4,45 @@
     <v-app-bar
       color="#FCFCFD"
       flat
-      height="72"
+      height="90px"
     >
-      <v-avatar> 
-        <img
-          src="public\images\takoImg.png"
-          alt="takoyaki Image"
-        >
-      </v-avatar>
       
+      <v-col class="text-left">
+
+        <v-avatar> 
+     
+      </v-avatar>
       <router-link to="/">
-        <v-btn class="me-2">
-          home
+        <v-btn depressed color="transparent" class="me-2">
+          HOME
         </v-btn>
       </router-link>  
       <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
       <router-link to="/writeform">
-        <v-btn class="me-2">
-          글 쓰기
+        <v-btn depressed color="transparent" class="me-2">
+          글쓰기
         </v-btn>
       </router-link>
-      
+    </v-col>
       <v-spacer />
       
       <v-col class="text-right">
         <router-link to="/mypage">
-          <v-btn class="me-2">
+          <v-btn depressed color="transparent" class="me-2">
             <v-icon>mdi-account</v-icon>
           </v-btn>
         </router-link>
-        <v-btn
+        <v-btn depressed color="transparent"
           v-if="isLoggedIn"
           @click="logout"
         >
-          Logout
+          로그아웃
         </v-btn>
-        <v-btn
+        <v-btn depressed color="transparent"
           v-else
           @click="openLoginModal"
         >
-          Login
+          로그인
         </v-btn>
       </v-col>
     </v-app-bar>
@@ -82,6 +81,17 @@ data() {
 
 </script>
 
-<style>
+<style scoped>
+.v-btn{
+  font-size: large;
+  color:#777E90;
+}
+
+.text-left{
+  padding-left: 8%;
+}
+.text-right{
+  padding-right: 8%;
+}
 
 </style>
