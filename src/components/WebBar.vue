@@ -4,7 +4,7 @@
     <v-app-bar
       color="#FCFCFD"
       flat
-      height="90px"
+      height="60px"
     >
       
       <v-col class="text-left">

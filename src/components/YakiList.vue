@@ -92,7 +92,7 @@
   </script>
   
 
-  <style>
+  <style scoped>
   .yaki {
 
   }

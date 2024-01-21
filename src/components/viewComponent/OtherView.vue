@@ -15,7 +15,7 @@
                 {{ closingDate }} 마감
               </v-row>
               <v-row>
-                <v-btn
+                <v-btn class="applciation"
                   @click="applyNow"
                 >
                   신청하기
@@ -105,6 +105,14 @@ export default {
 }}
 </script>
 
-<style>
+<style scoped>
+.applictaion{
+  border-radius: 14px;
+  width: 50%;
+  
+  background-color:#664b3b ;
+  color: #fff2d1;
+}
+
 
 </style>
