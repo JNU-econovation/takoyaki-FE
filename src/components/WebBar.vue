@@ -37,11 +37,14 @@
             color="transparent"
             class="me-2"
           >
-            <v-icon>mdi-account</v-icon>
+            <div v-if="checkLogin">
+              <v-icon>mdi-account</v-icon>
+            </div>
+            <div v-else />
           </v-btn>
         </router-link>
         <v-btn
-          v-if="isLoggedIn"
+          v-if="checkLogin"
           depressed
           color="transparent"
           @click="logout"
@@ -68,10 +71,14 @@ export default {
   components: {
     SocialModal
   },
-data() {
+  props:['check-login'],
+  /* data() {
     return {
       isLoggedIn: false
     }
+  }, */
+  created(){
+
   },
   methods: {
     openLoginModal() {
@@ -81,8 +88,16 @@ data() {
     logout(){
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/logout', {
       })
-          .then(() => {
-            this.isLoggedIn = false;
+          .then((response) => {
+            console.log(response);
+            if(this.$route.path==='/'){
+              this.$router.go(this.$router.currentRoute);
+              window.location.reload();
+          }
+            else{
+              this.$router.push({ path: '/' })
+              window.location.reload();
+            }
           })
           .catch((error) => {
             console.log(error);

@@ -57,7 +57,7 @@
           <input
             v-model="nickname"
             type="text"
-            placeholder="Nickname"
+            placeholder="공백 없이 2-16자 사이로 작성해주세요"
           >
           <button @click="setNickname">
             가입
@@ -152,6 +152,13 @@ export default {
               this.closeAdditionalInfoModal();
               //TODO: 로그인 true값을 App.vue로 보내기
             }
+            if(this.$route.path==='/'){
+            this.$router.go(this.$router.currentRoute);
+            window.location.reload();}
+            else{
+              this.$router.push({ path: '/' })
+              window.location.reload();
+            }
           } else {
             console.log("에러");
             this.closeLoginModal();
@@ -166,7 +173,7 @@ export default {
 
     },
     async setNickname() {
-      if (this.nickname.length > 16 && this.nickname.length < 4){
+      if (this.nickname.length > 16 && this.nickname.length < 2){
         //TODO: 닉네임 길이 확인하세요 모달창
       }
       console.log(this.nickname);
@@ -176,7 +183,7 @@ export default {
           .then((response) => {
             if (response.data.success){
               this.closeLoginModal();
-
+              window.location.reload();
               //TODO: 로그인 true값 전달
             }else{
               //TODO: 예외 메세지 모달창에 띄우기
