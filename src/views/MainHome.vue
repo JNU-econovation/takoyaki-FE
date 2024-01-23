@@ -10,21 +10,39 @@
       <v-sheet class="party-list">
         👀 내가 관심있는 팟
       </v-sheet>
-      <v-slide-group show-arrows>
-        <!--여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때-->
+      <v-slide-group
+        show-arrows
+      >
         <v-slide-group-item
           v-for="n in 8"
           :key="n"
-        >
-          <v-sheet
-            class="ma-3"
-            color="grey-lighten-1"
-            height="200"
-            rounded
-            width="250"
-          />
-        </v-slide-group-item>
+        />
       </v-slide-group>
+      <!-- <v-slide-group show-arrows>
+  여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때
+      <v-slide-group-item
+          v-for="n in list"
+          :key="n.party_id"
+        style="padding: 25px; margin-bottom: 10px;"
+        >
+          <router-link
+            :to="{
+              name: 'userCategorize',
+              params: { party_id: n.party_id },
+            }"
+          >
+            <BasicCard
+              :party_id="n.party_id"
+              :competition_rate="n.competition_rate"
+              :title="n.title"
+              :category="n.category"
+              :activity_location="n.activity_location"
+              :planned_closing_date="n.planned_closing_date"
+              :occupation_rate="n.occupation_rate"
+            />
+          </router-link>
+        </v-slide-group-item>
+      </v-slide-group> -->
     </v-sheet>
 
     <v-sheet
