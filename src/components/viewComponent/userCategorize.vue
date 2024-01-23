@@ -117,7 +117,7 @@ export default {
         this.is_login=response.data.meta.is_login;
         this.user_type = response.data.meta.user_type;
         this.title = response.data.data.title;
-        this.closingDate = response.data.data.planned_closing_date;
+        this.closingDate = ((response.data.data.planned_closing_date).slice(2)).replace(/-/g,'/');
         this.category = response.data.data.category;
         this.area = response.data.data.activity_location;
         this.competitionRate = response.data.data.competition_rate;

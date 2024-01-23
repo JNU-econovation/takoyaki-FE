@@ -10,53 +10,62 @@
 
       <v-row>
         <v-col cols="1">
-          <strong>카테고리</strong>
+          <strong>카테고리:</strong>
         </v-col>
-        <v-col cols="2">
-          {{ category }}
+        <v-col cols="5">
+          <v-btn style="background-color: #fff2d1; color: #664B3B;">
+            {{ category }}
+          </v-btn>
         </v-col>
         <v-col cols="1">
-          <strong>지역:</strong>
+          <strong>활동지역:</strong>
         </v-col>
-        <v-col cols="2">
-          {{ activity_location }}
+        <v-col
+          cols="2"
+        >
+          <v-btn style="background-color: #fff2d1; color: #664B3B;">
+            {{ activity_location }}
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="1">
           <strong>활동시작:</strong>
         </v-col>
-        <v-col cols="2">
-          {{ plannedStartDate }}
+        <v-col cols="5">
+          <h4>{{ plannedStartDate }}</h4>
         </v-col>
         <v-col cols="1">
           <strong>예상기간:</strong>
         </v-col>
         <v-col cols="2">
-          {{ activityDuration }}
+          <h4>{{ activityDuration }}</h4>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="1">
           <strong>모집인원:</strong>
         </v-col>
-        <v-col cols="2">
-          {{ recruitNumber }}
+        <v-col cols="">
+          <h4>{{ recruitNumber }}</h4>
         </v-col>
         <v-col cols="1">
           <strong>연락방법:</strong>
         </v-col>
-        <v-col cols="2">
-          {{ contactMethod }} 
+        <v-col cols="5">
+          <h4>{{ contactMethod }} </h4>
         </v-col>
       </v-row>
       <br><br><br>
-      <p :style="{ textAlign: 'right' }">
-        조회수: {{ view_count }}
+      <p
+        :style="{ textAlign: 'right' }"
+        style="padding-right:50px"
+      >
+        <i class="fa-regular fa-eye" /> {{ view_count }}
       </p>
       
 
-      <br><br>
+      <br>
       <h3> 팟 소개 </h3>
 
       <v-row align="center">
@@ -70,6 +79,7 @@
         <editor-content :editor="editor" />
       </div>
     </v-container>
+    <br><br><br><br><br><br>
   </div>
 </template>
 
@@ -106,5 +116,15 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.v-btn{
+  border-radius: 18px;
+  margin-top:-7px;
+}
+.button{
+  padding-top:100px;
+  padding-left:0px;
+  position: absolute;
+  
+}</style>
 

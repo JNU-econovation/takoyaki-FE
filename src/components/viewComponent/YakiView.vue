@@ -2,48 +2,95 @@
   <div>
     <v-container>
       <div v-if="closed_date==null">
-        <h1> {{ title }} </h1>
         <br><br>
+        <h1> {{ title }} </h1>
+        <br><br><br>
         <v-row>
-          <v-col cols="2">
+          <v-col
+            cols="2"
+            style="margin-right: -90px;"
+          >
             <h3> 팟 정보 </h3>
           </v-col>
-          <v-col>{{ nickname }}</v-col>
+          <v-col
+            cols="1"
+            style="margin-top: 4px;"
+          >
+            <img
+              class="imgTako"
+              src="/images/takoImg.png"
+              alt="타코야끼 이미지"
+            >
+          </v-col>
+          <v-col
+            cols="6"
+            style="padding-left:-110px;
+                    margin-left: -70px;
+                    margin-top: 4px;"
+          >
+            {{ nickname }}
+          </v-col>
           <div v-if="yaki_status === 'WAITING'">
             <v-col>
-              <v-row>
+              <v-spacer />
+              <v-row
+                style="color: #664B3B; padding-left: 66px;"
+              >
                 {{ closingDate }} 마감
               </v-row>
               <v-row>
-                <div class="complete">
-                  신청 완료
-                </div> 
-                <v-btn @click="cancelApplication">
-                  신청 취소
-                </v-btn>
+                <v-col>
+                  <v-btn
+                    class="complete"
+                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px;"
+                  >
+                    신청 완료
+                  </v-btn>
+                </v-col>
+                <v-col>
+                  <v-btn
+                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px;"
+                    @click="cancelApplication"
+                  >
+                    신청 취소
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-col>
           </div>
           <div v-else>
             <v-col>
-              <v-row>
+              <v-row
+                style="color: #664B3B; padding-left: 80px;"
+              >
                 {{ closingDate }} 마감
               </v-row>
               <v-row>
-                <div class="complete">
-                  수락되었어요!
-                </div> 
-                <v-btn @click="leaving">
-                  팟 나가기
-                </v-btn>
+                <v-col>
+                  <v-btn
+                    class="complete"
+                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px;"
+                  >
+                    수락되었어요!
+                  </v-btn>
+                </v-col>
+                <v-col>
+                  <v-btn
+                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px;"
+                    @click="leaving"
+                  >
+                    팟 나가기
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-col>
           </div>
         </v-row>
       </div>
       <div v-else>
-        <h1> {{ title }} </h1>
         <br><br>
+        <h1> {{ title }} </h1>
+        <br><br><br>
         <v-row>
           <v-col cols="2">
             <h3> 팟 정보 </h3>
@@ -103,9 +150,13 @@ export default {
 </script>
 
 <style scoped>
-.complete {
+/* .complete {
   padding-right: 60px;
   padding-top: 10px;
   padding-left: 20px;
+} */
+.imgTako {
+  width:25px;
+  height:25px;
 }
 </style>
