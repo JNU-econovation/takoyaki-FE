@@ -132,22 +132,22 @@
               </router-link>
             </v-col>
           </v-row>
+          <v-row class="fixed bottom py-4">
+            <v-col>
+              <!--페이지네이션-->
+              <v-pagination
+                v-model="page"
+                rounded="circle"
+                :length="total_pages"
+                @input="handleCategorizePage"
+              />
+            </v-col>
+          </v-row>
         </v-container>
       </v-container>
 
     
       <!--페이지네이션-->
-      <v-row class="fixed bottom py-4">
-        <v-col>
-          <!--페이지네이션-->
-          <v-pagination
-            v-model="page"
-            rounded="circle"
-            :length="total_pages"
-            @input="handleCategorizePage"
-          />
-        </v-col>
-      </v-row>
     </v-sheet>
   </v-main>
 </template>

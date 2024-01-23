@@ -14,6 +14,7 @@
             ✕
           </button>
         </div>
+
         <div class="content-box">
           <h2 class="content-title"><strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌</h2>
           <div class="social-buttons">
@@ -46,20 +47,21 @@
         v-if="isAdditionalInfoModalOpen"
         class="additional-info-modal"
       >
+        <!--닉네임 입력하라는 모달창 -->
         <div class="status-bar">
           <button class = "close" @click="closeAdditionalInfoModal">
             ✕
           </button>
         </div>
         <div class="content-box">
-          <h2>Enter Your Nickname</h2>
+          <h2>닉네임을 입력해주세요!</h2>
           <input
             v-model="nickname"
             type="text"
             placeholder="Nickname"
           >
           <button @click="setNickname">
-            Submit
+            가입
           </button>
         </div>
       </div>
@@ -268,7 +270,7 @@ overflow: hidden;
 
 .additional-info-modal button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: FFF2D1;
   color: white;
   border: none;
   border-radius: 5px;

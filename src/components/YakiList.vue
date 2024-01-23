@@ -93,11 +93,6 @@
   
 
   <style scoped>
-  .yaki {
-
-  }
-  .yaki button {
-    
-  }
+  
   </style>
   

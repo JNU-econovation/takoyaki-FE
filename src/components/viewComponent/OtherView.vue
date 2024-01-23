@@ -109,7 +109,7 @@ export default {
 .applictaion{
   border-radius: 14px;
   width: 50%;
-  
+
   background-color:#664b3b ;
   color: #fff2d1;
 }

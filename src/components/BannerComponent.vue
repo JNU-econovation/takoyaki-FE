@@ -58,7 +58,7 @@ export default {
   }*/ //타코야끼 가이드말고 다른 이미지가 있을 경우 화살표 누르면 넘어가게끔 
 }
 </script>
-<style>
+<style scoped>
 #banner {
 
   position: relative;

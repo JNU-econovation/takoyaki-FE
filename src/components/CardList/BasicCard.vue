@@ -57,6 +57,11 @@ export default {
   font-family: 'Pretendard';
   font-weight: 800;
 }
+
+h3{
+  padding-top: 20px;
+  padding-left:20px;
+}
 .card-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -100,8 +105,9 @@ export default {
 
 }
 .button{
+  
   padding-top:100px;
-  padding-left:0px;
+
   position: absolute;
   
 }
