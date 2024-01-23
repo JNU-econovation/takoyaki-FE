@@ -66,6 +66,7 @@
         <v-btn
           depressed
           color="transparent"
+          style="margin-right: 170.863px;"
           @click="openLoginModal"
         >
           로그인
