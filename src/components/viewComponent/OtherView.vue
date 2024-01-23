@@ -3,23 +3,50 @@
     <v-container>
       <div v-if="closed_date==null">
         <div v-if="user_type==='OTHER'">
+          <br><br><br>
           <h1> {{ title }} </h1>
-          <br><br>
+          <br><br><br>
           <v-row>
-            <v-col cols="2">
+            <v-col
+              cols="2"
+              style="margin-right: -90px;"
+            >
               <h3> 팟 정보 </h3>
             </v-col>
-            <v-col>{{ nickname }}</v-col>
+            <v-col
+              cols="1"
+              style="margin-top: 4px;"
+            >
+              <img
+                class="imgTako"
+                src="/images/takoImg.png"
+                alt="타코야끼 이미지"
+              >
+            </v-col>
+            <v-col
+              cols="6"
+              style="padding-left:-110px;
+                    margin-left: -70px;
+                    margin-top: 4px;"
+            >
+              {{ nickname }}
+            </v-col>
             <v-col>
-              <v-row>
+              <v-spacer />
+              <v-row
+                style="color: #664B3B; padding-left: 53px;"
+              >
                 {{ closingDate }} 마감
               </v-row>
               <v-row>
-                <v-btn class="applciation"
-                  @click="applyNow"
-                >
-                  신청하기
-                </v-btn>
+                <v-col>
+                  <v-btn
+                    style="background-color: #958176; padding-right: 70px; padding-left: 70px;"
+                    @click="applyNow"
+                  >
+                    신청하기
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-col>
           </v-row>
@@ -53,8 +80,9 @@
       </div>
 
       <div v-else>
-        <h1> {{ title }} </h1>
         <br><br>
+        <h1> {{ title }} </h1>
+        <br><br><br>
         <v-row>
           <v-col cols="2">
             <h3> 팟 정보 </h3>
@@ -106,13 +134,12 @@ export default {
 </script>
 
 <style scoped>
-.applictaion{
-  border-radius: 14px;
-  width: 50%;
-
-  background-color:#664b3b ;
-  color: #fff2d1;
+.imgTako {
+  width:25px;
+  height:25px;
 }
-
+/* .apply-btn {
+  paddin-right: -240px;
+} */
 
 </style>

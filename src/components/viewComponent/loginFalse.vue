@@ -1,20 +1,43 @@
 <template>
   <div>
     <v-container>
-      <h1> {{ title }} </h1>
       <br><br>
+      <h1> {{ title }} </h1>
+      <br><br><br>
 
       <v-row>
-        <v-col cols="2">
-          <h3> 팟 정보 </h3>
+        <v-col
+          cols="2"
+          style="margin-right: -90px;"
+        >
+          <h2> 팟 정보 </h2>
         </v-col>
-        <v-col cols="2">
-          <h5> 마감날짜 </h5>
+        <v-col
+          cols="2"
+          class="partyInformation"
+        >
+          <h4>마감날짜 </h4>
         </v-col>
-        <v-col cols="2">
-          {{ closingDate }}
+        <v-col
+          cols="1"
+          class="partyInformation closingDate"
+        >
+          <h4>{{ closingDate }}</h4>
         </v-col>
-        <v-col cols="2">
+        <v-col
+          class="nicknameImg"
+          cols="1"
+        >
+          <img
+            class="imgTako"
+            src="/images/takoImg.png"
+            alt="타코야끼 이미지"
+          >
+        </v-col>
+        <v-col
+          cols="2"
+          class="partyInformation nickname"
+        >
           {{ nickname }}
         </v-col>
       </v-row>
@@ -45,4 +68,33 @@ export default {
 </script>
 
 
-<style></style>
+<style scoped>
+.partyInformation {
+margin-right: -100px;
+margin-top: 3.5px;
+
+}
+.closingDate{
+  margin-top:7px;
+  height: 40px;
+  color: #664B3B;
+  border-radius: 50px; /* Make it circular */
+  border: 4px solid 
+  #ffedc1; /* Adjust the border color and width as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.nickname {
+  padding-left:-110px;
+  margin-left: -70px;
+}
+.nicknameImg{
+  margin-left: 110px; margin-top: 2px;
+}
+.imgTako{
+  width:25px;
+  height:25px;
+}
+</style>

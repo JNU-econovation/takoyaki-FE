@@ -11,7 +11,7 @@
       :recruit-number="recruitNumber"
       :planned-start-date="plannedStartDate"
       :contact-mthod="contactMethod"
-      :body="bodey"
+      :body="body"
       :activity_location="activity_location"
       :waiting_list="waiting_list"
       :accepted_list="accepted_list"
@@ -36,7 +36,7 @@
       :view_count="view_count"
     />
     <OtherView
-      v-else-if="user_type =='OTHER'"
+      v-else-if="user_type =='OTHER' && is_login==true"
       :party_id="party_id"
       :title="title"
       :closing-date="closingDate"
@@ -106,6 +106,7 @@ export default {
       closed_date:'',
       yaki_status:'',
       view_count:null,
+      is_login:Boolean
     }
   },
 
@@ -113,9 +114,10 @@ export default {
     this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + this.party_id)
       .then((response) => {
         console.log(response)
+        this.is_login=response.data.meta.is_login;
         this.user_type = response.data.meta.user_type;
         this.title = response.data.data.title;
-        this.closingDate = response.data.data.planned_closing_date;
+        this.closingDate = ((response.data.data.planned_closing_date).slice(2)).replace(/-/g,'/');
         this.category = response.data.data.category;
         this.area = response.data.data.activity_location;
         this.competitionRate = response.data.data.competition_rate;

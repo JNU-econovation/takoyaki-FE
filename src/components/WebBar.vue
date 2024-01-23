@@ -6,7 +6,9 @@
       flat
       height="60px"
     >
-      <v-col class="text-left">
+      <v-col
+        class="text-left"
+      >
         <v-avatar />
         <router-link to="/">
           <v-btn
@@ -18,45 +20,58 @@
           </v-btn>
         </router-link>  
         <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
-        <router-link to="/writeform">
-          <v-btn
-            depressed
-            color="transparent"
-            class="me-2"
-          >
-            글쓰기
-          </v-btn>
-        </router-link>
       </v-col>
       <v-spacer />
       
-      <v-col class="text-right">
-        <router-link to="/mypage/my-information">
-          <v-btn
-            depressed
-            color="transparent"
-            class="me-2"
-          >
-            <v-icon>mdi-account</v-icon>
-          </v-btn>
-        </router-link>
+
+      <div v-if="checkLogin">
+        <v-row class="text-right">
+          <v-col>
+            <router-link to="/mypage/my-information">
+              <v-btn
+                depressed
+                color="transparent"
+                style="margin-right: -40px;"
+              >
+                <i class="fa-regular fa-user" />
+              </v-btn>
+            </router-link>
+          </v-col>
+          
+          <v-col>
+            <router-link to="/writeform">
+              <v-btn
+                depressed
+                color="transparent"
+                style="margin-right: -25px;"
+              >
+                글쓰기
+              </v-btn>
+            </router-link>
+          </v-col>
+
+          <v-col>
+            <v-btn
+              depressed
+              color="transparent"
+              @click="logout"
+            >
+              로그아웃
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
+
+      <div v-else>
         <v-btn
-          v-if="isLoggedIn"
           depressed
           color="transparent"
-          @click="logout"
-        >
-          로그아웃
-        </v-btn>
-        <v-btn
-          v-else
-          depressed
-          color="transparent"
+          style="margin-right: 170.863px;"
           @click="openLoginModal"
         >
           로그인
         </v-btn>
-      </v-col>
+      </div>
     </v-app-bar>
   </div>
 </template>
@@ -68,10 +83,14 @@ export default {
   components: {
     SocialModal
   },
-data() {
+  props:['check-login'],
+  data() {
     return {
       isLoggedIn: false
     }
+  },
+  created(){
+
   },
   methods: {
     openLoginModal() {
@@ -81,8 +100,16 @@ data() {
     logout(){
       this.$axios.post(process.env.VUE_APP_TAKOYAKI_API +'users/logout', {
       })
-          .then(() => {
-            this.isLoggedIn = false;
+          .then((response) => {
+            console.log(response);
+            if(this.$route.path==='/'){
+              this.$router.go(this.$router.currentRoute);
+              window.location.reload();
+          }
+            else{
+              this.$router.push({ path: '/' })
+              window.location.reload();
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -100,7 +127,8 @@ data() {
   padding-left: 8%;
 }
 .text-right{
-  padding-right: 8%;
+  padding-right: 170.863px;
+  margin-left: -20%;
 }
 
 </style>

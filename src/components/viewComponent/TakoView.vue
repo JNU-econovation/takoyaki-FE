@@ -105,8 +105,9 @@
       <div v-else />
   
       <!--본문시작-->
+      <br><br>
       <h1> {{ title }} </h1>
-      <br>
+      <br><br><br>
 
       <YakiList
         :party_id="party_id"

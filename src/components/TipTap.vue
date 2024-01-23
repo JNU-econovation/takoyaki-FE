@@ -1,6 +1,5 @@
 <template>
   <div v-if="editor">
-
     <button
       :disabled="!editor.can().chain().focus().toggleBold().run()"
       :class="{ 'is-active': editor.isActive('bold') }"
@@ -67,7 +66,7 @@
       구분선
     </button>
 
-    <v-divider/>
+    <v-divider />
     
     <editor-content
       v-model="content"
