@@ -60,9 +60,9 @@ export default {
 </script>
 <style scoped>
 #banner {
-
+ 
   position: relative;
-
+  top:10%
   
 }
 
@@ -90,7 +90,7 @@ export default {
 .banner-image {
   margin:auto;
   display:block;
-  height:60%;
+  height:100%;
   top:150%;
 
   padding-bottom:50px ;
