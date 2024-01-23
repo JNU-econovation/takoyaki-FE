@@ -308,7 +308,7 @@ export default {
 </script>
 
 <style scoped>
-
+a{text-decoration:none; color: white}
 
 @import "./style/MainHome.css";
 </style>

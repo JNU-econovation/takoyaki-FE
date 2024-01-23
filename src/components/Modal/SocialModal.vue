@@ -153,14 +153,21 @@ export default {
               this.closeSocialLoginModal();
               this.closeAdditionalInfoModal();
               //TODO: 로그인 true값을 App.vue로 보내기
+              if(this.$route.path==='/'){
+              this.$router.go(this.$router.currentRoute);
+              window.location.reload();}
+              else{
+                this.$router.push({ path: '/' })
+                window.location.reload();
+              }
             }
-            if(this.$route.path==='/'){
-            this.$router.go(this.$router.currentRoute);
-            window.location.reload();}
-            else{
-              this.$router.push({ path: '/' })
-              window.location.reload();
-            }
+            // if(this.$route.path==='/'){
+            // this.$router.go(this.$router.currentRoute);
+            // window.location.reload();}
+            // else{
+            //   this.$router.push({ path: '/' })
+            //   window.location.reload();
+            // }
           } else {
             console.log("에러");
             this.closeLoginModal();
@@ -185,8 +192,14 @@ export default {
           .then((response) => {
             if (response.data.success){
               this.closeLoginModal();
-              window.location.reload();
               //TODO: 로그인 true값 전달
+              if(this.$route.path==='/'){
+              this.$router.go(this.$router.currentRoute);
+              window.location.reload();}
+              else{
+                this.$router.push({ path: '/' })
+                window.location.reload();
+              }
             }else{
               //TODO: 예외 메세지 모달창에 띄우기
             }
@@ -234,7 +247,7 @@ export default {
 }
 .social-buttons button img{
   margin: 20px;
-  height: 130px;
+  height: 50%;
 }
 .status-bar{
   display: flex;
