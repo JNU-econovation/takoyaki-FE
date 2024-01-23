@@ -176,7 +176,6 @@
           :register="(registerBtn = false)"
           @input="handleText"
         />
-        <!--그대로 보내줘서 오류가 발생함-->
 
         <v-btn @click="handleText">
           a
@@ -262,6 +261,7 @@ export default {
         .post(process.env.VUE_APP_TAKOYAKI_API + "users/logout")
         .then((response) => {
           console.log(response);
+          window.location.reload()
         })
         .catch((error) => {
           console.log(error);
@@ -272,6 +272,7 @@ export default {
         .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 11)
         .then((response) => {
           console.log(response);
+          window.location.reload()
         })
         .catch((error) => {
           console.log(error);

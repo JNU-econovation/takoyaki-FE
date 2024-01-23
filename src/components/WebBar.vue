@@ -6,7 +6,9 @@
       flat
       height="90px"
     >
-      <v-col class="text-left">
+      <v-col
+        class="text-left"
+      >
         <v-avatar />
         <router-link to="/">
           <v-btn
@@ -18,48 +20,57 @@
           </v-btn>
         </router-link>  
         <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
-        <router-link to="/writeform">
-          <v-btn
-            depressed
-            color="transparent"
-            class="me-2"
-          >
-            글쓰기
-          </v-btn>
-        </router-link>
       </v-col>
       <v-spacer />
       
-      <v-col class="text-right">
-        <router-link to="/mypage/my-information">
-          <v-btn
-            depressed
-            color="transparent"
-            class="me-2"
-          >
-            <div v-if="checkLogin">
-              <v-icon>mdi-account</v-icon>
-            </div>
-            <div v-else />
-          </v-btn>
-        </router-link>
+
+      <div v-if="checkLogin">
+        <v-row class="text-right">
+          <v-col>
+            <router-link to="/mypage/my-information">
+              <v-btn
+                depressed
+                color="transparent"
+                style="margin-right: -40px;"
+              >
+                <i class="fa-regular fa-user" />
+              </v-btn>
+            </router-link>
+          </v-col>
+          
+          <v-col>
+            <router-link to="/writeform">
+              <v-btn
+                depressed
+                color="transparent"
+                style="margin-right: -25px;"
+              >
+                글쓰기
+              </v-btn>
+            </router-link>
+          </v-col>
+
+          <v-col>
+            <v-btn
+              depressed
+              color="transparent"
+              @click="logout"
+            >
+              로그아웃
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
+
+      <div v-else>
         <v-btn
-          v-if="checkLogin"
-          depressed
-          color="transparent"
-          @click="logout"
-        >
-          로그아웃
-        </v-btn>
-        <v-btn
-          v-else
           depressed
           color="transparent"
           @click="openLoginModal"
         >
           로그인
         </v-btn>
-      </v-col>
+      </div>
     </v-app-bar>
   </div>
 </template>
@@ -72,11 +83,11 @@ export default {
     SocialModal
   },
   props:['check-login'],
-  /* data() {
+  data() {
     return {
       isLoggedIn: false
     }
-  }, */
+  },
   created(){
 
   },
@@ -118,7 +129,8 @@ export default {
   padding-left: 8%;
 }
 .text-right{
-  padding-right: 8%;
+  padding-right: 170.863px;
+  margin-left: -20%;
 }
 
 </style>

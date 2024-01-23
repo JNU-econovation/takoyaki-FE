@@ -2,19 +2,19 @@
   <v-app id="inspire">
     <WebBar :check-login="checkLogin" />
     <router-view /><!--내가 관심있는 팟 모든팟 뿌려줌-->
-    <WebFooter />
+    <!-- <WebFooter /> -->
   </v-app>
 </template>
 
 <script>
 import WebBar from './components/WebBar.vue';
-import WebFooter from './components/WebFooter.vue';
-
+/* import WebFooter from './components/WebFooter.vue';
+ */
 export default {
   components: {
     'WebBar':WebBar,
-    'WebFooter': WebFooter,
-    
+    /*  'WebFooter': WebFooter,
+     */
   },
   data(){
     return{
