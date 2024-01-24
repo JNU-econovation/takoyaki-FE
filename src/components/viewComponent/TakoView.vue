@@ -2,110 +2,122 @@
   <div>
     <v-container>
       <div v-if="closed_date==null">
-        <v-row justify-end>
-          <v-col class="text-right">
-            <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
+        <br><br>
+        <div>
+          <v-row justify-end>
+            <v-col class="text-right">
+              <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
 
-            <!--마감 모달-->
-            <v-btn @click="dialog=true">
-              마감하기
-            </v-btn>
-            <v-dialog
-              v-model="dialog"
-              width="auto"
-            >
-              <v-card>
-                <v-card-text>
-                  <h2>{{ title }}</h2>
-                </v-card-text>
-                <v-card-subtitle>
-                  <v-col>
-                    <v-row>
-                      ✔  남은 자리 {{ recruitNumber-accepted_list.length }}
-                    </v-row>
-                    <v-row>
-                      ✔  대기 중인 야끼  {{ waiting_list.length }}
-                    </v-row>
-                  </v-col>
-                </v-card-subtitle>
-                <v-card-actions>
-                  <v-col>
-                    <v-btn @click="dialog = false">
-                      취소
-                    </v-btn>
-                  </v-col>
-                  <v-col>
-                    <v-btn @click="closing">
-                      마감하기
-                    </v-btn>
-                  </v-col>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-col>
-
-
-          <v-col
-            cols="1"
-            class="text-right"
-          >
-            <v-btn @click="edit">
-              수정
-            </v-btn>
-          </v-col>
-
-
-          <!--삭제 모달-->
-          <v-col
-            cols="1"
-            class="text-right"
-          >
-            <div class="text-center">
+              <!--마감 모달-->
+            
               <v-btn
-                @click="dialogremove = true"
+                style="margin-right: -20px; background-color: #be8a6b; padding-right: 50px; padding-left: 50px;border-radius:15px; height: 50px; font-size: large; font-weight: bold;"
+                @click="dialog=true"
               >
-                삭제
+                마감하기
               </v-btn>
               <v-dialog
-                v-model="dialogremove"
+                v-model="dialog"
                 width="auto"
               >
                 <v-card>
-                  <v-card-text>
-                    {{ title }}
+                  <v-card-text
+                    style="padding-top: 20px;"
+                  >
+                    <h2>{{ title }}</h2>
                   </v-card-text>
                   <v-card-subtitle>
                     <v-col>
                       <v-row>
-                        ✔  남은 자리 {{ recruitNumber - accepted_list.length }}
+                        ✔  남은 자리: {{ recruitNumber-accepted_list.length }}
                       </v-row>
                       <v-row>
-                        ✔  대기 중인 야끼  {{ waiting_list.length }}
+                        ✔  대기 중인 야끼:  {{ waiting_list.length }}
                       </v-row>
                     </v-col>
                   </v-card-subtitle>
                   <v-card-actions>
                     <v-col>
-                      <v-btn @click="dialogremove = false">
+                      <v-btn
+                        style="background-color: #585858; color: white"
+                        @click="dialog = false"
+                      >
                         취소
                       </v-btn>
                     </v-col>
                     <v-col>
-                      <v-btn @click="remove">
-                        삭제하기
+                      <v-btn
+                        style="background-color: #4D8152; color: white"
+                        @click="closing"
+                      >
+                        마감하기
                       </v-btn>
                     </v-col>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-            </div>
-          </v-col>
-        </v-row>
+            </v-col>
+
+
+            <!--삭제 모달-->
+            <v-col
+              cols="1"
+              class="text-right"
+            >
+              <div class="text-center">
+                <v-btn
+                  style="background-color: #D9D9D9; height: 50px;border-radius:10px; margin-left:15px ; padding-left: 20px; padding-right: 20px; font-size: large;"
+                  @click="dialogremove = true"
+                >
+                  삭제
+                </v-btn>
+                <v-dialog
+                  v-model="dialogremove"
+                  width="auto"
+                >
+                  <v-card>
+                    <v-card-text style="padding-top: 20px;">
+                      <h2>{{ title }}</h2>
+                    </v-card-text>
+                    <v-card-subtitle>
+                      <v-col>
+                        <v-row>
+                          ✔  남은 자리: {{ recruitNumber - accepted_list.length }}
+                        </v-row>
+                        <v-row>
+                          ✔  대기 중인 야끼:  {{ waiting_list.length }}
+                        </v-row>
+                      </v-col>
+                    </v-card-subtitle>
+                    <v-card-actions>
+                      <v-col>
+                        <v-btn
+                          style="background-color: #585858; color: white"
+                          @click="dialogremove = false"
+                        >
+                          취소
+                        </v-btn>
+                      </v-col>
+                      <v-col>
+                        <v-btn
+                          style="background-color: #CECECE; "
+                          @click="remove"
+                        >
+                          삭제하기
+                        </v-btn>
+                      </v-col>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
       </div>
       <div v-else />
   
       <!--본문시작-->
-      <br><br>
+      <br>
       <h1> {{ title }} </h1>
       <br><br><br>
 
@@ -121,11 +133,29 @@
         <v-col cols="2">
           <h3> 팟 정보 </h3>
         </v-col>
-        <v-col cols="2">
+        <v-col
+          cols="2"
+          style="margin-left: -90px; margin-top:5px"
+        >
           <h4> 마감날짜 </h4>
         </v-col>
         <v-col>
-          {{ closingDate }}
+          <v-btn
+            style="margin-left: -110px; margin-top:-3px 
+            height: 40px;
+            color: #664B3B;
+            border-radius: 50px;
+            border: 4px solid #ffedc1; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center; 
+            margin-right: -100px;
+            
+            background-color:white;"
+          >
+            {{ closingDate }}
+          </v-btn>
         </v-col>
       </v-row>
 
@@ -155,14 +185,13 @@ export default {
     'informationParty': informationParty,
     'YakiList': YakiList,
   },
-  props: ["party_id","title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","waiting_list","accepted_list","closed_date","view_count"],
+  props: ["party_id","title","closing-date","nickname","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","waiting_list","accepted_list","closed_date","view_count",],
   data() {
     return {
       dialog:false,
       dialogremove:false,
     }
   },
-
 
   methods: {
     closing() {
@@ -175,10 +204,6 @@ export default {
         .catch((error) => {
         console.log(error)
         })
-    },
-    edit(){
-      this.$router.push(
-        { path: '/editComponent'});
     },
       
     remove() {
