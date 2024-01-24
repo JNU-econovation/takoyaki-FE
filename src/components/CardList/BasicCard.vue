@@ -7,7 +7,9 @@
       class="card"
     >
       <!--마감이 안 된 팟-->
-     <div style="height: 80px;"> <h2>{{ title }}</h2></div>
+      <div style="height: 80px;">
+        <h2>{{ title }}</h2>
+      </div>
       <v-container class="button">
         <v-btn style="border-color: #fff2d1; max-width: 200px; background-color: white; color: #664B3B; max">
           {{ planned_closing_date }}
@@ -26,9 +28,11 @@
         </v-container>
 
         <v-hover v-slot="{ hover }">
-          <v-btn style="max-width:100px;font-weight: 900;bottom: 45px; left: 135px; background: transparent;
-          border: none; font-size: 35px; box-shadow: none;">
-            {{ hover ? hi : occupation_rate }}
+          <v-btn
+            style="max-width:100px;font-weight: 900;bottom: 45px; left: 135px; background: transparent;
+          border: none; font-size: 35px; box-shadow: none;"
+          >
+            {{ hover ? '대기'+waiting_number : occupation_rate }}
           </v-btn>
         </v-hover>
       </v-container>
@@ -47,8 +51,13 @@
 
 <script>
 export default {
-  props: ["party_id","competition_rate","title","category","activity_location","planned_closing_date","occupation_rate","closed_date"],
+  props: ["party_id","competition_rate","title","category","activity_location","planned_closing_date","occupation_rate","closed_date","waiting_number"],
   
+  data() {
+    return {
+      hover: false,
+    };
+  }
   }
 </script>
 
