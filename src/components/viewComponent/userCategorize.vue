@@ -10,7 +10,7 @@
       :activity-duration="activityDuration"
       :recruit-number="recruitNumber"
       :planned-start-date="plannedStartDate"
-      :contact-mthod="contactMethod"
+      :contact-method="contactMethod"
       :body="body"
       :activity_location="activity_location"
       :waiting_list="waiting_list"
