@@ -7,7 +7,7 @@
           <v-sheet
           min-height="70vh"
             rounded="lg"
-            width="700px"
+            width="1300px"
             class="MyPageBG"
           >
             <!--화면 상단 부분-->
@@ -15,26 +15,26 @@
               <v-col>
                 <h1>내가 신청한 팟</h1>
                 <br>
-                <v-row>
-                  <v-btn
+                <v-row style="padding-left: 20px;">
+                  <v-btn elevation="0"
                     class="me-3"
                     @click="waiting"
                   >
                     대기중
                   </v-btn>
-                  <v-btn @click="accepted">
+                  <v-btn elevation="0" @click="accepted">
                     수락
                   </v-btn>
                   <!--대기중누르면 누른표시나게 색깔을 다르게 한다거나 추가해야함-->
                   <v-col class="text-right">
-                    <v-btn
+                    <v-btn text
                       class="icon"
                       @click="showBackFour"
                     >
                       <i class="fa-solid fa-arrow-left" />
                     </v-btn>
                     <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
-                    <v-btn
+                    <v-btn text
                       class="icon"
                       @click="showNextFour"
                     >
@@ -80,7 +80,7 @@
               </v-col>
             </v-row>
             <v-col class="text-right">
-              <v-btn
+              <v-btn text
                 class="icon"
             
                 @click="showBack2Four"
@@ -88,7 +88,7 @@
                 <i class="fa-solid fa-arrow-left" />
               </v-btn>
               <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
-              <v-btn
+              <v-btn text
                 class="icon"
                
                 @click="showNext2Four"
@@ -217,7 +217,7 @@ export default {
 <style scoped>
 .icon {
   margin-right: 13px;
-  border-radius: 13px;
+  border-radius: 20px;
 }
 .listItem {
   width: 150px;
@@ -238,6 +238,7 @@ export default {
 }
 .divideLine {
   width:100%;
-  
 }
+
+
 </style>
