@@ -129,6 +129,7 @@ export default {
             .then((response) => {
             console.log(response);
             this.checkChanged=true;
+            window.location.reload();
         })
             .catch((error) => {
             console.log(error);
