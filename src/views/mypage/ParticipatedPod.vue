@@ -5,7 +5,7 @@
         <MyPage />
         <v-col>
           <v-sheet
-          min-height="70vh"
+            min-height="70vh"
             rounded="lg"
             width="700px"
             class="MyPageBG"
@@ -240,4 +240,5 @@ export default {
   width:100%;
   
 }
+a{text-decoration:none; color: white}
 </style>

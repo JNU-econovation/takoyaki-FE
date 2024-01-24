@@ -102,7 +102,7 @@
                   :title="item.title"
                   :category="item.category"
                   :activity_location="item.activity_location"
-                  :planned_closing_date="item.planned_closing_date"
+                  :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
                 />
               </router-link>
@@ -143,7 +143,7 @@
                   :title="item.title"
                   :category="item.category"
                   :activity_location="item.activity_location"
-                  :planned_closing_date="item.planned_closing_date"
+                  :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
                 />
               <!--받은 키로 BasicCard에 props-->
@@ -204,10 +204,19 @@ export default {
         process.env.VUE_APP_TAKOYAKI_API +
           "parties?number=16&page_number=1"
       )
-      .then((response) => {
+      .then(async(response) => {
         console.log(response)
         this.list=response.data.data.card_list;
         this.total_pages=response.data.meta.total_pages;
+        let data=response.data.data.card_list;
+        for (let i=0; i<data.length; i++) {
+          let partyId=data[i].party_id;
+          let waiting_member = await this.waitingList(partyId);
+          console.log("--------------------------")
+          
+          data[i].waiting_member=waiting_member;
+          console.log(waiting_member);
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -217,21 +226,25 @@ export default {
   },
 
   methods: {
-    waitingList(ID){
-      const apiUrl=process.env.VUE_APP_TAKOYAKI_API+'parties/'+ID
-      const response= this.$axios.get(apiUrl);
-      const waitingL=response.data.data.waiting_list;
-      for(const temp of this.list)
-
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
+    async waitingList(ID){
+      const apiUrl=process.env.VUE_APP_TAKOYAKI_API+'parties/'+ID;
+      try {
+      const response = await this.$axios.get(apiUrl);
+      const waitingL = response.data.data.waiting_list;
+      console.log(waitingL);
+      return waitingL;
+    } catch (error) {
+      console.log(error);
+      return 0}},
+      /* this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
       .then((response) => {
         console.log(response)
         this.waiting_list=response.data.data.waiting_list;
       })
       .catch((error) => {
         console.log(error)
-      })},
-      
+      })}, */
+    
     clickCategory: function () {
       this.$axios
         .get(process.env.VUE_APP_TAKOYAKI_API + "party/category")
@@ -309,6 +322,6 @@ export default {
 
 <style scoped>
 
-
+a{text-decoration:none; color: white}
 @import "./style/MainHome.css";
 </style>

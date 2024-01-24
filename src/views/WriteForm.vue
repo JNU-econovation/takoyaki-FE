@@ -8,7 +8,6 @@
           v-model="title"
           placeholder="제목을 입력하세요"
           maxlength="100"
-          
         />
         <h1>기본정보를 입력해주세요.</h1>
 

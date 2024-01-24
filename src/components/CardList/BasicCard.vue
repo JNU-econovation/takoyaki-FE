@@ -25,7 +25,6 @@
           </v-btn>
         </v-container>
 
-         
         <v-hover v-slot="{ hover }">
           <v-btn>
             {{ hover ? hi : occupation_rate }}

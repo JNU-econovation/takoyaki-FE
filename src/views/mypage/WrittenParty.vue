@@ -10,8 +10,7 @@
             width="700px"
             class="MyPageBG"
           >
-           
-              <h1>작성 목록</h1>
+            <h1>작성 목록</h1>
          
             <v-row>
               <v-col
@@ -102,6 +101,7 @@ export default {
 </script>
 
 <style scoped>
+
 .listItem {
   width: 150px;
 }
@@ -124,4 +124,5 @@ export default {
   padding-top: 100px;
 
 }
+a{text-decoration:none; color: white}
 </style>

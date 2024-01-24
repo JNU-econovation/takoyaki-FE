@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div
       v-if="isModalOpen"
       class="login-modal"
@@ -9,14 +8,19 @@
         v-if="isSocialModalOpen"
         class="social-modal"
       >
-       <div class="status-bar">
-          <button class = "close" @click="closeSocialLoginModal">
+        <div class="status-bar">
+          <button
+            class="close"
+            @click="closeSocialLoginModal"
+          >
             ✕
           </button>
         </div>
 
         <div class="content-box">
-          <h2 class="content-title"><strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌</h2>
+          <h2 class="content-title">
+            <strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌
+          </h2>
           <div class="social-buttons">
             <button @click="loginWith('kakao')">
               <img
@@ -37,7 +41,6 @@
               >
             </button>
           </div>
-
         </div>
       </div>
 
@@ -49,7 +52,10 @@
       >
         <!--닉네임 입력하라는 모달창 -->
         <div class="status-bar">
-          <button class = "close" @click="closeAdditionalInfoModal">
+          <button
+            class="close"
+            @click="closeAdditionalInfoModal"
+          >
             ✕
           </button>
         </div>
@@ -67,7 +73,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -151,15 +156,15 @@ export default {
             } else {
               console.log("정보 필요 없음");
               this.closeSocialLoginModal();
-              this.closeAdditionalInfoModal();
+              this.closeAdditionalInfoModal(); 
+                if(this.$route.path==='/'){
+                  this.$router.go(this.$router.currentRoute);
+                  window.location.reload();}
+                else{
+                  this.$router.push({ path: '/' })
+                  window.location.reload();
+                }
               //TODO: 로그인 true값을 App.vue로 보내기
-            }
-            if(this.$route.path==='/'){
-            this.$router.go(this.$router.currentRoute);
-            window.location.reload();}
-            else{
-              this.$router.push({ path: '/' })
-              window.location.reload();
             }
           } else {
             console.log("에러");
@@ -185,7 +190,13 @@ export default {
           .then((response) => {
             if (response.data.success){
               this.closeLoginModal();
-              window.location.reload();
+              if(this.$route.path==='/'){
+                  this.$router.go(this.$router.currentRoute);
+                  window.location.reload();}
+                else{
+                  this.$router.push({ path: '/' })
+                  window.location.reload();
+                }
               //TODO: 로그인 true값 전달
             }else{
               //TODO: 예외 메세지 모달창에 띄우기
