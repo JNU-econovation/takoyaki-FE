@@ -43,7 +43,7 @@
 
 
 
-      <div
+      <div style="width:450px; height:250px;"
         v-if="isAdditionalInfoModalOpen"
         class="additional-info-modal"
       >
@@ -53,15 +53,15 @@
             ✕
           </button>
         </div>
-        <div class="content-box">
-          <h2>닉네임을 입력해주세요!</h2>
+        <div style="padding-top: 10%" class="content-box">
+          <h2> 닉네임을 입력해주세요!</h2>
           <input
             v-model="nickname"
             type="text"
             placeholder="공백 없이 2-16자 사이로 작성해주세요"
           >
-          <button @click="setNickname">
-            가입
+          <button style="color:black; background-color: #f4f4f4;" @click="setNickname">
+            등록하기
           </button>
         </div>
       </div>
