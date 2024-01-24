@@ -1,8 +1,7 @@
 <template>
   <v-main style="padding-left: 10em; padding-right: 10em;">
-    <router-link to="/banner">
-      <BannerComponent />
-    </router-link>
+    <BannerComponent />
+    
     <v-sheet
       class="mx-auto pa-2 pt-6"
       color="grey-lighten-2"
@@ -321,7 +320,8 @@ export default {
 </script>
 
 <style scoped>
-
 a{text-decoration:none; color: white}
+
+
 @import "./style/MainHome.css";
 </style>

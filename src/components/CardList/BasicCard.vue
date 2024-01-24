@@ -7,9 +7,9 @@
       class="card"
     >
       <!--마감이 안 된 팟-->
-      <h3>{{ title }}</h3>
+     <div style="height: 80px;"> <h2>{{ title }}</h2></div>
       <v-container class="button">
-        <v-btn style=" border-color: #fff2d1; background-color: white; color: #664B3B;">
+        <v-btn style="border-color: #fff2d1; max-width: 200px; background-color: white; color: #664B3B; max">
           {{ planned_closing_date }}
         </v-btn>
           
@@ -17,7 +17,7 @@
           style="padding-top: 10px; padding-left: 0px;"
           class="SortedCard"
         >
-          <v-btn style="background-color: #fff2d1; color: #664B3B;">
+          <v-btn style="background-color: #fff2d1; margin-right: 5px; color: #664B3B;">
             {{ category }}
           </v-btn>
           <v-btn style="background-color: #fff2d1; color: #664B3B;">
@@ -26,7 +26,8 @@
         </v-container>
 
         <v-hover v-slot="{ hover }">
-          <v-btn>
+          <v-btn style="max-width:100px;font-weight: 900;bottom: 45px; left: 135px; background: transparent;
+          border: none; font-size: 35px; box-shadow: none;">
             {{ hover ? hi : occupation_rate }}
           </v-btn>
         </v-hover>
@@ -52,14 +53,18 @@ export default {
 </script>
 
 <style scoped>
+
+
 *{
   font-family: 'Pretendard';
   font-weight: 800;
 }
 
-h3{
+h2{
+  height:50px;
   padding-top: 20px;
   padding-left:20px;
+  border: none;
 }
 .card-list {
     display: grid;
@@ -73,8 +78,6 @@ h3{
 }
   
 .card {
-
-
   position: relative;
   z-index: 1;
   background-color: white; /* 아래쪽 색상 */
@@ -93,20 +96,24 @@ h3{
   top: 0;
   left: 0;
   width: 100%;
-  height: 60%; /* 전체 높이의 절반 */
+  height: 55%; /* 전체 높이의 절반 */
   background-color: #fff2d1; /* 위쪽 색상 */
   border-radius: 15% 15% 30% 30%; /* 위쪽 모서리만 둥글게 */
 }
 
 .v-btn{
   border-radius: 18px;
- 
+  max-width: 30px;
 
+}
+
+a {
+  text-decoration: none;
 }
 .button{
   
-  padding-top:100px;
-
+  padding-top:50px;
+  padding-left:5px;
   position: absolute;
   
 }
