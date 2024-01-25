@@ -114,6 +114,15 @@ export default {
         })
             .catch((error) => {
             console.log(error);
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.");
+                break;
+              case "USER_NOT_FOUND":
+                alert("사용자를 찾을 수 없습니다.")
+                break;
+            }
+            history.back();
         });
     },
     methods:{
@@ -132,6 +141,24 @@ export default {
         })
             .catch((error) => {
             console.log(error);
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.");
+                break;
+              case "HTTP_MSG_NOT_READABLE":
+                console.log("request body 확인 필요");
+                alert("오류가 발생하였습니다.");
+                break;
+              case 'VALIDATION_FAILED':
+                alert("2~16자리의 숫자, 영어, 한글만 허용됩니다.");
+                break;
+              case "DUPLICATE_NICKNAME":
+                alert("중복된 닉네임입니다. 다른 닉네임을 입력해주세요!");
+                break;
+              case "NICKNAME_CHANGE_TOO_EARLY":
+                alert("닉네임은 하루에 한 번만 바꿀 수 있습니다.");
+                break;                
+            }
         });
       },
       x(){

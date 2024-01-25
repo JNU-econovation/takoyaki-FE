@@ -235,14 +235,6 @@ export default {
     } catch (error) {
       console.log(error);
       return 0}},
-      /* this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
-      .then((response) => {
-        console.log(response)
-        this.waiting_list=response.data.data.waiting_list;
-      })
-      .catch((error) => {
-        console.log(error)
-      })}, */
     
     clickCategory: function () {
       this.$axios

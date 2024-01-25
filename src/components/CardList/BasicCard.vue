@@ -7,7 +7,7 @@
       class="card"
     >
       <!--마감이 안 된 팟-->
-     <div style="height: 80px;"> <h2>{{ title }}</h2></div>
+      <div style="height: 80px;"><h2>{{ title }}</h2></div>
       <v-container class="button">
         <v-btn style="border-color: #fff2d1; max-width: 200px; background-color: white; color: #664B3B; max">
           {{ planned_closing_date }}

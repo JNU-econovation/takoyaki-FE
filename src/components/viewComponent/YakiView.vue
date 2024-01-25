@@ -132,6 +132,26 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "NOT_YAKI":
+              alert("사용자가 야끼가 아닙니다.")
+              break;
+            case "CANCEL_APPLICATION_NOT_ALLOWED":
+              alert("신청 취소가 불가능합니다.")
+              break;
+          }
         })
       },
       leaving() {
@@ -142,6 +162,26 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "NOT_YAKI":
+              alert("사용자가 야끼가 아닙니다.")
+              break;
+            case "LEAVE_PARTY_NOT_ALLOWED":
+              alert("신청 취소가 불가능합니다.")
+              break;
+          }
         })
       }
     }

@@ -173,7 +173,21 @@ export default {
 
         })
         .catch((error) => {
-        console.log(error)
+          console.log(error)
+          switch(error.response.data.code) {
+            case "NOT_TAKO":
+              alert("사용자가 타코가 아닙니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+          }
         })
     },
     edit(){
@@ -189,6 +203,20 @@ export default {
         })
         .catch((error) => {
         console.log(error)
+        switch(error.response.data.code) {
+          case "NOT_TAKO":
+            alert("사용자가 타코가 아닙니다.")
+            break;
+          case "PARTY_NOT_FOUND":
+            alert("삭제되었거나 존재하지 않는 팟입니다.")
+            break;
+          case "PARTY_CLOSED":
+            alert("이미 마감된 팟입니다.")
+            break;
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.")
+            break;
+        }
         })
     }
 

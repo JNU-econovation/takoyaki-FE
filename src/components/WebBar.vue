@@ -113,6 +113,10 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.");
+            }
           })
     }
   }

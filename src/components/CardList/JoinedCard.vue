@@ -60,7 +60,9 @@ export default {
         this.contact_method = response.data.data.contact_method;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error)        
+        alert("존재하지 않거나 삭제된 팟입니다.")
+        history.back()
       });
   },
   methods: {

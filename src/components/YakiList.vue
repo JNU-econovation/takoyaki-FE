@@ -74,6 +74,29 @@
           })
           .catch((error) => {
             console.log(error)
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.")
+                break;
+              case "USER_NOT_FOUND":
+                alert("사용자를 찾을 수 없습니다.")
+                break;
+              case "PARTY_NOT_FOUND":
+                alert("삭제되었거나 존재하지 않는 팟입니다.")
+                break;
+              case "PARTY_CLOSED":
+                alert("이미 마감된 팟입니다.")
+                break;
+              case "NOT_TAKO":
+                alert("사용자가 타코가 아닙니다.")
+                break;
+              case "NOT_YAKI":
+                alert("사용자가 야끼가 아닙니다.")
+                break;
+              case "ALREADY_ACCEPTED_YAKI":
+                alert("이미 수락된 야끼입니다.")
+                break;
+            }
           })
       },
       reject(index) {
@@ -83,6 +106,29 @@
           })
           .catch((error) => {
             console.log(error)
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.")
+                break;
+              case "USER_NOT_FOUND":
+                alert("사용자를 찾을 수 없습니다.")
+                break;
+              case "PARTY_NOT_FOUND":
+                alert("삭제되었거나 존재하지 않는 팟입니다.")
+                break;
+              case "PARTY_CLOSED":
+                alert("이미 마감된 팟입니다.")
+                break;
+              case "NOT_TAKO":
+                alert("사용자가 타코가 아닙니다.")
+                break;
+              case "NOT_YAKI":
+                alert("사용자가 야끼가 아닙니다.")
+                break;
+              case "ALREADY_ACCEPTED_YAKI":
+                alert("이미 수락된 야끼는 수락 취소가 불가능합니다.")
+                break;
+            }
           })
       }
 
