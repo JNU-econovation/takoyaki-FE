@@ -1,13 +1,14 @@
 <template>
   <div>
-    <v-container>
+    <v-container style="margin-right: 600px;">
       <v-row>
         <MyPage />
-        <v-col>
+        <v-col style="margin-right: 375px;">
           <v-sheet
+            style="padding-left:200px; padding-right: -50px;"
             min-height="70vh"
             rounded="lg"
-            width="700px"
+            width="1200px"
             class="MyPageBG"
           >
             <!--화면 상단 부분-->
@@ -62,6 +63,7 @@
                     :activity_location="item.activity_location"
                     :planned_closing_date="item.planned_closing_date"
                     :occupation_rate="item.occupation_rate"
+                    :waiting_number="item.waiting_number"
                   />
                 <!--받은 키로 BasicCard에 props-->
                 </router-link>
@@ -90,7 +92,6 @@
               <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
               <v-btn
                 class="icon"
-              
                 @click="showNext2Four"
               >
                 <i class="fa-solid fa-arrow-right" />
@@ -142,7 +143,8 @@ export default {
       closedList:[],
       itemsPerPage:4, 
       currentPage:1,
-      current2Page:1
+      current2Page:1,
+      waiting_number:null,
     }
   },
       computed: {

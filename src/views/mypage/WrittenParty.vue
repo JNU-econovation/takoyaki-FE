@@ -1,17 +1,16 @@
 <template>
   <v-app id="inspire">
-    <v-container>
+    <v-container style="margin: 100px; margin-top: 20px; margin-right: 1000px;;">
       <v-row>
         <MyPage />
-        <v-col>
+        <v-col style="border-right: 375px;">
           <v-sheet
             min-height="70vh"
             rounded="lg"
-            width="700px"
+            width="1500px"
             class="MyPageBG"
           >
             <h1>작성 목록</h1>
-         
             <v-row>
               <v-col
                 v-for="item in written_list"
@@ -26,9 +25,10 @@
                     :title="item.title"
                     :category="item.category"
                     :activity_location="item.activity_location"
-                    :planned_closing_date="item.planned_closing_date"
+                    :planned_closing_date="(item.planned_closing_date).slice(2)"
                     :closed_date="item.closed_date"
                     :occupation_rate="item.occupation_rate"
+                    :waiting_number="item.waiting_number"
                   />
                 </router-link>
               </v-col>
@@ -65,6 +65,7 @@ export default {
       mypage: ['나의 정보', '내가 연 팟', '내가 참여한 팟'],
       routerMypage: ['my-information', 'written-party', 'participated-party'],
       written_list:[],
+      waiting_number:null,
     }
   },
   created() {
@@ -75,6 +76,8 @@ export default {
         this.closed_date=response.data.data.closed_date;
         this.occupation_rate=response.data.data.occupation_rate;
         this.total_pages=response.data.meta.total_pages;
+               
+        this.waiting_number=response.data.data.card_list.waiting_number
       })
       .catch((error) => {
         console.log(error)
@@ -133,7 +136,7 @@ export default {
 }
 
 .MyPageBG {
-  padding-left: 150px;
+  padding-left: 50px;
   padding-top: 50px;
 }
 

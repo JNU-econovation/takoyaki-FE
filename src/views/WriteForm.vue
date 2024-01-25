@@ -293,7 +293,7 @@ export default {
     },
     login() {
       this.$axios
-        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 11)
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 26)
         .then((response) => {
           console.log(response);
           window.location.reload()
@@ -330,7 +330,9 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.partyID = response.data.data.party_id; //팟 등록 id받아옴
+          this.partyID = response.data.data.party_id;
+           //팟 등록 id받아옴
+          this.$router.push({ path: '/' })
         })
         .catch((error) => {
           console.log(error.response.data.code)

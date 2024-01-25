@@ -6,17 +6,13 @@
       class="mx-auto pa-2 pt-6"
       color="grey-lighten-2"
     >
-      <v-sheet class="party-list">
+      <!-- <v-sheet class="party-list">
         👀 내가 관심있는 팟
       </v-sheet>
-      <v-slide-group
-        show-arrows
-      >
-        <v-slide-group-item
-          v-for="n in 8"
-          :key="n"
-        />
-      </v-slide-group>
+      <v-slide-group-item
+        v-for="n in 8"
+        :key="n"
+      /> -->
       <!-- <v-slide-group show-arrows>
   여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때
       <v-slide-group-item
@@ -34,9 +30,9 @@
               :party_id="n.party_id"
               :competition_rate="n.competition_rate"
               :title="n.title"
-              :category="n.category"
               :activity_location="n.activity_location"
               :planned_closing_date="n.planned_closing_date"
+              :category="n.category"
               :occupation_rate="n.occupation_rate"
             />
           </router-link>
@@ -70,8 +66,11 @@
                   @click="clickArea"
                 />
               </v-col>
-              <v-col style="padding-top: 26px">
-                <v-btn @click="applyBtn">
+              <v-col style="margin-top: 5px; margin-left: -10px;  ">
+                <v-btn
+                  style="border-radius: 50px; background-color: #D9D9D9; color: black; font-weight: bold; "
+                  @click="applyBtn"
+                >
                   적용
                 </v-btn>
               </v-col>
@@ -103,6 +102,7 @@
                   :activity_location="item.activity_location"
                   :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
+                  :waiting_number="item.waiting_number"
                 />
               </router-link>
             </v-col>
@@ -144,6 +144,7 @@
                   :activity_location="item.activity_location"
                   :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
+                  :waiting_number="itme.waiting_number"
                 />
               <!--받은 키로 BasicCard에 props-->
               </router-link>
@@ -195,6 +196,7 @@ export default {
       planned_closing_date:'',
       occupation_rate:'',
       waiting_list:[],
+      waiting_number:null
     };
   },
   created() {

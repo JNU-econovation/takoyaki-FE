@@ -41,7 +41,7 @@
               <v-row>
                 <v-col>
                   <v-btn
-                    style="background-color: #958176; padding-right: 70px; padding-left: 70px;"
+                    style="background-color: #958176; padding-right: 70px; padding-left: 70px; background-color: #be8a6b; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                     @click="applyNow"
                   >
                     신청하기
