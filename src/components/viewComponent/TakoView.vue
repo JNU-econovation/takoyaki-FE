@@ -34,7 +34,7 @@
                       <v-row>
                         ✔  대기 중인 야끼:  {{ waiting_list.length }}
                       </v-row>
-                      <v-row><h5>팟을 삭제하시겠어요?</h5></v-row>
+                      <v-row><h5>팟을 마감하시겠어요?</h5></v-row>
                     </v-col>
                   </v-card-subtitle>
                   <v-card-actions>
@@ -88,6 +88,7 @@
                         <v-row>
                           ✔  대기 중인 야끼:  {{ waiting_list.length }}
                         </v-row>
+                        <v-row><h5>팟을 삭제하시겠어요?</h5></v-row>
                       </v-col>
                     </v-card-subtitle>
                     <v-card-actions>
