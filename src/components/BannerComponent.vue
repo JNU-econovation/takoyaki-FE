@@ -1,13 +1,13 @@
 <template>
-  <div
+  <div 
     id="banner"
-    style="padding-right:55px; "
+    style="padding-right:505px; "
   >
     <!--배너 컴포넌트를 감싸는 부모 컨테이너-->
     <div id="bannerimg">
       <!--배너 이미지와 좌우 화살표 버튼을 감싸는 컨테이너-->
       <img
-        style="padding-right: 60px;"
+        style="width: 1450px;"
         :src="img_url"
         class="banner-image"
       >
@@ -49,10 +49,8 @@ export default {
 </script>
 <style scoped>
 #banner {
- 
   position: relative;
-  top:10%
-  
+  top:3%;
 }
 
 #bannerimg {
