@@ -26,16 +26,18 @@
                     <v-row>
                       ✔  대기 중인 야끼  {{ waiting_list.length }}
                     </v-row>
+                    <v-row><h5>팟을 삭제하시겠어요?</h5></v-row>
                   </v-col>
                 </v-card-subtitle>
                 <v-card-actions>
                   <v-col>
-                    <v-btn @click="dialog = false">
+                    <v-btn elevation="0" @click="dialog = false"
+                    style="background-color: #585858; color: white; border-radius: 10px;">
                       취소
                     </v-btn>
                   </v-col>
                   <v-col>
-                    <v-btn @click="closing">
+                    <v-btn elevation="0"  style="background-color: #4d8152; color: #ffffff; border-radius: 10px;" @click="closing">
                       마감하기
                     </v-btn>
                   </v-col>
@@ -71,7 +73,7 @@
                 width="auto"
               >
                 <v-card>
-                  <v-card-text>
+                  <v-card-text >
                     {{ title }}
                   </v-card-text>
                   <v-card-subtitle>
@@ -82,16 +84,20 @@
                       <v-row>
                         ✔  대기 중인 야끼  {{ waiting_list.length }}
                       </v-row>
+                      <v-row><h5>팟을 삭제하시겠어요?</h5></v-row>
                     </v-col>
                   </v-card-subtitle>
                   <v-card-actions>
                     <v-col>
-                      <v-btn @click="dialogremove = false">
+                   
+                      <v-btn elevation="0" @click="dialogremove = false"
+                       style="background-color: #585858; color: white; border-radius: 10px;">
                         취소
                       </v-btn>
                     </v-col>
                     <v-col>
-                      <v-btn @click="remove">
+                      <v-btn elevation="0" @click="remove"
+                      style="background-color: #cecece; color: #585858; border-radius: 10px;">
                         삭제하기
                       </v-btn>
                     </v-col>
@@ -196,4 +202,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.h3{
+ align-content: center;
+  margin-top:30%;
+  color: #777E90;
+}
+</style>
