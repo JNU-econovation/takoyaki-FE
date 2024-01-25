@@ -5,7 +5,7 @@
         <MyPage />
         <v-col>
           <v-sheet
-          min-height="70vh"
+        
             rounded="lg"
             width="1300px"
             class="MyPageBG"

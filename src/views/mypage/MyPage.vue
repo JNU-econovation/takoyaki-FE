@@ -61,7 +61,7 @@ export default {
   padding-top: 50px;
 }
 .MyPageBG {
-  padding-left:150px;
+  padding-left:10px;
   padding-top:50px;
 }
 

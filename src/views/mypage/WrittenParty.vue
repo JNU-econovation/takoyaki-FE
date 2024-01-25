@@ -18,7 +18,7 @@
                 v-for="item in written_list"
                 :key="item.party_id"
                 cols="3"
-                style="padding: 30px;"
+                style="padding: 10px;"
               >
                 <router-link :to="{name:'userCategorize', params:{party_id:item.party_id}}">
                   <BasicCard

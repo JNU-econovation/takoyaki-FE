@@ -68,7 +68,8 @@ export default {
 
 #bannerimg {
   width: 100%;
-  height: 500px;
+  height: 300px;
+  margin-bottom: 30px;
 
 }
 
