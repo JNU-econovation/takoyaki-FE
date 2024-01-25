@@ -20,7 +20,10 @@
                 <v-card-title>
                   {{ nickname }}
                   <v-spacer />
-                  <v-btn @click="changed">
+                  <v-btn
+                    style="border-radius: 50px; background-color: #FFF2D1; font-weight: bold;"
+                    @click="changed"
+                  >
                     수정
                   </v-btn>
                 </v-card-title>
@@ -32,12 +35,13 @@
                 placeholder="2~16자리/공백불가인 새로운닉네임을 입력해주세요"
               />
               <v-btn
-                style="margin-right: 10px;"
-                @click="changeNickname"
+                style="margin-right: 10px; border-radius: 50px; background-color: #FFF2D1; font-weight: bold;"
+                @click="changeNickname" 
               >
                 수정
               </v-btn>
               <v-btn
+                style="margin-right: 10px; border-radius: 50px; background-color: #d2d0d0; font-weight: bold;"
                 @click="x"
               >
                 취소

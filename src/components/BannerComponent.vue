@@ -1,27 +1,16 @@
 <template>
-  <div id="banner">
+  <div
+    id="banner"
+    style="padding-right:55px; "
+  >
     <!--배너 컴포넌트를 감싸는 부모 컨테이너-->
     <div id="bannerimg">
       <!--배너 이미지와 좌우 화살표 버튼을 감싸는 컨테이너-->
       <img
+        style="padding-right: 60px;"
         :src="img_url"
         class="banner-image"
       >
-      
-      <div
-        id="beforearr"
-        style="color:gray"
-      >
-        <!--@click="beforeimg"-->
-        <i class="fas fa-chevron-left fa-2x" />
-      </div>
-      <div
-        id="nextarr"
-        style="color:gray"
-      >
-        <!-- @click="nextimg" -->
-        <i class="fas fa-chevron-right fa-2x" />
-      </div>
     </div>
   </div>
 </template>
