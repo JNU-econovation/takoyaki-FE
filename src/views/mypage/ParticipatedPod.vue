@@ -164,20 +164,38 @@ export default {
       .then((response) => {
         console.log(response)
         this.list = response.data.data.card_list;
-        this.waiting_number=response.data.data.card_list.waiting_number
+        this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/closed?number=4000&page_number=1')
+          .then((response) => {
+            console.log(response)
+            this.closedList = response.data.data.card_list;
+          })
+          .catch((error) => {
+            console.log(error)
+            switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.");
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            }
+            history.back();
+          })
       })
       .catch((error) => {
         console.log(error)
-      }),
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/closed?number=4000&page_number=1')
-        .then((response) => {
-          console.log(response)
-          this.closedList = response.data.data.card_list;
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      },
+        switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
+          history.back();
+      })
+  
+  },
   methods: {
     waiting() {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/not-closed-waiting?number=4000&page_number=1')
@@ -187,6 +205,14 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
         })
     },
     accepted() {
@@ -197,6 +223,14 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
         })
     },
     showNextFour() {

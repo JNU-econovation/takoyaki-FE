@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
-    <WebBar :check-login="checkLogin" />
+    <!-- TODO: OAuth.vue인 경우 WebBar 안띄우게 하기 -->
+    <WebBar v-if="isOauthView" :check-login="checkLogin" />
     <router-view /><!--내가 관심있는 팟 모든팟 뿌려줌-->
     <!-- <WebFooter /> -->
   </v-app>
@@ -18,10 +19,12 @@ export default {
   },
   data(){
     return{
-    checkLogin:Boolean
+    checkLogin:Boolean,
+    isOauthView:Boolean
     }
   },
   created(){
+    this.checkLogin = window.document.location.pathname == '/oauth';
     this.$axios
       .get(
         process.env.VUE_APP_TAKOYAKI_API +

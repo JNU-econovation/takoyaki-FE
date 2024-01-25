@@ -1,0 +1,14 @@
+<template>
+  <div />
+</template>
+
+<script>
+export default {
+  created() {
+    alert("페이지를 찾을 수 없습니다.");
+    history.back();
+  }
+};
+</script>
+
+<style></style>

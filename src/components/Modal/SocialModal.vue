@@ -120,6 +120,7 @@ export default {
             console.log(error);
           })
       if (this.loginURL == null) {
+        alert("오류가 발생하였습니다.");
         //TODO: 에러 모달창
         return;
       }
@@ -168,6 +169,14 @@ export default {
             }
           } else {
             console.log("에러");
+            switch(localStorage.getItem("error_code")) {
+              case "LOGOUT_REQUIRED":
+                alert("로그아웃이 필요합니다.");
+                break;
+              case "WEB_CLIENT_EXCEPTION":
+                alert("로그인 서버와의 통신이 실패했습니다. 잠시 후 다시 시도해주세요.");
+                break;
+            }
             this.closeLoginModal();
             //TODO: 모달창
           }
@@ -188,6 +197,7 @@ export default {
         "nickname": this.nickname
       })
           .then((response) => {
+            console.log(response);
             if (response.data.success){
               this.closeLoginModal();
               if(this.$route.path==='/'){
@@ -211,6 +221,22 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            let msg = "";
+            switch(error.response.data.code) {
+              case 'VALIDATION_FAILED':
+                msg = "2~16자리의 숫자, 영어, 한글만 허용됩니다.";
+                break;
+              case 'UNAUTHORIZED':
+                msg = "로그인이 필요합니다.";
+                break;
+              case "DUPLICATE_NICKNAME":
+                msg = "중복된 닉네임입니다. 다른 닉네임을 입력해주세요!";
+                break;
+              case "ADDITIONAL_INFO_PROVIDED":
+                msg = "이미 닉네임을 설정하였습니다.";
+                break;
+            }            
+            alert(msg);
           })
 
 
