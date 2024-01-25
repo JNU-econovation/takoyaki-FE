@@ -7,7 +7,7 @@
           <v-sheet
             min-height="70vh"
             rounded="lg"
-            width="1500px"
+            width="1200px"
             class="MyPageBG"
           >
             <h1>작성 목록</h1>

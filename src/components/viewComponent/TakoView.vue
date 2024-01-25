@@ -8,8 +8,8 @@
             <v-col class="text-right">
               <!--text-right 버튼 오른쪽으로 붙임 좀 더 css로 추가기능 필요해 보임-->
 
+
               <!--마감 모달-->
-            
               <v-btn
                 style="margin-right: -20px; background-color: #be8a6b; padding-right: 50px; padding-left: 50px;border-radius:15px; height: 50px; font-size: large; font-weight: bold;"
                 @click="dialog=true"
@@ -34,6 +34,7 @@
                       <v-row>
                         ✔  대기 중인 야끼:  {{ waiting_list.length }}
                       </v-row>
+                      <v-row><h5>팟을 삭제하시겠어요?</h5></v-row>
                     </v-col>
                   </v-card-subtitle>
                   <v-card-actions>
@@ -249,4 +250,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.h3{
+ align-content: center;
+  margin-top:30%;
+  color: #777E90;
+}
+</style>
