@@ -5,12 +5,8 @@
         <MyPage />
         <v-col style="margin-right: 375px;">
           <v-sheet
-<<<<<<< HEAD
-        
-=======
             style="padding-left:200px; padding-right: -50px;"
             min-height="70vh"
->>>>>>> 73d589611d6e45c1e7f33cee4d14b890ce67b445
             rounded="lg"
             width="1300px"
             class="MyPageBG"
