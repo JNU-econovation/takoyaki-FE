@@ -10,7 +10,7 @@
       :activity-duration="activityDuration"
       :recruit-number="recruitNumber"
       :planned-start-date="plannedStartDate"
-      :contact-mthod="contactMethod"
+      :contact-method="contactMethod"
       :body="body"
       :activity_location="activity_location"
       :waiting_list="waiting_list"
@@ -137,6 +137,8 @@ export default {
       })
       .catch((error) => {
         console.log(error)
+        alert("존재하지 않거나 삭제된 팟입니다.")
+        history.back()
       })
     }
 }

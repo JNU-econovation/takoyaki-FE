@@ -1,13 +1,12 @@
 <template>
   <v-app id="inspire">
     <v-main class="bg-grey-lighten-3">
-      <v-container>
+      <v-container style="padding-left: 1px;">
         <v-row>
           <v-col cols="1">
             <v-sheet
               rounded="lg"
               class="mypage-card"
-              
             >
               <v-card
                 class="elevation-12"

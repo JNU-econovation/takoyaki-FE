@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div
       v-if="isModalOpen"
       class="login-modal"
@@ -9,14 +8,19 @@
         v-if="isSocialModalOpen"
         class="social-modal"
       >
-       <div class="status-bar">
-          <button class = "close" @click="closeSocialLoginModal">
+        <div class="status-bar">
+          <button
+            class="close"
+            @click="closeSocialLoginModal"
+          >
             ✕
           </button>
         </div>
 
         <div class="content-box">
-          <h2 class="content-title"><strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌</h2>
+          <h2 class="content-title">
+            <strong>타코야끼</strong>와 함께 즐거운 팟 구하기 🙌
+          </h2>
           <div class="social-buttons">
             <button @click="loginWith('kakao')">
               <img
@@ -37,7 +41,6 @@
               >
             </button>
           </div>
-
         </div>
       </div>
 
@@ -49,7 +52,10 @@
       >
         <!--닉네임 입력하라는 모달창 -->
         <div class="status-bar">
-          <button class = "close" @click="closeAdditionalInfoModal">
+          <button
+            class="close"
+            @click="closeAdditionalInfoModal"
+          >
             ✕
           </button>
         </div>
@@ -67,7 +73,6 @@
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -115,6 +120,7 @@ export default {
             console.log(error);
           })
       if (this.loginURL == null) {
+        alert("오류가 발생하였습니다.");
         //TODO: 에러 모달창
         return;
       }
@@ -151,25 +157,26 @@ export default {
             } else {
               console.log("정보 필요 없음");
               this.closeSocialLoginModal();
-              this.closeAdditionalInfoModal();
+              this.closeAdditionalInfoModal(); 
+                if(this.$route.path==='/'){
+                  this.$router.go(this.$router.currentRoute);
+                  window.location.reload();}
+                else{
+                  this.$router.push({ path: '/' })
+                  window.location.reload();
+                }
               //TODO: 로그인 true값을 App.vue로 보내기
-              if(this.$route.path==='/'){
-              this.$router.go(this.$router.currentRoute);
-              window.location.reload();}
-              else{
-                this.$router.push({ path: '/' })
-                window.location.reload();
-              }
             }
-            // if(this.$route.path==='/'){
-            // this.$router.go(this.$router.currentRoute);
-            // window.location.reload();}
-            // else{
-            //   this.$router.push({ path: '/' })
-            //   window.location.reload();
-            // }
           } else {
             console.log("에러");
+            switch(localStorage.getItem("error_code")) {
+              case "LOGOUT_REQUIRED":
+                alert("로그아웃이 필요합니다.");
+                break;
+              case "WEB_CLIENT_EXCEPTION":
+                alert("로그인 서버와의 통신이 실패했습니다. 잠시 후 다시 시도해주세요.");
+                break;
+            }
             this.closeLoginModal();
             //TODO: 모달창
           }
@@ -190,8 +197,16 @@ export default {
         "nickname": this.nickname
       })
           .then((response) => {
+            console.log(response);
             if (response.data.success){
               this.closeLoginModal();
+              if(this.$route.path==='/'){
+                  this.$router.go(this.$router.currentRoute);
+                  window.location.reload();}
+                else{
+                  this.$router.push({ path: '/' })
+                  window.location.reload();
+                }
               //TODO: 로그인 true값 전달
               if(this.$route.path==='/'){
               this.$router.go(this.$router.currentRoute);
@@ -206,6 +221,22 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            let msg = "";
+            switch(error.response.data.code) {
+              case 'VALIDATION_FAILED':
+                msg = "2~16자리의 숫자, 영어, 한글만 허용됩니다.";
+                break;
+              case 'UNAUTHORIZED':
+                msg = "로그인이 필요합니다.";
+                break;
+              case "DUPLICATE_NICKNAME":
+                msg = "중복된 닉네임입니다. 다른 닉네임을 입력해주세요!";
+                break;
+              case "ADDITIONAL_INFO_PROVIDED":
+                msg = "이미 닉네임을 설정하였습니다.";
+                break;
+            }            
+            alert(msg);
           })
 
 

@@ -1,11 +1,16 @@
 <template>
   <div>
-    <v-container>
+    <v-container style="margin-right: 600px;">
       <v-row>
         <MyPage />
-        <v-col>
+        <v-col style="margin-right: 375px;">
           <v-sheet
+<<<<<<< HEAD
         
+=======
+            style="padding-left:200px; padding-right: -50px;"
+            min-height="70vh"
+>>>>>>> 73d589611d6e45c1e7f33cee4d14b890ce67b445
             rounded="lg"
             width="1300px"
             class="MyPageBG"
@@ -62,6 +67,7 @@
                     :activity_location="item.activity_location"
                     :planned_closing_date="item.planned_closing_date"
                     :occupation_rate="item.occupation_rate"
+                    :waiting_number="item.waiting_number"
                   />
                 <!--받은 키로 BasicCard에 props-->
                 </router-link>
@@ -90,7 +96,6 @@
               <!--버튼 모양 좀더 이쁘게 만들어 주세요-->
               <v-btn text
                 class="icon"
-               
                 @click="showNext2Four"
               >
                 <i class="fa-solid fa-arrow-right" />
@@ -142,7 +147,8 @@ export default {
       closedList:[],
       itemsPerPage:4, 
       currentPage:1,
-      current2Page:1
+      current2Page:1,
+      waiting_number:null,
     }
   },
       computed: {
@@ -162,19 +168,38 @@ export default {
       .then((response) => {
         console.log(response)
         this.list = response.data.data.card_list;
+        this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/closed?number=4000&page_number=1')
+          .then((response) => {
+            console.log(response)
+            this.closedList = response.data.data.card_list;
+          })
+          .catch((error) => {
+            console.log(error)
+            switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.");
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            }
+            history.back();
+          })
       })
       .catch((error) => {
         console.log(error)
-      }),
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/closed?number=4000&page_number=1')
-        .then((response) => {
-          console.log(response)
-          this.closedList = response.data.data.card_list;
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      },
+        switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
+          history.back();
+      })
+  
+  },
   methods: {
     waiting() {
       this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/not-closed-waiting?number=4000&page_number=1')
@@ -184,6 +209,14 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
         })
     },
     accepted() {
@@ -194,6 +227,14 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+          }
         })
     },
     showNextFour() {
@@ -239,6 +280,5 @@ export default {
 .divideLine {
   width:100%;
 }
-
-
+a{text-decoration:none; color: white}
 </style>

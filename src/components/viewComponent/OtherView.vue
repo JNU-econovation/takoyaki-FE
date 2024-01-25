@@ -41,7 +41,7 @@
               <v-row>
                 <v-col>
                   <v-btn
-                    style="background-color: #958176; padding-right: 70px; padding-left: 70px;"
+                    style="background-color: #958176; padding-right: 70px; padding-left: 70px; background-color: #be8a6b; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                     @click="applyNow"
                   >
                     신청하기
@@ -128,6 +128,26 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "ALREADY_APPLIED":
+              alert("이미 신청한 팟입니다.")
+              break;
+            case "TAKO_NOT_ALLOWED":
+              alert("타코는 신청할 수 없습니다.")
+              break;
+          }
         })
     },
 }}

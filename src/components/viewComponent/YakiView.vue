@@ -42,14 +42,14 @@
                 <v-col>
                   <v-btn
                     class="complete"
-                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px;"
+                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                   >
                     신청 완료
                   </v-btn>
                 </v-col>
                 <v-col>
                   <v-btn
-                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px;"
+                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                     @click="cancelApplication"
                   >
                     신청 취소
@@ -69,14 +69,14 @@
                 <v-col>
                   <v-btn
                     class="complete"
-                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px;"
+                    style="background-color: #cbb1a3; padding-right: 70px; padding-left: 70px; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                   >
                     수락되었어요!
                   </v-btn>
                 </v-col>
                 <v-col>
                   <v-btn
-                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px;"
+                    style="background-color: #FFF2D1;padding-right: 30px; padding-left: 30px; border-radius:15px; height: 35px; font-size: large; font-weight: bold;"
                     @click="leaving"
                   >
                     팟 나가기
@@ -95,9 +95,33 @@
           <v-col cols="2">
             <h3> 팟 정보 </h3>
           </v-col>
-          <v-col>{{ nickname }}</v-col>
+          <v-col
+            cols="1"
+            style="margin-top: 4px; margin-left: -90px;"
+          >
+            <img
+              class="imgTako"
+              src="/images/takoImg.png"
+              alt="타코야끼 이미지"
+            >
+          </v-col>
+          <v-col
+            cols="6"
+            style="padding-left:-110px;
+                    margin-left: -70px;
+                    margin-top: 4px;"
+          >
+            {{ nickname }}
+          </v-col>
           <v-spacer />
-          <v-col> 마감된 팟이에요! </v-col>
+          <v-col>
+            <v-btn
+              style="background-color: #cbb1a3;padding-right: 30px; padding-left: 30px; border-radius:15px; height: 45px; font-size: large; font-weight: bold;"
+              @click="cancelApplication"
+            >
+              마감된 팟이에요 {{ contactMethod }} 통해 연락해보세요!
+            </v-btn>
+          </v-col>
         </v-row>
       </div>
       <informationParty
@@ -121,7 +145,7 @@ export default {
   components: {
     'informationParty': informationParty
   },
-  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","yaki_status","view_count"],
+  props: ['party_id',"title","closing-date","nickname","user_type","category","activity-duration","recruit-number","planned-start-date","contact-method","body","activity_location","yaki_status","view_count","closed_date"],
 
   methods:{
     cancelApplication() {
@@ -132,6 +156,26 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "NOT_YAKI":
+              alert("사용자가 야끼가 아닙니다.")
+              break;
+            case "CANCEL_APPLICATION_NOT_ALLOWED":
+              alert("신청 취소가 불가능합니다.")
+              break;
+          }
         })
       },
       leaving() {
@@ -142,6 +186,26 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.")
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+            case "PARTY_NOT_FOUND":
+              alert("삭제되었거나 존재하지 않는 팟입니다.")
+              break;
+            case "PARTY_CLOSED":
+              alert("이미 마감된 팟입니다.")
+              break;
+            case "NOT_YAKI":
+              alert("사용자가 야끼가 아닙니다.")
+              break;
+            case "LEAVE_PARTY_NOT_ALLOWED":
+              alert("신청 취소가 불가능합니다.")
+              break;
+          }
         })
       }
     }
