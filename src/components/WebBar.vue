@@ -70,7 +70,7 @@
         <v-btn
           depressed
           color="transparent"
-          style="margin-right: 170.863px;"
+          style="margin-right: 170.863px; font-weight: bold; color:#664B3B; font-size: 18px;"
           @click="openLoginModal"
         >
           로그인
