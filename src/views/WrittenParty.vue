@@ -104,6 +104,15 @@ export default {
       })
       .catch((error) => {
         console.log(error)
+        switch(error.response.data.code) {
+          case "UNAUTHORIZED":
+            alert("로그인이 필요합니다.");
+            break;
+          case "USER_NOT_FOUND":
+            alert("사용자를 찾을 수 없습니다.")
+            break;
+        }
+        history.back();  
       })
   },
   methods:{
@@ -120,6 +129,15 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.");
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자를 찾을 수 없습니다.")
+              break;
+          }
+          history.back();  
         });
     },
   }

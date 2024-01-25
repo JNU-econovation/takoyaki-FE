@@ -8,6 +8,7 @@ import ParticipatedPod from './views/mypage/ParticipatedPod'
 import guideTakoyaki from './views/guideTakoyaki'
 import OAuth from "./views/OAuth.vue";
 import userCategorize from "./components/viewComponent/userCategorize";
+import NotFound from "./views/NotFound.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -47,6 +48,15 @@ export default new Router({
     component: userCategorize,
     name:'userCategorize',
     props:true,
+  },
+  {
+    path: "/404",
+    name: "notFound",
+    component: NotFound
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404"
   }
 ],
 })

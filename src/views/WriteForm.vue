@@ -8,7 +8,6 @@
           v-model="title"
           placeholder="제목을 입력하세요"
           maxlength="100"
-          
         />
         <h1>기본정보를 입력해주세요.</h1>
 
@@ -239,6 +238,27 @@ export default {
       contactMethod: [],
     };
   },
+  created() {
+      this.$axios
+        .get(process.env.VUE_APP_TAKOYAKI_API + "users/login-check")
+        .then((response) => {
+          console.log(response);
+          if (response.data.success) {
+            console.log(response.data.data.login)
+            if (!response.data.data.login) {
+              alert("로그인이 필요합니다.")
+              history.back()
+            }
+          }
+          else {
+            alert("오류가 발생했습니다.")
+            history.back()
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
   methods: {
     handleText(text) {
       this.receivedcontent = text;
@@ -265,11 +285,15 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.");
+          }
         });
     },
     login() {
       this.$axios
-        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 11)
+        .post(process.env.VUE_APP_TAKOYAKI_API + "test/users/login/" + 26)
         .then((response) => {
           console.log(response);
           window.location.reload()
@@ -289,6 +313,7 @@ export default {
         });
     },
     registerParty() {
+      console.log("===========")
       this.$axios
         .post(process.env.VUE_APP_TAKOYAKI_API + "party", {
           category: this.selectCategory,
@@ -305,10 +330,63 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.partyID = response.data.data.party_id; //팟 등록 id받아옴
+          this.partyID = response.data.data.party_id;
+           //팟 등록 id받아옴
+          this.$router.push({ path: '/' })
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data.code)
+          console.log(error.response.data.msg)
+          switch(error.response.data.code) {
+            case "UNAUTHORIZED":
+              alert("로그인이 필요합니다.");
+              break;
+            case "USER_NOT_FOUND":
+              alert("사용자가 존재하지 않습니다.")
+              break;
+            case "VALIDATION_FAILED":
+            case "INVALID_TYPE_VALUE":
+              let msg = error.response.data.msg
+              msg = msg.slice(0, msg.indexOf(':'))
+              console.log(error.response.data.code)
+              console.log(msg)
+              switch(msg) {
+                case "activity_location":
+                  alert("활동 지역을 선택해주세요.");
+                  break;
+                case "contact_method":
+                  alert("연락 수단을 선택해주세요.");
+                  break;
+                case "category":
+                  alert("카테고리를 선택해주세요.");
+                  break;
+                case "activity_duration":
+                  alert("활동 예상 기간을 입력해주세요.");
+                  break;
+                case "activity_duration_unit":
+                  alert("활동 기간 단위를 선택해주세요.");
+                  break;
+                case "recruit_number":
+                  alert("모집 인원을 입력해주세요.");
+                  break;
+                case "contact":
+                  alert("연락 방법을 입력해주세요.");
+                  break;
+                case "title":
+                  alert("제목을 입력해주세요.");
+                  break;
+                case "planned_start_date":
+                  alert("활동 시작 날짜를 선택해주세요.");
+                  break;
+                case "planned_closing_date":
+                  alert("마감 날짜를 선택해주세요.");
+                  break;
+                case "body":
+                  alert("팟 소개 내용을 입력해주세요.");
+                  break;
+              }
+              break;           
+          }
         });
     },
     clickCategory: function () {

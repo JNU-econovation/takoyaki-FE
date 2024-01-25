@@ -16,7 +16,10 @@
             color="transparent"
             class="me-2"
           >
-            <img src="/images/BannerLogo.png" style="width:120px">
+            <img
+              src="/images/BannerLogo.png"
+              style="width:120px"
+            >
           </v-btn>
         </router-link>  
         <!--<me-2> 오른쪽 여백을 생성하여 두 번째 버튼과의 간격이 생긴다-->
@@ -31,7 +34,7 @@
               <v-btn
                 depressed
                 color="transparent"
-                style="margin-right: -40px;"
+                style="margin-right: -40px; font-weight: bold;font-size: 18px; color:#664B3B;"
               >
                 <i class="fa-regular fa-user" />
               </v-btn>
@@ -43,7 +46,7 @@
               <v-btn
                 depressed
                 color="transparent"
-                style="margin-right: -25px;"
+                style="margin-right: -25px; font-weight: bold;font-size: 18px;color:#664B3B;"
               >
                 글쓰기
               </v-btn>
@@ -54,6 +57,7 @@
             <v-btn
               depressed
               color="transparent"
+              style="font-weight: bold; color:#664B3B; font-size: 18px;"
               @click="logout"
             >
               로그아웃
@@ -113,6 +117,10 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            switch(error.response.data.code) {
+              case "UNAUTHORIZED":
+                alert("로그인이 필요합니다.");
+            }
           })
     }
   }

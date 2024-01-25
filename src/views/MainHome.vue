@@ -1,23 +1,18 @@
 <template>
   <v-main style="padding-left: 10em; padding-right: 10em;">
-    
-      <BannerComponent />
+    <BannerComponent />
     
     <v-sheet
       class="mx-auto pa-2 pt-6"
       color="grey-lighten-2"
     >
-      <v-sheet class="party-list">
+      <!-- <v-sheet class="party-list">
         👀 내가 관심있는 팟
       </v-sheet>
-      <v-slide-group
-        show-arrows
-      >
-        <v-slide-group-item
-          v-for="n in 8"
-          :key="n"
-        />
-      </v-slide-group>
+      <v-slide-group-item
+        v-for="n in 8"
+        :key="n"
+      /> -->
       <!-- <v-slide-group show-arrows>
   여러개의 슬라이드 아이템을 가지고 있는 그룹을 생성할때
       <v-slide-group-item
@@ -35,9 +30,9 @@
               :party_id="n.party_id"
               :competition_rate="n.competition_rate"
               :title="n.title"
-              :category="n.category"
               :activity_location="n.activity_location"
               :planned_closing_date="n.planned_closing_date"
+              :category="n.category"
               :occupation_rate="n.occupation_rate"
             />
           </router-link>
@@ -71,8 +66,11 @@
                   @click="clickArea"
                 />
               </v-col>
-              <v-col style="padding-top: 26px">
-                <v-btn @click="applyBtn">
+              <v-col style="margin-top: 5px; margin-left: -10px;  ">
+                <v-btn
+                  style="border-radius: 50px; background-color: #D9D9D9; color: black; font-weight: bold; "
+                  @click="applyBtn"
+                >
                   적용
                 </v-btn>
               </v-col>
@@ -102,8 +100,9 @@
                   :title="item.title"
                   :category="item.category"
                   :activity_location="item.activity_location"
-                  :planned_closing_date="item.planned_closing_date"
+                  :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
+                  :waiting_number="item.waiting_number"
                 />
               </router-link>
             </v-col>
@@ -143,8 +142,9 @@
                   :title="item.title"
                   :category="item.category"
                   :activity_location="item.activity_location"
-                  :planned_closing_date="item.planned_closing_date"
+                  :planned_closing_date="(item.planned_closing_date).slice(2)"
                   :occupation_rate="item.occupation_rate"
+                  :waiting_number="itme.waiting_number"
                 />
               <!--받은 키로 BasicCard에 props-->
               </router-link>
@@ -196,6 +196,7 @@ export default {
       planned_closing_date:'',
       occupation_rate:'',
       waiting_list:[],
+      waiting_number:null
     };
   },
   created() {
@@ -204,10 +205,19 @@ export default {
         process.env.VUE_APP_TAKOYAKI_API +
           "parties?number=16&page_number=1"
       )
-      .then((response) => {
+      .then(async(response) => {
         console.log(response)
         this.list=response.data.data.card_list;
         this.total_pages=response.data.meta.total_pages;
+        let data=response.data.data.card_list;
+        for (let i=0; i<data.length; i++) {
+          let partyId=data[i].party_id;
+          let waiting_member = await this.waitingList(partyId);
+          console.log("--------------------------")
+          
+          data[i].waiting_member=waiting_member;
+          console.log(waiting_member);
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -217,21 +227,17 @@ export default {
   },
 
   methods: {
-    waitingList(ID){
-      const apiUrl=process.env.VUE_APP_TAKOYAKI_API+'parties/'+ID
-      const response= this.$axios.get(apiUrl);
-      const waitingL=response.data.data.waiting_list;
-      for(const temp of this.list)
-
-      this.$axios.get(process.env.VUE_APP_TAKOYAKI_API + 'parties/' + ID)
-      .then((response) => {
-        console.log(response)
-        this.waiting_list=response.data.data.waiting_list;
-      })
-      .catch((error) => {
-        console.log(error)
-      })},
-      
+    async waitingList(ID){
+      const apiUrl=process.env.VUE_APP_TAKOYAKI_API+'parties/'+ID;
+      try {
+      const response = await this.$axios.get(apiUrl);
+      const waitingL = response.data.data.waiting_list;
+      console.log(waitingL);
+      return waitingL;
+    } catch (error) {
+      console.log(error);
+      return 0}},
+    
     clickCategory: function () {
       this.$axios
         .get(process.env.VUE_APP_TAKOYAKI_API + "party/category")
@@ -309,6 +315,7 @@ export default {
 
 <style scoped>
 a{text-decoration:none; color: white}
+
 
 @import "./style/MainHome.css";
 </style>

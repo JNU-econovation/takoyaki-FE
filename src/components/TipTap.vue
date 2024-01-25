@@ -120,6 +120,7 @@ export default {
   },
   methods: {
     sendContent() {
+      console.log(this.content)
       this.$emit('input',this.content);
     },
     b() {
